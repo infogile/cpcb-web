@@ -1,13 +1,11 @@
 import React from "react";
 import Login from "./Login";
+import Home from "./Home";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
 import "./App.css";
 
-const LoginSuccess = () => {
-  return "login success";
-};
 function App() {
   return (
     <Provider store={store}>
@@ -15,8 +13,8 @@ function App() {
         <Route path="/" exact>
           <Login />
         </Route>
-        <Route path="/home" exact>
-          <LoginSuccess />
+        <Route path="/home">
+          <Home />
         </Route>
       </Router>
     </Provider>
