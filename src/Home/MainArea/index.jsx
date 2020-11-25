@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
+import ActiveInspection from "./ActiveInspection";
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -16,7 +17,9 @@ export const MainArea = ({ expand }) => {
       <Route path="/home" exact>
         <Dashboard />
       </Route>
-      <Route path="/home/active_inspections">Active Inspection</Route>
+      <Route path="/home/active_inspections">
+        <ActiveInspection />
+      </Route>
       <Route path="/home/schedule">Schedule</Route>
     </MainAreaStyled>
   );

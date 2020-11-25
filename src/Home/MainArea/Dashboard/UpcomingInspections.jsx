@@ -11,6 +11,7 @@ const ListItem = styled.div`
   padding-left: 30px;
   padding-right: 30px;
   background: white;
+  box-shadow: 0px 2px 5px 0px #17171747;
   margin-top: 22px;
   margin-left: 20px;
   margin-right: 20px;
