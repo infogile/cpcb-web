@@ -14,6 +14,7 @@ const StyledCard = styled.div`
   height: 60px;
 `;
 
+<<<<<<< HEAD
 const Card = ({ bg, number, status }) => {
   return (
     <StyledCard bg={bg}>
@@ -23,6 +24,15 @@ const Card = ({ bg, number, status }) => {
       <Text color="white" fontSize="15px">
         {status}
       </Text>
+=======
+const Card = ({ bg }) => {
+  return (
+    <StyledCard bg={bg}>
+      <Text color="white" as="div" fontSize="30px">
+        50
+      </Text>
+      <Text color="white">Pending</Text>
+>>>>>>> 103609f... initial commit
     </StyledCard>
   );
 };

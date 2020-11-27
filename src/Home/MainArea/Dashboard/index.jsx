@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import RiverStats from "./RiverStats";
 import { Grid } from "../../../shared/Grid";
@@ -17,6 +18,17 @@ export const Dashboard = () => {
     <Grid>
       <RiverStats title="Ganga Dashboard" data={data.ganga}></RiverStats>
       {/* <RiverStats title="Yamuna Dashboard"></RiverStats> */}
+=======
+import React from "react";
+import RiverStats from "./RiverStats";
+import { Grid } from "../../../shared/Grid";
+
+export const Dashboard = () => {
+  return (
+    <Grid>
+      <RiverStats title="Ganga Dashboard"></RiverStats>
+      <RiverStats title="Yamuna Dashboard"></RiverStats>
+>>>>>>> 103609f... initial commit
     </Grid>
   );
 };

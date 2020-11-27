@@ -38,6 +38,7 @@ export const DashboardIcon = ({
     </g>
   </svg>
 );
+<<<<<<< HEAD
 
 export const UploadIcon = () => {
   return (
@@ -65,3 +66,5 @@ export const UploadIcon = () => {
     </svg>
   );
 };
+=======
+>>>>>>> 103609f... initial commit

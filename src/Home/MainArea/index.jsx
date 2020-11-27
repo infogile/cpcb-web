@@ -20,7 +20,11 @@ export const MainArea = ({ expand }) => {
       <Route path="/home/active_inspections">
         <ActiveInspection />
       </Route>
+<<<<<<< HEAD
       {/* <Route path="/home/schedule">Schedule</Route> */}
+=======
+      <Route path="/home/schedule">Schedule</Route>
+>>>>>>> 103609f... initial commit
     </MainAreaStyled>
   );
 };

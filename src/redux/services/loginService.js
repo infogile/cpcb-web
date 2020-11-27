@@ -5,6 +5,7 @@ export function tryLogin(username, password) {
   return (dispatch) => {
     dispatch(initLoginAction());
     axios
+<<<<<<< HEAD
       .post("/api/auth/login", { username, password })
       .then((res) => {
         axios.interceptors.request.use(
@@ -22,10 +23,19 @@ export function tryLogin(username, password) {
       })
       .catch((err) => {
         dispatch(loginError());
+=======
+      .get("/login")
+      .then((res) => {
+        dispatch(loginSuccess());
+      })
+      .catch((err) => {
+        dispatch(loginSuccess());
+>>>>>>> 103609f... initial commit
       });
     // setTimeout(() => dispatch(loginSuccess()), 2000);
   };
 }
+<<<<<<< HEAD
 
 export function doLogout() {
   sessionStorage.setItem("token", null);
@@ -39,3 +49,5 @@ export function doLogout() {
     }
   );
 }
+=======
+>>>>>>> 103609f... initial commit

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Text } from "../shared/Text";
 import { Link } from "react-router-dom";
 import { DashboardIcon } from "../icons";
 import { useHistory } from "react-router-dom";
@@ -34,39 +33,34 @@ const NavItem = styled(Link)`
 
 function Sidebar({ show, ...otherProps }) {
   const history = useHistory();
-<<<<<<< HEAD
-  console.log(history);
-=======
   console.log(otherProps);
->>>>>>> 103609f... initial commit
 
   return (
     <StyledSidebar show={show}>
-      <NavItem to="/home">
+      <NavItem to="/spcb">
         <DashboardIcon
-          color={history.location.pathname === "/home" ? "#4759FB" : "#5c5c5c"}
+          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
           size="14px"
           marginRight="10px"
         />
-        Dashboard
+        Add ATR
       </NavItem>
-      <NavItem to="/home/active_inspections">
+      <NavItem to="/spcb/ganga">
         <DashboardIcon
-          color={
-            history.location.pathname === "/home/active_inspections"
-              ? "#4759FB"
-              : "#5c5c5c"
-          }
+          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
           size="14px"
           marginRight="10px"
         />
-        Active Inspections
+        Ganga
       </NavItem>
-<<<<<<< HEAD
-      {/* <NavItem to="/home/schedule">Schedule</NavItem> */}
-=======
-      <NavItem to="/home/schedule">Schedule</NavItem>
->>>>>>> 103609f... initial commit
+      <NavItem to="/spcb/yamuna">
+        <DashboardIcon
+          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
+          size="14px"
+          marginRight="10px"
+        />
+        yamuna
+      </NavItem>
     </StyledSidebar>
   );
 }

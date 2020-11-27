@@ -3,6 +3,7 @@ import store from "../redux/store";
 import { tryLogin } from "../redux/services";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+<<<<<<< HEAD
 import logo from "../assets/img/cpcb.jpg";
 import styled from "styled-components";
 
@@ -45,6 +46,8 @@ const Button = styled.div`
   padding-top: 14px;
   margin: 20px 0px 0px 36%;
 `;
+=======
+>>>>>>> 103609f... initial commit
 
 export default function Login() {
   const { loginValidated, isLoading } = useSelector(
@@ -56,6 +59,7 @@ export default function Login() {
     store.dispatch(tryLogin(username, password));
   };
   if (isLoading) {
+<<<<<<< HEAD
     return "loading...";
   }
   if (loginValidated) {
@@ -89,6 +93,28 @@ export default function Login() {
         <br />
         <Forgotpass onClick={onLogin}>Forgot password?</Forgotpass>
       </Cardstyle>
+=======
+    return "loading";
+  }
+  if (loginValidated) {
+    return <Redirect to="/home" />;
+  }
+
+  return (
+    <div>
+      <h1>CPCB</h1>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <input type="submit" onClick={onLogin} />
+>>>>>>> 103609f... initial commit
     </div>
   );
 }
