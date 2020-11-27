@@ -37,21 +37,13 @@ function Sidebar({ show, ...otherProps }) {
 
   return (
     <StyledSidebar show={show}>
-      <NavItem to="/spcb">
-        <DashboardIcon
-          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
-          size="14px"
-          marginRight="10px"
-        />
-        Add ATR
-      </NavItem>
       <NavItem to="/spcb/ganga">
         <DashboardIcon
           color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
           size="14px"
           marginRight="10px"
         />
-        Ganga
+        Ganga (Add ATR)
       </NavItem>
       <NavItem to="/spcb/yamuna">
         <DashboardIcon
@@ -59,7 +51,7 @@ function Sidebar({ show, ...otherProps }) {
           size="14px"
           marginRight="10px"
         />
-        yamuna
+        yamuna (Add ATR)
       </NavItem>
     </StyledSidebar>
   );

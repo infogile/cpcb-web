@@ -10,7 +10,7 @@ export const GangaAtr = ({title}) => {
     return(
         <gangaAtrStyled>
             <Route path="spcb/ganga/view/:id" exact>View</Route>
-            <Route path="spcb/ganga/add-action/:id" exact>View</Route>
+            <Route path="spcb/ganga/add-action/:id" exact>Add Action</Route>
         </gangaAtrStyled>
     );
 };

@@ -13,7 +13,7 @@ const MainAreaStyled = styled.div`
 export const MainArea = ({ expand }) => {
   return (
     <MainAreaStyled expand={expand}>
-      <Route path="/spcb" exact><GangaAtr/></Route>
+      <Route path="/spcb" exact>Ganga<GangaAtr/></Route>
       <Route path="/spcb/ganga">Ganga</Route>
       <Route path="/spcb/yamuna">Yamuna</Route>
     </MainAreaStyled>
