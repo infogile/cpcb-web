@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
@@ -6,11 +5,6 @@ import { useHistory } from "react-router-dom";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getFieldReport } from "../../../redux/services/";
-=======
-import React from "react";
-import styled from "styled-components";
-import { Text } from "../../../shared/Text";
->>>>>>> 103609f... initial commit
 
 const FieldReportStyled = styled.div`
   margin-top: 30px;
@@ -45,11 +39,8 @@ const Th = styled.th`
   border-bottom: 1px solid #c0c0c0;
   border-top: 1px solid #c0c0c0;
   padding-right: 10px;
-<<<<<<< HEAD
   padding-top: 10px;
   padding-bottom: 10px;
-=======
->>>>>>> 103609f... initial commit
 `;
 
 const Td = styled.td`
@@ -60,7 +51,6 @@ const Td = styled.td`
   padding-left: 10px;
 `;
 
-<<<<<<< HEAD
 export const FieldReport = () => {
   const history = useHistory();
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
@@ -71,16 +61,12 @@ export const FieldReport = () => {
   if (isLoading) {
     return "loading...";
   }
-=======
-export const FieldReport = ({ title }) => {
->>>>>>> 103609f... initial commit
   return (
     <FieldReportStyled>
       <Text as="h3" marginLeft="10px">
         Field Report
       </Text>
       <Report>
-<<<<<<< HEAD
         <Text as="h4">{data.name}</Text>
         <Table>
           <tbody>
@@ -91,18 +77,6 @@ export const FieldReport = ({ title }) => {
             <tr>
               <Th>Unit Sector</Th>
               <Td>{data.sector}</Td>
-=======
-        <Text as="h4">Bajirao mastani slaughter house</Text>
-        <Table>
-          <tbody>
-            <tr>
-              <Th>Firstname</Th>
-              <Td>Lastname</Td>
-            </tr>
-            <tr>
-              <Th>Jill</Th>
-              <Td>SmiTh</Td>
->>>>>>> 103609f... initial commit
             </tr>
             <tr>
               <Th>Eve</Th>

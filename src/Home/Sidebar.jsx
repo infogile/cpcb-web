@@ -34,11 +34,7 @@ const NavItem = styled(Link)`
 
 function Sidebar({ show, ...otherProps }) {
   const history = useHistory();
-<<<<<<< HEAD
   console.log(history);
-=======
-  console.log(otherProps);
->>>>>>> 103609f... initial commit
 
   return (
     <StyledSidebar show={show}>
@@ -62,11 +58,7 @@ function Sidebar({ show, ...otherProps }) {
         />
         Active Inspections
       </NavItem>
-<<<<<<< HEAD
       {/* <NavItem to="/home/schedule">Schedule</NavItem> */}
-=======
-      <NavItem to="/home/schedule">Schedule</NavItem>
->>>>>>> 103609f... initial commit
     </StyledSidebar>
   );
 }

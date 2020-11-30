@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
@@ -6,12 +5,6 @@ import { Link } from "react-router-dom";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getActiveInspections } from "../../../redux/services/";
-=======
-import React from "react";
-import styled from "styled-components";
-import { Text } from "../../../shared/Text";
-import { Link } from "react-router-dom";
->>>>>>> 103609f... initial commit
 
 const ListItem = styled.div`
   display: grid;
@@ -71,7 +64,6 @@ const List = styled.div`
 `;
 
 export const InspectionsList = ({ title }) => {
-<<<<<<< HEAD
   const { data, isLoading } = useSelector(
     (state) => state.activeInspectionReducers
   );
@@ -82,9 +74,6 @@ export const InspectionsList = ({ title }) => {
   if (isLoading) {
     return "loading...";
   }
-=======
-  const reportIds = [123, 234, 53, 23, 42];
->>>>>>> 103609f... initial commit
   return (
     <>
       <Text as="h3" marginLeft="10px">
@@ -97,17 +86,10 @@ export const InspectionsList = ({ title }) => {
           <ListItemHeader>Field reports</ListItemHeader>
           <ListItemHeader>Inspection reports</ListItemHeader>
         </ListHeader>
-<<<<<<< HEAD
         {data.map(({ id, code, name }) => (
           <ListItem key={id}>
             <UnitCode>{code}</UnitCode>
             <UnitName>{name}</UnitName>
-=======
-        {reportIds.map((id) => (
-          <ListItem key={id}>
-            <UnitCode>234</UnitCode>
-            <UnitName>Bajirao mastani slaughter house</UnitName>
->>>>>>> 103609f... initial commit
             <ReportLink to={`/home/active_inspections/field_report/${id}`}>
               View Report
             </ReportLink>
