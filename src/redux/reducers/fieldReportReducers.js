@@ -1,27 +1,28 @@
-export function loginReducer(state, action) {
-  switch (action.type) {
-    case "INIT_LOGIN":
+export function fieldReportReducers(
+  state = { data: {}, isLoading: true },
+  action
+) {
+  const { data, type } = action;
+  switch (type) {
+    case "INIT_FIELD_REPORT":
       return {
         ...state,
         isLoading: true,
       };
-    case "LOGIN_SUCCESS":
+    case "GET_FIELD_REPORT":
       return {
         ...state,
-        loginValidated: true,
+        data,
         isLoading: false,
       };
-    case "LOGIN_ERROR":
+    case "ERROR_FIELD_REPORT":
       return {
         ...state,
-        loginValidated: false,
         isLoading: false,
       };
     default:
       return {
         ...state,
-        loginValidated: false,
-        isLoading: false,
       };
   }
 }

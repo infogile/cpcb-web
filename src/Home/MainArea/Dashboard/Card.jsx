@@ -14,13 +14,15 @@ const StyledCard = styled.div`
   height: 60px;
 `;
 
-const Card = ({ bg }) => {
+const Card = ({ bg, number, status }) => {
   return (
     <StyledCard bg={bg}>
       <Text color="white" as="div" fontSize="30px">
-        50
+        {number}
       </Text>
-      <Text color="white">Pending</Text>
+      <Text color="white" fontSize="15px">
+        {status}
+      </Text>
     </StyledCard>
   );
 };

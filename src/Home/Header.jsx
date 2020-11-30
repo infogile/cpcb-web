@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Text } from "../shared/Text";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
+import store from "../redux/store";
+import { doLogout } from "../redux/services";
 
 const StyledHeader = styled.div`
   display: grid;
@@ -18,7 +21,21 @@ const StyledHeader = styled.div`
   box-shadow: 5px 5px 5px #00000059;
 `;
 
+const Logout = styled.span`
+  cursor: pointer;
+  margin-right: 40px;
+  text-align: right;
+  :hover {
+    color: #636363;
+  }
+`;
+
 function Header({ toggleNav }) {
+  const history = useHistory();
+  const onLogout = () => {
+    doLogout();
+    history.push("/");
+  };
   return (
     <StyledHeader>
       <span style={{ marginLeft: "40px", textAlign: "left" }}>
@@ -32,6 +49,7 @@ function Header({ toggleNav }) {
       <Text fontSize="20px" color="white">
         CPCB Portal
       </Text>
+      <Logout onClick={onLogout}>Logout</Logout>
     </StyledHeader>
   );
 }

@@ -34,7 +34,7 @@ const NavItem = styled(Link)`
 
 function Sidebar({ show, ...otherProps }) {
   const history = useHistory();
-  console.log(otherProps);
+  console.log(history);
 
   return (
     <StyledSidebar show={show}>
@@ -58,7 +58,7 @@ function Sidebar({ show, ...otherProps }) {
         />
         Active Inspections
       </NavItem>
-      <NavItem to="/home/schedule">Schedule</NavItem>
+      {/* <NavItem to="/home/schedule">Schedule</NavItem> */}
     </StyledSidebar>
   );
 }

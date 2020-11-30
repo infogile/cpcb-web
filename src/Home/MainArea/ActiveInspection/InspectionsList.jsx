@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
 import { Link } from "react-router-dom";
+import store from "../../../redux/store";
+import { useSelector } from "react-redux";
+import { getActiveInspections } from "../../../redux/services/";
 
 const ListItem = styled.div`
   display: grid;
@@ -61,7 +64,16 @@ const List = styled.div`
 `;
 
 export const InspectionsList = ({ title }) => {
-  const reportIds = [123, 234, 53, 23, 42];
+  const { data, isLoading } = useSelector(
+    (state) => state.activeInspectionReducers
+  );
+  useEffect(() => {
+    store.dispatch(getActiveInspections());
+  }, []);
+
+  if (isLoading) {
+    return "loading...";
+  }
   return (
     <>
       <Text as="h3" marginLeft="10px">
@@ -74,10 +86,10 @@ export const InspectionsList = ({ title }) => {
           <ListItemHeader>Field reports</ListItemHeader>
           <ListItemHeader>Inspection reports</ListItemHeader>
         </ListHeader>
-        {reportIds.map((id) => (
+        {data.map(({ id, code, name }) => (
           <ListItem key={id}>
-            <UnitCode>234</UnitCode>
-            <UnitName>Bajirao mastani slaughter house</UnitName>
+            <UnitCode>{code}</UnitCode>
+            <UnitName>{name}</UnitName>
             <ReportLink to={`/home/active_inspections/field_report/${id}`}>
               View Report
             </ReportLink>

@@ -5,13 +5,37 @@ export function tryLogin(username, password) {
   return (dispatch) => {
     dispatch(initLoginAction());
     axios
-      .get("/login")
+      .post("/api/auth/login", { username, password })
       .then((res) => {
+        axios.interceptors.request.use(
+          (config) => {
+            console.log("set axios");
+            sessionStorage.setItem("token", res.data.token);
+            config.headers.authorization = res.data.token;
+            return config;
+          },
+          (error) => {
+            return Promise.reject(error);
+          }
+        );
         dispatch(loginSuccess());
       })
       .catch((err) => {
-        dispatch(loginSuccess());
+        dispatch(loginError());
       });
     // setTimeout(() => dispatch(loginSuccess()), 2000);
   };
+}
+
+export function doLogout() {
+  sessionStorage.setItem("token", null);
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = null;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 }

@@ -1,31 +1,108 @@
 import React, { useState } from "react";
 import { Form } from "../../../shared/Form";
-import { CheckBox, LabeledInput } from "../../../shared/Input";
+import {
+  CheckBox,
+  FormButton,
+  Input,
+  LabeledInput,
+} from "../../../shared/Input";
 import { Grid } from "../../../shared/Grid";
 import { Text } from "../../../shared/Text";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
+import Media from "./Media";
+import axios from "../../../axios";
 
 const InspectionForm = () => {
-  const [complianceStatus, setComplianceStatus] = useState("compliance");
   const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
-  const onComplianceStatusCheck = (e) => {
-    setComplianceStatus(e.target.value);
-    if (e.target.value === "noncompliance") {
-      setShowNonComplianceTerms(true);
-    } else {
-      setShowNonComplianceTerms(false);
+  const [consentCopyProgree, setConsentCopyProgree] = useState(-1);
+  const [inspectionForm, setInspectionForm] = useState({
+    teamnames: "",
+    finalrecommendation: "",
+    compliancestatus: "compliance",
+    watergeneration: "",
+    waterdischarge: "",
+    BOD: "",
+    BODload: "",
+    COD: "",
+    CODload: "",
+    othercharacterestics: "",
+    nonInstallationofOCEMS: false,
+    temperedOCEMS: false,
+    dissentBypassArrangement: false,
+    provision: false,
+    defunctETP: false,
+    ZLDnorms: false,
+    standardExceedance: false,
+    dilutionInETP: false,
+    dissentWaterDischarge: false,
+    unauthorizedDisposal: false,
+    effluent: false,
+    invalidCTO: false,
+  });
+  const onInputChange = (e) => {
+    const {
+      target: { name, type, checked, value },
+    } = e;
+    const fieldValue = type === "checkbox" ? checked : value;
+    if (name === "compliancestatus") {
+      if (fieldValue === "noncompliance") {
+        setShowNonComplianceTerms(true);
+      } else {
+        setShowNonComplianceTerms(false);
+        setInspectionForm((prevState) => ({
+          ...prevState,
+          compliancestatus: fieldValue,
+          nonInstallationofOCEMS: false,
+          temperedOCEMS: false,
+          dissentBypassArrangement: false,
+          provision: false,
+          defunctETP: false,
+          ZLDnorms: false,
+          standardExceedance: false,
+          dilutionInETP: false,
+          dissentWaterDischarge: false,
+          unauthorizedDisposal: false,
+          effluent: false,
+          invalidCTO: false,
+        }));
+        return;
+      }
     }
+    setInspectionForm((prevState) => ({
+      ...prevState,
+      [name]: fieldValue,
+    }));
+  };
+  const onFileInputChange = (e) => {
+    const formData = new FormData();
+    formData.append("consentcopy", e.target.files[0], e.target.name);
+    axios.post("/inspections/consent_copy", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: function (progressEvent) {
+        var percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setConsentCopyProgree(percentCompleted);
+      },
+    });
+  };
+  const submit = (e) => {
+    e.preventDefault();
   };
   return (
-    <Form marginTop="40px">
+    <Form marginTop="40px" onSubmit={submit}>
       <LabeledInput
         labelProps={{ label: "Memeber of inspection Team" }}
         inputProps={{
           name: "teamnames",
           id: "teamnames",
           type: "text",
+          onChange: onInputChange,
+          value: inspectionForm.teamnames,
           placeholder: "Team Names",
         }}
       />
@@ -33,18 +110,21 @@ const InspectionForm = () => {
         marginTop="30px"
         labelProps={{ label: "Upload consent Copy" }}
         inputProps={{
-          name: "teamnames",
-          id: "teamnames",
+          accept:
+            "application/msword, application/vnd.ms-excel, application/pdf",
+          name: "consentcopy",
+          id: "consentcopy",
           type: "file",
-          placeholder: "Team Names",
+          onChange: onFileInputChange,
         }}
       />
+      {`${consentCopyProgree}%`}
       <LabeledInput
         marginTop="30px"
         labelProps={{ label: "Upload inspection report" }}
         inputProps={{
-          name: "teamnames",
-          id: "teamnames",
+          name: "inspectionreport",
+          id: "inspectionreport",
           type: "file",
           placeholder: "Team Names",
         }}
@@ -55,7 +135,9 @@ const InspectionForm = () => {
         inputProps={{
           name: "finalrecommendation",
           id: "finalrecommendation",
+          value: inspectionForm.finalrecommendation,
           type: "text",
+          onChange: onInputChange,
         }}
       />
       <Div marginTop="30px">
@@ -69,8 +151,8 @@ const InspectionForm = () => {
             name: "compliancestatus",
             id: "compliance",
             value: "compliance",
-            checked: complianceStatus === "compliance",
-            onChange: onComplianceStatusCheck,
+            checked: inspectionForm.compliancestatus === "compliance",
+            onChange: onInputChange,
           }}
         />
         <RadioInput
@@ -80,8 +162,8 @@ const InspectionForm = () => {
             name: "compliancestatus",
             id: "noncompliance",
             value: "noncompliance",
-            checked: complianceStatus === "noncompliance",
-            onChange: onComplianceStatusCheck,
+            checked: inspectionForm.compliancestatus === "noncompliance",
+            onChange: onInputChange,
           }}
         />
       </Grid>
@@ -92,7 +174,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "watergeneration",
             id: "watergeneration",
+            value: inspectionForm.watergeneration,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -102,7 +186,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "waterdischarge",
             id: "waterdischarge",
+            value: inspectionForm.waterdischarge,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -114,7 +200,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "BOD",
             id: "BOD",
+            value: inspectionForm.BOD,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -124,7 +212,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "BODload",
             id: "BODload",
+            value: inspectionForm.BODload,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -136,7 +226,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "COD",
             id: "COD",
+            value: inspectionForm.COD,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -146,7 +238,9 @@ const InspectionForm = () => {
           inputProps={{
             name: "CODload",
             id: "CODload",
+            value: inspectionForm.CODload,
             type: "text",
+            onChange: onInputChange,
             maxWidth: "300px",
           }}
         />
@@ -155,23 +249,25 @@ const InspectionForm = () => {
         marginTop="30px"
         labelProps={{ label: "Other characterestics" }}
         inputProps={{
-          name: "compliancestatus",
+          name: "othercharacterestics",
+          value: inspectionForm.othercharacterestics,
           type: "text",
+          onChange: onInputChange,
         }}
       />
-      <Div as="div" marginTop="20px">
-        <Text as="strong">Conditions of Non-Compliance</Text>
-      </Div>
       <Grid templateColumns="auto" hide={!showNonComplianceTerms}>
+        <Div as="div" marginTop="20px">
+          <Text as="strong">Conditions of Non-Compliance</Text>
+        </Div>
         <CheckBox
           marginTop="10px"
           labelProps={{
             label: "Non-installation and non-connectivity of OCEMS",
           }}
           inputProps={{
-            name: "noninstallationofOCEMS",
-            id: "noninstallationofOCEMS",
-            value: "noninstallationofOCEMS",
+            name: "nonInstallationofOCEMS",
+            checked: inspectionForm.nonInstallationofOCEMS,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -182,7 +278,8 @@ const InspectionForm = () => {
           inputProps={{
             id: "temperedOCEMS",
             name: "temperedOCEMS",
-            value: "temperedOCEMS",
+            checked: inspectionForm.temperedOCEMS,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -192,9 +289,10 @@ const InspectionForm = () => {
               "More than consented outlet(s) and/or any bypass arrangement",
           }}
           inputProps={{
-            id: "bypassarrangement",
-            name: "bypassarrangement",
-            value: "bypassarrangement",
+            id: "dissentBypassArrangement",
+            name: "dissentBypassArrangement",
+            checked: inspectionForm.dissentBypassArrangement,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -206,7 +304,8 @@ const InspectionForm = () => {
           inputProps={{
             id: "provision",
             name: "provision",
-            value: "provision",
+            checked: inspectionForm.provision,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -218,7 +317,8 @@ const InspectionForm = () => {
           inputProps={{
             id: "defunctETP",
             name: "defunctETP",
-            value: "defunctETP",
+            checked: inspectionForm.defunctETP,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -229,30 +329,34 @@ const InspectionForm = () => {
           inputProps={{
             id: "ZLDnorms",
             name: "ZLDnorms",
-            value: "ZLDnorms",
-          }}
-        />
-        <CheckBox
-          marginTop="10px"
-          labelProps={{
-            label: "Exceedance of the notified effluent discharge standards",
-          }}
-          inputProps={{
-            id: "exceedance",
-            name: "exceedance",
-            value: "exceedance",
+            checked: inspectionForm.ZLDnorms,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
           marginTop="10px"
           labelProps={{
             label:
-              "Dilution or addition of fresh water at any stage of treatment in ETP.",
+              "standardExceedance of the notified effluent discharge standards",
           }}
           inputProps={{
-            id: "dilution",
-            name: "dilution",
-            value: "dilution",
+            id: "standardExceedance",
+            name: "standardExceedance",
+            checked: inspectionForm.standardExceedance,
+            onChange: onInputChange,
+          }}
+        />
+        <CheckBox
+          marginTop="10px"
+          labelProps={{
+            label:
+              "dilutionInETP or addition of fresh water at any stage of treatment in ETP.",
+          }}
+          inputProps={{
+            id: "dilutionInETP",
+            name: "dilutionInETP",
+            checked: inspectionForm.dilutionInETP,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -261,9 +365,10 @@ const InspectionForm = () => {
             label: "Waste water discharge beyond consented quantity.",
           }}
           inputProps={{
-            id: "waterdischarge",
-            name: "waterdischarge",
-            value: "waterdischarge",
+            id: "dissentWaterDischarge",
+            name: "dissentWaterDischarge",
+            checked: inspectionForm.dissentWaterDischarge,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -273,9 +378,10 @@ const InspectionForm = () => {
               "Unauthorized disposal of Hazardous waste or inadequate Hazardous Waste storage capacity",
           }}
           inputProps={{
-            id: "unauthorizeddisposal",
-            name: "unauthorizeddisposal",
-            value: "unauthorizeddisposal",
+            id: "unauthorizedDisposal",
+            name: "unauthorizedDisposal",
+            checked: inspectionForm.unauthorizedDisposal,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -287,7 +393,8 @@ const InspectionForm = () => {
           inputProps={{
             id: "effluent",
             name: "effluent",
-            value: "effluent",
+            checked: inspectionForm.effluent,
+            onChange: onInputChange,
           }}
         />
         <CheckBox
@@ -299,10 +406,13 @@ const InspectionForm = () => {
           inputProps={{
             id: "invalidCTO",
             name: "invalidCTO",
-            value: "invalidCTO",
+            checked: inspectionForm.invalidCTO,
+            onChange: onInputChange,
           }}
         />
       </Grid>
+      {/* <Media /> */}
+      <FormButton marginTop="20px" />
     </Form>
   );
 };

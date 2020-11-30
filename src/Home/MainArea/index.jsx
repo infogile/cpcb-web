@@ -20,7 +20,7 @@ export const MainArea = ({ expand }) => {
       <Route path="/home/active_inspections">
         <ActiveInspection />
       </Route>
-      <Route path="/home/schedule">Schedule</Route>
+      {/* <Route path="/home/schedule">Schedule</Route> */}
     </MainAreaStyled>
   );
 };
