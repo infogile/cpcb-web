@@ -9,7 +9,7 @@ export function getActiveInspections() {
   return (dispatch) => {
     dispatch(initActiveInspectionAction());
     axios
-      .get(`/api/inspection/myactiveinspection`)
+      .post(`/api/inspection/myactiveinspection`)
       .then((res) => {
         const responseData = res.data;
         let data = [];

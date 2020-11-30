@@ -15,18 +15,13 @@ const RiverStatsStyled = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 export const RiverStats = ({ title, data }) => {
-=======
-export const RiverStats = ({ title }) => {
->>>>>>> 103609f... initial commit
   return (
     <RiverStatsStyled>
       <Text as="h2" marginLeft="10px">
         {title}
       </Text>
       <CardWrapper>
-<<<<<<< HEAD
         <Card
           bg="linear-gradient(270deg,#d83cff -3.15%,#a05cff 103.51%,#9b6bff 103.52%)"
           number={data.totalAlloted}
@@ -47,12 +42,6 @@ export const RiverStats = ({ title }) => {
           number={data.inspectionReportSubmitted}
           status="Inspection Report Submitted"
         />
-=======
-        <Card bg="linear-gradient(270deg,#d83cff -3.15%,#a05cff 103.51%,#9b6bff 103.52%)" />
-        <Card bg="linear-gradient(278.13deg, #5AD7FF 3.53%, #A05CFF 112.63%, #0EF1FF 112.64%);" />
-        <Card bg="linear-gradient(276.51deg, #60C86A 20.09%, #4881D6 102.62%);" />
-        <Card bg="linear-gradient(278.13deg, #FFB169 3.53%, #D267B4 112.64%);" />
->>>>>>> 103609f... initial commit
       </CardWrapper>
     </RiverStatsStyled>
   );

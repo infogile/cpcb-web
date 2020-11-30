@@ -1,8 +1,4 @@
 export function loginReducer(state, action) {
-<<<<<<< HEAD
-=======
-  console.log(action.type);
->>>>>>> 103609f... initial commit
   switch (action.type) {
     case "INIT_LOGIN":
       return {

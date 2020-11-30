@@ -2,15 +2,15 @@ import { loginSuccess, initLoginAction, loginError } from "../actions";
 import axios from "../../axios";
 
 export function tryLogin(username, password) {
+  console.log("logging in");
   return (dispatch) => {
     dispatch(initLoginAction());
     axios
       .post("/api/auth/login", { username, password })
       .then((res) => {
+        sessionStorage.setItem("token", res.data.token);
         axios.interceptors.request.use(
           (config) => {
-            console.log("set axios");
-            sessionStorage.setItem("token", res.data.token);
             config.headers.authorization = res.data.token;
             return config;
           },
@@ -18,7 +18,7 @@ export function tryLogin(username, password) {
             return Promise.reject(error);
           }
         );
-        dispatch(loginSuccess());
+        setTimeout(dispatch(loginSuccess()), 0);
       })
       .catch((err) => {
         dispatch(loginError());

@@ -34,7 +34,7 @@ function Header({ toggleNav }) {
   const history = useHistory();
   const onLogout = () => {
     doLogout();
-    history.push("/");
+    setTimeout(history.push("/"), 0);
   };
   return (
     <StyledHeader>

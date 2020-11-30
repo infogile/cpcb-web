@@ -9,7 +9,7 @@ export function getInspections() {
   return (dispatch) => {
     dispatch(initDashboardAction());
     axios
-      .get(`/api/inspection/myinspection`)
+      .post(`/api/inspection/myallinspection`)
       .then((res) => {
         const data = res.data;
         const dashboard = {};

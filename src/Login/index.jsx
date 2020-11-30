@@ -3,19 +3,19 @@ import store from "../redux/store";
 import { tryLogin } from "../redux/services";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Text } from "../shared/Text";
 import logo from "../assets/img/cpcb.jpg";
 import styled from "styled-components";
 
 const Logo = styled.div`
   float: center;
-  margin-left: 45%;
   margin-top: 40px;
 `;
 
 const Cardstyle = styled.div`
   float: center;
   padding: 20px 0px;
-  margin: 25px 0px 0px 35%;
+  margin: 40px auto;
   width: 500px;
   height: 300px;
   text-align: center;
@@ -59,24 +59,26 @@ export default function Login() {
     return "loading...";
   }
   if (loginValidated) {
-    console.log("home");
     return <Redirect to="/home" />;
   }
   return (
-    <div>
-      <h1>CPCB</h1>
+    <div style={{ textAlign: "center" }}>
       <Logo>
         <img src={logo} alt="Logo" width="12%" />
       </Logo>
       <Cardstyle>
-        <h6>Username:</h6>
+        <Text as="div" marginBottom="20px">
+          Username
+        </Text>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <h6>Password:</h6>
+        <Text as="div" marginTop="20px" marginBottom="20px">
+          Password
+        </Text>
         <input
           type="password"
           value={password}

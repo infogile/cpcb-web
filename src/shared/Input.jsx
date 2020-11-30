@@ -2,10 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from "./Grid";
 import { Div } from "./Div";
-<<<<<<< HEAD
 import { UploadIcon } from "../icons/";
-=======
->>>>>>> 103609f... initial commit
 
 export const Input = styled.input`
   background: #ffffff;
@@ -14,11 +11,8 @@ export const Input = styled.input`
   border-radius: 5px;
   height: ${(props) => (props.height ? props.height : "35px")};
   font-size: 16px;
-<<<<<<< HEAD
   background: ${(props) => props.bg};
   color: ${(props) => props.color};
-=======
->>>>>>> 103609f... initial commit
   max-width: ${(props) => props.maxWidth};
   width: ${(props) => (props.width ? props.width : "-webkit-fill-available")};
   margin-left: ${(props) => props.marginLeft};
@@ -28,7 +22,6 @@ export const Input = styled.input`
   padding: 5px 15px;
 `;
 
-<<<<<<< HEAD
 export const FileInput = styled.input`
   border: 3px solid grey;
   opacity: 1;
@@ -47,8 +40,6 @@ export const MediaInput = (props) => {
   );
 };
 
-=======
->>>>>>> 103609f... initial commit
 export const Label = styled.label`
   color: black;
   margin-left: ${(props) => props.marginLeft};
@@ -96,12 +87,9 @@ export const CheckBox = ({ labelProps, inputProps, ...otherProps }) => {
     </Div>
   );
 };
-<<<<<<< HEAD
 
 export const FormButton = (props) => {
   return (
     <Input type="submit" width="160px " bg="#00A8F3" color="white" {...props} />
   );
 };
-=======
->>>>>>> 103609f... initial commit
