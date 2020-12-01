@@ -6,7 +6,7 @@ export function tryLogin(username, password) {
   return (dispatch) => {
     dispatch(initLoginAction());
     axios
-      .post("/api/auth/login", { username, password })
+      .post("/auth/login", { username, password })
       .then((res) => {
         sessionStorage.setItem("token", res.data.token);
         axios.interceptors.request.use(

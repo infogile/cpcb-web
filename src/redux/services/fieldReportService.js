@@ -9,7 +9,7 @@ export function getFieldReport(id) {
   return (dispatch) => {
     dispatch(initFieldReportAction());
     axios
-      .get(`/api/inspection/getfieldreport/${id}`)
+      .get(`/inspection/getfieldreport/${id}`)
       .then((res) => {
         const responseData = res.data;
         let data = {};

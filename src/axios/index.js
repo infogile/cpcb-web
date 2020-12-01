@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:9090",
+  baseURL: window.location.protocol + "//" + window.location.host + "/api",
   headers: {
     authorization: sessionStorage.getItem("token")
       ? sessionStorage.getItem("token")
