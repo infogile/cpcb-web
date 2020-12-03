@@ -57,34 +57,48 @@ font-size: 18px;
 line-height: 21px;
 }
 
+
+.n{
+    position: absolute;
+    text-align: center;
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 65px;
+margin-left: 25px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.texts{
+    position: absolute;
+    margin: 10px 0px;
+    height: 42px;
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 25px;
+    color: #000000;
+}
+
 .rectangle{
     position: absolute;
-width: 1140px;
-height: 65px;
+    line-height: 50px;
+width: 1200px;
+height: 90px;
 left: 292px;
 top: 788px;
 
 background: #E8E5E5;
 }
-
-
-.texts{
-    position: absolute;
-    margin: 10px 0px;
-    text-align: center;
-    width: 148px;
-    height: 42px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 21px;
-    color: #000000;
-}
-
 .rectangle2{
     position: absolute;
-    width: 1140px;
+    width: 1200px;
     height: 487px;
     left: 292px;
     top: 788px;
@@ -96,7 +110,7 @@ background: #F7F7F7;
     position: absolute;
 width: 97px;
 height: 58px;
-top: 866px;
+top: 900px;
 
 background: #D83CFF;
 }
@@ -111,4 +125,14 @@ background: #D83CFF;
   .row {
     margin-right: -15px;
     margin-left: -15px;
+  }
+
+  .line{
+    position: absolute;
+    width: 251px;
+    height: 0px;
+    top: 230px;
+    bottom: 1000px;
+    border: 1px solid #000000;
+    transform: rotate(90deg);
   }
