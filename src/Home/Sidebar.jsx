@@ -53,6 +53,22 @@ function Sidebar({ show, ...otherProps }) {
           marginRight="10px"
       />
       Tech Institute Reports
+        <NavItem to="/home/tir/ganga">
+          <DashboardIcon
+            color={history.location.pathname === "/home/tir" ? "#4759FB" : "#5c5c5c"}
+            size="10px"
+            marginRight="10px"
+          />
+            Ganga
+        </NavItem>
+        <NavItem to="/home/tir/yamuna">
+          <DashboardIcon
+            color={history.location.pathname === "/home/tir" ? "#4759FB" : "#5c5c5c"}
+            size="10px"
+            marginRight="10px"
+          />
+            Yamuna
+        </NavItem>
       </NavItem>
 
       <NavItem to="/home/active_inspections">

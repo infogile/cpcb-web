@@ -25,7 +25,7 @@ top: 588px;
 background: #F7F7F7;
 `;
 
-export const Dashboard =({ title })=>{
+export const YamunaReports =({ title })=>{
     return (
         <Text as="h2" marginLeft="10px">
             {title}
@@ -33,4 +33,4 @@ export const Dashboard =({ title })=>{
     );
 };
 
-export default Dashboard;
+export default YamunaReports;
