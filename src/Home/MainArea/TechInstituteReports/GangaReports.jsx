@@ -100,7 +100,7 @@ export const GangaReports =({ title })=>{
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="col-md-8 col-sm-7 text-align-right">
-                                <span class="texts">Total Inspection</span>
+                                <span class="texts" style={{ left: "503px" }}>Total Inspection</span>
                                 <span class="texts">Inspection Pending</span>
                                 <span class="texts">Field Report Submitted</span>
                                 <span class="texts">Inspection Report Submitted</span>
@@ -111,6 +111,12 @@ export const GangaReports =({ title })=>{
                     </div>
                 </div>  
             </div>
+            <div class="rectangle3" style={{ left: "503px" }}/>
+            <div class="rectangle3" style={{ left: "666px" }}/>
+            <div class="rectangle3" style={{ left: "820px" }}/>
+            <div class="rectangle3" style={{ left: "971px" }}/>
+            <div class="rectangle3" style={{ left: "1138px" }}/>
+            <div class="rectangle3" style={{ left: "1306px" }}/>
         </div>
         </>
     );
