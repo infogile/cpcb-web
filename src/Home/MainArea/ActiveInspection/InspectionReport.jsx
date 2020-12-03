@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import { Text } from "../../../shared/Text";
+import store from "../../../redux/store";
 import InspectionForm from "./InspectionForm";
+import { getFieldReport } from "../../../redux/services/";
 
 const InspectionReportStyled = styled.div`
   margin-top: 30px;
@@ -48,14 +51,21 @@ const Td = styled.td`
 `;
 
 export const InspectionReport = ({ title }) => {
+  const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
+  useEffect(() => {
+    store.dispatch(getFieldReport("5f928c3e5147573a1a2d26bc"));
+  }, []);
+  if (isLoading) {
+    return "loading...";
+  }
   return (
     <InspectionReportStyled>
       <Text as="h3" marginLeft="10px">
         Inspection Report
       </Text>
       <Report>
-        <Text as="h4">Bajirao mastani slaughter house</Text>
-        <Table>
+        <Text as="h4">{data.name}</Text>
+        {/* <Table>
           <tbody>
             <tr>
               <Th>Firstname</Th>
@@ -70,7 +80,7 @@ export const InspectionReport = ({ title }) => {
               <Td>Jackson</Td>
             </tr>
           </tbody>
-        </Table>
+        </Table> */}
         <InspectionForm />
       </Report>
     </InspectionReportStyled>

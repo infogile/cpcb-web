@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Form } from "../../../shared/Form";
 import {
   CheckBox,
@@ -11,12 +12,17 @@ import { Text } from "../../../shared/Text";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
-import Media from "./Media";
-import axios from "../../../axios";
+import UploadReport from "./UploadReport";
+import { submitInspectionform } from "../../../redux/services";
+import store from "../../../redux/store";
 
 const InspectionForm = () => {
   const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
-  const [consentCopyProgree, setConsentCopyProgree] = useState(-1);
+  const [validationWaring, setValidationWarning] = useState("");
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formFailure, setFormFailure] = useState(false);
+  const [isloading, setIsloading] = useState(false);
+  const params = useParams();
   const [inspectionForm, setInspectionForm] = useState({
     teamnames: "",
     finalrecommendation: "",
@@ -40,6 +46,7 @@ const InspectionForm = () => {
     unauthorizedDisposal: false,
     effluent: false,
     invalidCTO: false,
+    files: {},
   });
   const onInputChange = (e) => {
     const {
@@ -75,24 +82,52 @@ const InspectionForm = () => {
       [name]: fieldValue,
     }));
   };
-  const onFileInputChange = (e) => {
-    const formData = new FormData();
-    formData.append("consentcopy", e.target.files[0], e.target.name);
-    axios.post("/inspections/consent_copy", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: function (progressEvent) {
-        var percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total
-        );
-        setConsentCopyProgree(percentCompleted);
-      },
-    });
+  const onUploadComplete = (name, fileLocation) => {
+    setInspectionForm((prevState) => ({
+      ...prevState,
+      files: { ...prevState.files, [name]: fileLocation },
+    }));
+  };
+  const onRemoveFile = (name) => {
+    console.log("on remove", name);
+    setInspectionForm((prevState) => ({
+      ...prevState,
+      files: { ...prevState.files, [name]: undefined },
+    }));
   };
   const submit = (e) => {
     e.preventDefault();
+    console.log(inspectionForm);
+    if (
+      !inspectionForm.files.consentcopy ||
+      !inspectionForm.files.inspectionreport
+    ) {
+      setValidationWarning(
+        "*Please upload Concent Copy and Inspection Report to continue."
+      );
+    } else {
+      setIsloading(true);
+      store
+        .dispatch(submitInspectionform(params.id, inspectionForm))
+        .then((res) => {
+          setIsloading(false);
+          if (res.status === 200) {
+            setFormSuccess(true);
+          } else {
+            setFormFailure(true);
+          }
+        });
+    }
   };
+  if (isloading) {
+    return "loading...";
+  }
+  if (formSuccess) {
+    return "Inspection form Submitted Successfully.";
+  }
+  if (formFailure) {
+    return "Inpection form was not submitted because of some error.";
+  }
   return (
     <Form marginTop="40px" onSubmit={submit}>
       <LabeledInput
@@ -106,28 +141,17 @@ const InspectionForm = () => {
           placeholder: "Team Names",
         }}
       />
-      <LabeledInput
-        marginTop="30px"
-        labelProps={{ label: "Upload consent Copy" }}
-        inputProps={{
-          accept:
-            "application/msword, application/vnd.ms-excel, application/pdf",
-          name: "consentcopy",
-          id: "consentcopy",
-          type: "file",
-          onChange: onFileInputChange,
-        }}
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="consentcopy"
+        label="*Upload Concent Copy"
       />
-      {`${consentCopyProgree}%`}
-      <LabeledInput
-        marginTop="30px"
-        labelProps={{ label: "Upload inspection report" }}
-        inputProps={{
-          name: "inspectionreport",
-          id: "inspectionreport",
-          type: "file",
-          placeholder: "Team Names",
-        }}
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="inspectionreport"
+        label="*Upload Inspection Report"
       />
       <LabeledInput
         marginTop="30px"
@@ -412,7 +436,28 @@ const InspectionForm = () => {
         />
       </Grid>
       {/* <Media /> */}
-      <FormButton marginTop="20px" />
+      <Text color="#ec3737" as="div" marginTop="10px">
+        {validationWaring}
+      </Text>
+      <FormButton
+        marginTop="20px"
+        title="Please check above all conditions of non-compliance to submit form"
+        disable={
+          inspectionForm.compliancestatus === "noncompliance" &&
+          (!inspectionForm.nonInstallationofOCEMS ||
+            !inspectionForm.temperedOCEMS ||
+            !inspectionForm.dissentBypassArrangement ||
+            !inspectionForm.provision ||
+            !inspectionForm.defunctETP ||
+            !inspectionForm.ZLDnorms ||
+            !inspectionForm.standardExceedance ||
+            !inspectionForm.dilutionInETP ||
+            !inspectionForm.dissentWaterDischarge ||
+            !inspectionForm.unauthorizedDisposal ||
+            !inspectionForm.effluent ||
+            !inspectionForm.invalidCTO)
+        }
+      />
     </Form>
   );
 };

@@ -2,9 +2,9 @@ import { loginSuccess, initLoginAction, loginError } from "../actions";
 import axios from "../../axios";
 
 export function tryLogin(username, password) {
-  console.log("logging in");
   return (dispatch) => {
     dispatch(initLoginAction());
+    // console.log(axios);
     axios
       .post("/auth/login", { username, password })
       .then((res) => {
@@ -18,24 +18,12 @@ export function tryLogin(username, password) {
             return Promise.reject(error);
           }
         );
-        setTimeout(dispatch(loginSuccess()), 0);
+        dispatch({ ...loginSuccess(), username: res.data.user });
       })
       .catch((err) => {
         dispatch(loginError());
+        console.log(err);
       });
     // setTimeout(() => dispatch(loginSuccess()), 2000);
   };
-}
-
-export function doLogout() {
-  sessionStorage.setItem("token", null);
-  axios.interceptors.request.use(
-    (config) => {
-      config.headers.authorization = null;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
 }

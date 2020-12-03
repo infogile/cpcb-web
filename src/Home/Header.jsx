@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 import { Text } from "../shared/Text";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
@@ -32,9 +33,10 @@ const Logout = styled.span`
 
 function Header({ toggleNav }) {
   const history = useHistory();
+  const { username } = useSelector((state) => state.loginReducer);
   const onLogout = () => {
-    doLogout();
     setTimeout(history.push("/"), 0);
+    doLogout();
   };
   return (
     <StyledHeader>
@@ -47,7 +49,7 @@ function Header({ toggleNav }) {
         />
       </span>
       <Text fontSize="20px" color="white">
-        CPCB Portal
+        {username}
       </Text>
       <Logout onClick={onLogout}>Logout</Logout>
     </StyledHeader>
