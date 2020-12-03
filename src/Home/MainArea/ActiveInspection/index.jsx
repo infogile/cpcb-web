@@ -20,7 +20,7 @@ export const ActiveInspection = ({ title }) => {
         <FieldReport />
       </Route>
       <Route path="/home/active_inspections/upload_inspection_report/:id">
-        Coming Soon...
+        <InspectionReport />
       </Route>
     </ActiveInspectionStyled>
   );

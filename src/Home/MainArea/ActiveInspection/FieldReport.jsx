@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
-import { useHistory } from "react-router-dom";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getFieldReport } from "../../../redux/services/";
@@ -52,7 +51,6 @@ const Td = styled.td`
 `;
 
 export const FieldReport = () => {
-  const history = useHistory();
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
   useEffect(() => {
     store.dispatch(getFieldReport("5f928c3e5147573a1a2d26bc"));
