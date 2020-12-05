@@ -1,44 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Text } from "../../../shared/Text";
 import { Link } from "react-router-dom";
 import { Grid } from "../../../shared/Grid";
 import image from "../../../assets/img/image 2.png";
 import "../../../assets/css/tech.css"
-import { VictoryPie } from 'victory';
 
 
-const List = styled.div`
-  display: block;
-  margin-top: 22px;
-  margin-left: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  max-width: 1000px;
-  background: #f6f6f6;
-  :first-child {
-    margin-top: 10px;
-  }
-`;
-const ListHeader = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr;
-  margin-top: 22px;
-  margin-left: 20px;
-  margin-right: 20px;
-  :first-child {
-    margin-top: 0px;
-  }
-`;
-const ListItemHeader = styled.div`
-  text-align: center;
-  margin: 10px 0px;
-`;
-
-
-export const GangaReports =({ title })=>{
+export const YamunaReports =({ title })=>{
     return (
-    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-    <div>
+        <div>
         <header>
             <div class="container">
                 <h2 class="h1">
@@ -47,56 +18,54 @@ export const GangaReports =({ title })=>{
             </div>
         </header>
         <div class="container">
+            <div class="row">
                 <div class="img-text-wrapper">
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                           style={{labels: {fontSize: 80},}}/>
-                        <p>CPRI</p>
-                    </span>
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                            style={{labels: {fontSize: 80},}}/> 
-                        <p>DTU</p>
-                    </span>
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                             style={{labels: {fontSize:80},}}/> 
-                        <p>IIT Delhi</p>
-                    </span>
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                            style={{labels: {fontSize: 80},}}/> 
-                        <p>IIT Roorkee</p>
-                    </span>
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                           style={{labels: {fontSize: 80},}}/> 
-                        <p>NEERI</p>
-                    </span>
-                    <span class="graph">
-                        <VictoryPie
-                            data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
-                            style={{labels: {fontSize: 80},}}/> 
-                        <p>JMI</p>
-                    </span>
+                    <img src={image} style={{ position: "absolute", 
+                        width: "257px",
+                        height: "205px",
+                        left: "352px",
+                        top: "225px",
+                        border_radius: "102.5px",
+                    }}/> 
+                    <img src={image} style={{ position: "absolute", 
+                        width: "257px",
+                        height: "205px",
+                        left: "352px",
+                        top: "225px",
+                        border_radius: "102.5px",
+                    }}/>
+                    <img src={image} style={{ position: "absolute",
+                        width: "257px",
+                        height: "205px",
+                        left: "753px",
+                        top: "225px",
+                        border_radius: "102.5px", }}/>
+                    <img src={image} style={{ position: "absolute",
+                        width: "257px",
+                        height: "205px",
+                        left: "1132px",
+                        top: "225px",
+                        border_radius: "102.5px", }}/>
+                    <img src={image} style={{ position: "absolute",
+                        width: "257px",
+                        height: "205px",
+                        left: "352px",
+                        top: "443px",
+                        border_radius: "102.5px",}}/>
+                    <img src={image} style={{ position: "absolute",
+                        width: "257px",
+                        height: "205px",
+                        left: "753px",
+                        top: "443px",
+                        border_radius: "102.5px", }}/>
+                    <img src={image} style={{ position: "absolute",
+                        width: "257px",
+                        height: "205px",
+                        left: "1132px",
+                        top: "443px",
+                        border_radius: "102.5px", }}/>
                 </div>
+            </div>
         </div>
         <div class="container">
             <div class="rectangle">
@@ -149,8 +118,7 @@ export const GangaReports =({ title })=>{
             </div>
         </div>
     </div>
-    </body>
     );
 };
 
-export default GangaReports;
+export default YamunaReports;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
-import { Link } from "react-router-dom";
-import { Grid } from "../../../shared/Grid";
+import StateWise from './StateWise';
 
 const Percentage= styled.div`
 position: absolute;
@@ -27,9 +27,16 @@ background: #F7F7F7;
 
 export const Dashboard =({ title })=>{
     return (
+        <>
         <Text as="h2" marginLeft="10px">
             {title}
         </Text>
+        <a href="">State<Route path="/home/tir/state" exact>State Wise
+            <StateWise title="Technical Institute Reports: State wise"/>
+        </Route>
+        </a>
+        
+        </>
     );
 };
 
