@@ -5,6 +5,7 @@ import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import InspectionForm from "./InspectionForm";
 import { getFieldReport } from "../../../redux/services/";
+import { useParams } from "react-router";
 
 const InspectionReportStyled = styled.div`
   margin-top: 30px;
@@ -52,8 +53,10 @@ const Td = styled.td`
 
 export const InspectionReport = ({ title }) => {
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
+  const params = useParams();
   useEffect(() => {
-    store.dispatch(getFieldReport("5f928c3e5147573a1a2d26bc"));
+    const id = params.id;
+    store.dispatch(getFieldReport(id));
   }, []);
   if (isLoading) {
     return "loading...";
@@ -65,23 +68,7 @@ export const InspectionReport = ({ title }) => {
       </Text>
       <Report>
         <Text as="h4">{data.name}</Text>
-        {/* <Table>
-          <tbody>
-            <tr>
-              <Th>Firstname</Th>
-              <Td>Lastname</Td>
-            </tr>
-            <tr>
-              <Th>Jill</Th>
-              <Td>SmiTh</Td>
-            </tr>
-            <tr>
-              <Th>Eve</Th>
-              <Td>Jackson</Td>
-            </tr>
-          </tbody>
-        </Table> */}
-        <InspectionForm />
+        <InspectionForm status={data.status} />
       </Report>
     </InspectionReportStyled>
   );

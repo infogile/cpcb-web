@@ -4,16 +4,18 @@ import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getFieldReport } from "../../../redux/services/";
+import { useParams } from "react-router";
 
 const FieldReportStyled = styled.div`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const Report = styled.div`
   display: block;
   margin-top: 22px;
   margin-left: 10px;
-  padding: 10px 20px;
+  padding: 20px 20px;
   max-width: 900px;
   background: #f6f6f6;
   box-shadow: 0px 4px 4px 0px #00000033;
@@ -34,6 +36,7 @@ const Table = styled.table`
 
 const Th = styled.th`
   text-align: right;
+  width: 50%;
   border-right: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
   border-top: 1px solid #c0c0c0;
@@ -44,6 +47,7 @@ const Th = styled.th`
 
 const Td = styled.td`
   text-align: left;
+  width: 50%;
   border-left: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
   border-top: 1px solid #c0c0c0;
@@ -52,10 +56,11 @@ const Td = styled.td`
 
 export const FieldReport = () => {
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
+  const params = useParams();
   useEffect(() => {
-    store.dispatch(getFieldReport("5f928c3e5147573a1a2d26bc"));
+    const id = params.id;
+    store.dispatch(getFieldReport(id));
   }, []);
-  console.log(data);
   if (isLoading) {
     return "loading...";
   }
@@ -68,18 +73,15 @@ export const FieldReport = () => {
         <Text as="h4">{data.name}</Text>
         <Table>
           <tbody>
-            <tr>
-              <Th>Unit Code</Th>
-              <Td>{data.code}</Td>
-            </tr>
-            <tr>
-              <Th>Unit Sector</Th>
-              <Td>{data.sector}</Td>
-            </tr>
-            <tr>
-              <Th>Eve</Th>
-              <Td>Jackson</Td>
-            </tr>
+            {data.fields &&
+              data.fields.map((field) => {
+                return (
+                  <tr key={field.title}>
+                    <Th>{field.title}</Th>
+                    <Td>{field.value || "−"}</Td>
+                  </tr>
+                );
+              })}
           </tbody>
         </Table>
       </Report>

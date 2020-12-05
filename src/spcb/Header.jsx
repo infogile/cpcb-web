@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Text } from "../shared/Text";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const StyledHeader = styled.div`
   display: grid;
@@ -21,14 +19,7 @@ const StyledHeader = styled.div`
 function Header({ toggleNav }) {
   return (
     <StyledHeader>
-      <span style={{ marginLeft: "40px", textAlign: "left" }}>
-        <FontAwesomeIcon
-          icon={faBars}
-          size={"2x"}
-          onClick={toggleNav}
-          cursor="pointer"
-        />
-      </span>
+      <span style={{ marginLeft: "40px", textAlign: "left" }}></span>
       <Text fontSize="20px" color="white">
         CPCB Portal
       </Text>

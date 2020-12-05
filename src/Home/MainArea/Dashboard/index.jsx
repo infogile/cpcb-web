@@ -4,6 +4,7 @@ import { Grid } from "../../../shared/Grid";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getInspections } from "../../../redux/services/";
+import { capitalizeFirstLetter } from "../../../helpers";
 
 export const Dashboard = () => {
   const { isLoading, data } = useSelector((state) => state.dashboardReducers);
@@ -15,7 +16,18 @@ export const Dashboard = () => {
   }
   return (
     <Grid>
-      <RiverStats title="Ganga Dashboard" data={data.ganga}></RiverStats>
+      {data &&
+        data.map((riverData) => {
+          return (
+            <RiverStats
+              key={riverData.title}
+              title={`${capitalizeFirstLetter(riverData.title)} Dashboard`}
+              data={riverData}
+            />
+          );
+        })}
+      {(!data || data.length === 0) &&
+        "There are no Inspections asssigned to you."}
       {/* <RiverStats title="Yamuna Dashboard"></RiverStats> */}
     </Grid>
   );

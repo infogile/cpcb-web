@@ -23,6 +23,7 @@ export function getActiveInspections() {
         dispatch({ ...activeInspectionSuccess(), data });
       })
       .catch((err) => {
+        console.log(err);
         dispatch(activeInspectionError());
       });
   };

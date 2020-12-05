@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Form } from "../../../shared/Form";
 import {
@@ -16,7 +16,7 @@ import UploadReport from "./UploadReport";
 import { submitInspectionform } from "../../../redux/services";
 import store from "../../../redux/store";
 
-const InspectionForm = () => {
+const InspectionForm = ({ status }) => {
   const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
   const [validationWaring, setValidationWarning] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
@@ -48,6 +48,14 @@ const InspectionForm = () => {
     invalidCTO: false,
     files: {},
   });
+  useEffect(() => {
+    if (
+      inspectionForm.files.consentcopy &&
+      inspectionForm.files.inspectionreport
+    ) {
+      setValidationWarning("");
+    }
+  }, [inspectionForm.files.consentcopy, inspectionForm.files.inspectionreport]);
   const onInputChange = (e) => {
     const {
       target: { name, type, checked, value },
@@ -89,7 +97,6 @@ const InspectionForm = () => {
     }));
   };
   const onRemoveFile = (name) => {
-    console.log("on remove", name);
     setInspectionForm((prevState) => ({
       ...prevState,
       files: { ...prevState.files, [name]: undefined },
@@ -97,13 +104,29 @@ const InspectionForm = () => {
   };
   const submit = (e) => {
     e.preventDefault();
-    console.log(inspectionForm);
+    if (
+      inspectionForm.compliancestatus === "noncompliance" &&
+      (!inspectionForm.nonInstallationofOCEMS ||
+        !inspectionForm.temperedOCEMS ||
+        !inspectionForm.dissentBypassArrangement ||
+        !inspectionForm.provision ||
+        !inspectionForm.defunctETP ||
+        !inspectionForm.ZLDnorms ||
+        !inspectionForm.standardExceedance ||
+        !inspectionForm.dilutionInETP ||
+        !inspectionForm.dissentWaterDischarge ||
+        !inspectionForm.unauthorizedDisposal ||
+        !inspectionForm.effluent ||
+        !inspectionForm.invalidCTO)
+    ) {
+      return;
+    }
     if (
       !inspectionForm.files.consentcopy ||
       !inspectionForm.files.inspectionreport
     ) {
       setValidationWarning(
-        "*Please upload Concent Copy and Inspection Report to continue."
+        "*Please upload Consent Copy and Inspection Report to continue."
       );
     } else {
       setIsloading(true);
@@ -122,6 +145,9 @@ const InspectionForm = () => {
   if (isloading) {
     return "loading...";
   }
+  if (status > 1) {
+    return "Inspection Report Submitted Already.";
+  }
   if (formSuccess) {
     return "Inspection form Submitted Successfully.";
   }
@@ -129,7 +155,12 @@ const InspectionForm = () => {
     return "Inpection form was not submitted because of some error.";
   }
   return (
-    <Form marginTop="40px" onSubmit={submit}>
+    <Form
+      marginTop="40px"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <LabeledInput
         labelProps={{ label: "Memeber of inspection Team" }}
         inputProps={{
@@ -145,7 +176,7 @@ const InspectionForm = () => {
         onUploadComplete={onUploadComplete}
         onRemoveFile={onRemoveFile}
         name="consentcopy"
-        label="*Upload Concent Copy"
+        label="*Upload Consent Copy"
       />
       <UploadReport
         onUploadComplete={onUploadComplete}
@@ -441,7 +472,8 @@ const InspectionForm = () => {
       </Text>
       <FormButton
         marginTop="20px"
-        title="Please check above all conditions of non-compliance to submit form"
+        title="Please Check Above All Conditions Of Non-compliance To Submit Form"
+        onClick={submit}
         disable={
           inspectionForm.compliancestatus === "noncompliance" &&
           (!inspectionForm.nonInstallationofOCEMS ||

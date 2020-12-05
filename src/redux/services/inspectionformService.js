@@ -43,6 +43,7 @@ export function submitInspectionform(id, formdata) {
         return res;
       })
       .catch((err) => {
+        console.log(err);
         dispatch(inspectionformActionError());
       });
   };
