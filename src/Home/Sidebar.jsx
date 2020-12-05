@@ -34,7 +34,6 @@ const NavItem = styled(Link)`
 
 function Sidebar({ show, ...otherProps }) {
   const history = useHistory();
-  console.log(history);
 
   return (
     <StyledSidebar show={show}>

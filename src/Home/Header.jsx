@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { Text } from "../shared/Text";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { BarsIcon } from "../icons";
 import { useHistory } from "react-router-dom";
 import store from "../redux/store";
 import { doLogout } from "../redux/services";
@@ -41,17 +40,14 @@ function Header({ toggleNav }) {
   return (
     <StyledHeader>
       <span style={{ marginLeft: "40px", textAlign: "left" }}>
-        <FontAwesomeIcon
-          icon={faBars}
-          size={"2x"}
-          onClick={toggleNav}
-          cursor="pointer"
-        />
+        <BarsIcon color="white" size="32px" onClick={toggleNav} />
       </span>
       <Text fontSize="20px" color="white">
-        {username}
+        {`Hi, ${username || sessionStorage.getItem("username")}`}
       </Text>
-      <Logout onClick={onLogout}>Logout</Logout>
+      <div style={{ textAlign: "right", paddingTop: "5px" }}>
+        <Logout onClick={onLogout}>Logout</Logout>
+      </div>
     </StyledHeader>
   );
 }

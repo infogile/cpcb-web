@@ -1,13 +1,6 @@
 export function dashboardReducers(
   state = {
-    data: {
-      ganga: {
-        totalAlloted: 0,
-        pending: 0,
-        fieldReportSubmitted: 0,
-        inspectionReportSubmitted: 0,
-      },
-    },
+    data: [],
     isLoading: true,
   },
   action
