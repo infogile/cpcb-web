@@ -31,10 +31,6 @@ export const Dashboard =({ title })=>{
         <Text as="h2" marginLeft="10px">
             {title}
         </Text>
-        <a href="">State<Route path="/home/tir/state" exact>State Wise
-            <StateWise title="Technical Institute Reports: State wise"/>
-        </Route>
-        </a>
         
         </>
     );

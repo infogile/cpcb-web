@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Grid } from "../../../shared/Grid";
-import image from "../../../assets/img/image 2.png";
 import "../../../assets/css/tech.css"
 import { VictoryPie } from 'victory';
 

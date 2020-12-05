@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Text } from "../../../shared/Text";
-import { Link } from "react-router-dom";
-import { Grid } from "../../../shared/Grid";
-import image from "../../../assets/img/image 2.png";
 import "../../../assets/css/tech.css"
+import { VictoryPie } from 'victory';
 
 
 export const YamunaReports =({ title })=>{
     return (
-        <div>
+    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+    <div>
         <header>
             <div class="container">
                 <h2 class="h1">
@@ -18,54 +16,56 @@ export const YamunaReports =({ title })=>{
             </div>
         </header>
         <div class="container">
-            <div class="row">
                 <div class="img-text-wrapper">
-                    <img src={image} style={{ position: "absolute", 
-                        width: "257px",
-                        height: "205px",
-                        left: "352px",
-                        top: "225px",
-                        border_radius: "102.5px",
-                    }}/> 
-                    <img src={image} style={{ position: "absolute", 
-                        width: "257px",
-                        height: "205px",
-                        left: "352px",
-                        top: "225px",
-                        border_radius: "102.5px",
-                    }}/>
-                    <img src={image} style={{ position: "absolute",
-                        width: "257px",
-                        height: "205px",
-                        left: "753px",
-                        top: "225px",
-                        border_radius: "102.5px", }}/>
-                    <img src={image} style={{ position: "absolute",
-                        width: "257px",
-                        height: "205px",
-                        left: "1132px",
-                        top: "225px",
-                        border_radius: "102.5px", }}/>
-                    <img src={image} style={{ position: "absolute",
-                        width: "257px",
-                        height: "205px",
-                        left: "352px",
-                        top: "443px",
-                        border_radius: "102.5px",}}/>
-                    <img src={image} style={{ position: "absolute",
-                        width: "257px",
-                        height: "205px",
-                        left: "753px",
-                        top: "443px",
-                        border_radius: "102.5px", }}/>
-                    <img src={image} style={{ position: "absolute",
-                        width: "257px",
-                        height: "205px",
-                        left: "1132px",
-                        top: "443px",
-                        border_radius: "102.5px", }}/>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                           style={{labels: {fontSize: 80},}}/>
+                        <p>CPRI</p>
+                    </span>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                            style={{labels: {fontSize: 80},}}/> 
+                        <p>DTU</p>
+                    </span>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                             style={{labels: {fontSize:80},}}/> 
+                        <p>IIT Delhi</p>
+                    </span>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                            style={{labels: {fontSize: 80},}}/> 
+                        <p>IIT Roorkee</p>
+                    </span>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                           style={{labels: {fontSize: 80},}}/> 
+                        <p>NEERI</p>
+                    </span>
+                    <span class="graph">
+                        <VictoryPie
+                            data={[
+                            { x: "Ganga", y: 35 },
+                            { x: "Yamuna", y: 40 },]}
+                            style={{labels: {fontSize: 80},}}/> 
+                        <p>JMI</p>
+                    </span>
                 </div>
-            </div>
         </div>
         <div class="container">
             <div class="rectangle">
@@ -118,6 +118,7 @@ export const YamunaReports =({ title })=>{
             </div>
         </div>
     </div>
+    </body>
     );
 };
 
