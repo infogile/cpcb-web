@@ -1,3 +1,6 @@
+div{
+  display: block;
+}
 span, p{
     margin: 0;
 	padding: 0;

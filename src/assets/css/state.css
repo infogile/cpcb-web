@@ -1,0 +1,45 @@
+.iaBNQP {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 2rem 3rem 5.5rem 2rem;
+}
+.fVgyOA {
+    max-width: 121rem;
+    width: 100%;
+    margin-left: 0;
+}
+.food{
+    display: block;
+    background-color: #CEE6ED;
+
+    width: 800px;
+    padding:35px;
+    margin-left: 0;
+}
+.f1{
+    display: flex;
+    align-items: center;
+}
+
+.style{
+    position: relative;
+width: 219px;
+height: 28px;
+font-family: Roboto;
+font-style: normal;
+font-size: 24px;
+color: #000000;
+}
+.rect{
+    position: relative;
+    margin-left: 400px;
+    width: 136px;
+height: 43px;
+text-align: center;
+font-family: Roboto;
+font-size: 18px;
+color: white;
+background: #423FD2;
+border-radius: 11px;
+}

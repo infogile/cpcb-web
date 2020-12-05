@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import "../../../assets/css/tech.css"
+import "../../../assets/css/tech.css";
 import { VictoryPie } from 'victory';
-
 
 const List = styled.div`
   display: block;
@@ -34,8 +33,8 @@ const ListItemHeader = styled.div`
 
 export const GangaReports =({ title })=>{
     return (
+    <>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-    <div>
         <header>
             <div class="container">
                 <h2 class="h1">
@@ -48,48 +47,48 @@ export const GangaReports =({ title })=>{
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                            style={{labels: {fontSize: 80},}}/>
                         <p>CPRI</p>
                     </span>
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                             style={{labels: {fontSize: 80},}}/> 
                         <p>DTU</p>
                     </span>
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                              style={{labels: {fontSize:80},}}/> 
                         <p>IIT Delhi</p>
                     </span>
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                             style={{labels: {fontSize: 80},}}/> 
                         <p>IIT Roorkee</p>
                     </span>
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                            style={{labels: {fontSize: 80},}}/> 
                         <p>NEERI</p>
                     </span>
                     <span class="graph">
                         <VictoryPie
                             data={[
-                            { x: "Ganga", y: 35 },
-                            { x: "Yamuna", y: 40 },]}
+                            { x: "Total Alloted", y: 35 },
+                            { x: "Inspected", y: 40 },]}
                             style={{labels: {fontSize: 80},}}/> 
                         <p>JMI</p>
                     </span>
@@ -145,8 +144,8 @@ export const GangaReports =({ title })=>{
                 </div>
             </div>
         </div>
-    </div>
     </body>
+    </>
     );
 };
 

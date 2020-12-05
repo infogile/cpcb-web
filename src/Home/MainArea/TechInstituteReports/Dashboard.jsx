@@ -3,6 +3,8 @@ import { Route } from "react-router-dom";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
 import StateWise from './StateWise';
+import { Link } from "react-router-dom";
+
 
 const Percentage= styled.div`
 position: absolute;
@@ -31,7 +33,11 @@ export const Dashboard =({ title })=>{
         <Text as="h2" marginLeft="10px">
             {title}
         </Text>
-        
+        <div>
+            <nav>
+                <p><Link to="tir/statewise">State Wise</Link><Route path="home/tir/statewise" component={StateWise} exact/></p>
+            </nav>
+        </div>
         </>
     );
 };
