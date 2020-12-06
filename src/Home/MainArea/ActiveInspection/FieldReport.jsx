@@ -5,6 +5,7 @@ import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { getFieldReport } from "../../../redux/services/";
 import { useParams } from "react-router";
+import { ImageGrid } from "../../../shared/ImageGrid";
 
 const FieldReportStyled = styled.div`
   margin-top: 30px;
@@ -84,6 +85,12 @@ export const FieldReport = () => {
               })}
           </tbody>
         </Table>
+        {data.images && (
+          <>
+            <Text as="h4">Images</Text>
+            <ImageGrid images={data.images} />
+          </>
+        )}
       </Report>
     </FieldReportStyled>
   );

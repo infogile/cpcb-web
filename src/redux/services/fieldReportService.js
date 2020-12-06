@@ -30,6 +30,7 @@ export function getFieldReport(id) {
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
+          data.images = responseData.fieldReport?.images || [];
           data.fields = [
             { title: "Unit Name", value: responseData.factory.name },
             { title: "Unit Sector", value: responseData.factory.sector.name },
@@ -42,6 +43,12 @@ export function getFieldReport(id) {
               value: responseData.attendance?.entrylocation?.coordinates[1],
             },
             {
+              title: "Point of Contact",
+              value: responseData.fieldReport.poc
+                ? responseData.fieldReport.poc.map((p) => p.name).join(",")
+                : "",
+            },
+            {
               title: "Date of Inspection",
               value: dateOfInspection,
             },
@@ -49,6 +56,30 @@ export function getFieldReport(id) {
             {
               title: "Unit Functional Status",
               value: responseData.fieldReport.uos,
+            },
+            {
+              title: "Reasons for Non-operational",
+              value: responseData.fieldReport.uosdetail,
+            },
+            {
+              title: "ETP Operational Status",
+              value: responseData.fieldReport.etpos,
+            },
+            {
+              title: "ETP Status Details",
+              value: responseData.fieldReport.etposdetail,
+            },
+            {
+              title: "Present Production of Previous Day",
+              value: responseData.fieldReport.ppopd,
+            },
+            {
+              title: "Fresh Water Withdrawal Previous Day based on Flow Meter",
+              value: responseData.fieldReport.fwwpdbofm,
+            },
+            {
+              title: "Status of NOC from CGWA",
+              value: responseData.fieldReport.sonfc,
             },
             {
               title: "Valid Consent Under Air Act",
@@ -63,13 +94,82 @@ export function getFieldReport(id) {
               value: responseData.fieldReport.hc,
             },
             {
+              title: "Valid Consent Under CGWA",
+              value: responseData.fieldReport.cc,
+            },
+            {
               title: "Product Installed Capacity",
               value: responseData.fieldReport.ipc,
             },
+            {
+              title: "Consented Production Capacity",
+              value: responseData.fieldReport.cpc,
+            },
             { title: "Source of Water", value: responseData.fieldReport.sfwc },
+            {
+              title: "Reason for Other Water Source",
+              value: responseData.fieldReport.sfwcdetail,
+            },
+            {
+              title: "Flowmeter Installed at Borewell",
+              value: responseData.fieldReport.fib,
+            },
+            {
+              title: "Details for Flowmeter Installed at Borewell",
+              value: responseData.fieldReport.fibdetail,
+            },
+            {
+              title: "Flowmeter Installed at ETP Inlet",
+              value: responseData.fieldReport.fietpinlet,
+            },
+            {
+              title: "Details for Flowmeter Installed at ETP Inlet",
+              value: responseData.fieldReport.fietpinletdetail,
+            },
+            {
+              title: "Flowmeter Installed at ETP Outlet",
+              value: responseData.fieldReport.fietpoutlent,
+            },
+            {
+              title: "Details for Flowmeter Installed at ETP Outlet",
+              value: responseData.fieldReport.fietpoutlentdetail,
+            },
+
+            {
+              title: "Flow Meter at ETP Outlet Current day Flow (KLD)",
+              value: responseData.fieldReport.fmetpoutletcdf,
+            },
+            {
+              title: "Flow Meter at ETP Outlet Previous day Flow (KLD)",
+              value: responseData.fieldReport.fmetpoutletpdf,
+            },
+            {
+              title: "OCEMS Status",
+              value: responseData.fieldReport.os,
+            },
+            {
+              title: "Details for OCEMS Status",
+              value: responseData.fieldReport.osdetail,
+            },
+            {
+              title: "Separate Energy for ETP",
+              value: responseData.fieldReport.semfetp,
+            },
+            {
+              title: "Reading of Seprate Energy for ETP",
+              value: responseData.fieldReport.semfer,
+            },
             {
               title: "Online Connectivity Status",
               value: responseData.fieldReport.ocs,
+            },
+            {
+              title: "Mode to Reach River",
+              value: responseData.fieldReport.mrr,
+            },
+            {
+              title: "Mode to Reach River",
+              value: responseData.fieldReport.mrr,
             },
             {
               title: "Name of Drain/Subdrain",
