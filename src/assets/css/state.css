@@ -144,14 +144,12 @@ font-size: 24px;
 
     .export{
         background-color: rgb(190, 42, 50); 
-  border: none;
   color: white;
   padding: 10px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 12px;
-  margin: 4px 2px;
+  margin-left: 94.5%;
   cursor: pointer;
   border-radius: 12px;
     }
