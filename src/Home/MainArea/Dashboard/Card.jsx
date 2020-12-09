@@ -4,23 +4,23 @@ import { Text } from "../../../shared/Text";
 
 const StyledCard = styled.div`
   border-radius: 6px;
-  text-align: center;
   background-image: ${(props) => props.bg};
   margin: 10px;
   float: left;
+  text-align: center;
   color: white;
   padding: 20px;
-  width: 150px;
-  height: 60px;
+  width: 200px;
+  height: 100px;
 `;
 
 const Card = ({ bg, number, status }) => {
   return (
     <StyledCard bg={bg}>
-      <Text color="white" as="div" fontSize="30px">
+      <Text color="white" as="div" fontSize="15px">
         {number}
       </Text>
-      <Text color="white" fontSize="15px">
+      <Text color="white" fontSize="20px">
         {status}
       </Text>
     </StyledCard>

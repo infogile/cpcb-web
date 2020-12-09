@@ -188,16 +188,43 @@ td{
 
   span.graph{
     display: inline-block;
-    width: 320px;
-  height: 100px;
-  padding: 5px;
+    width: 300px;
+  height: 200px;
+  padding: 10px;
+  font-size: 18px;
   padding-top: 50px;
   padding-bottom: 30px;
+  margin-right: 20px;
+  margin-bottom: 40px;
   }
   .img-text-wrapper{
     position: relative;
+    align-items: center;
     width: 1000px;
     height: 500px; 
     text-align: center;
-    margin-left: 50px;
+    margin-left: 0px;
   }
+
+
+
+  .statew{
+    position: absolute;
+    background-color:#00A8F3;
+    color: white;
+    right:25px;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .head{
+      display : flex;
+      margin-left: -40px;
+      width: 100%;
+  }
+

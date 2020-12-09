@@ -76,9 +76,9 @@ export const InspectionsList = ({ title }) => {
   }
   return (
     <>
-      <Text as="h3" marginLeft="10px">
-        Active Inspections
-      </Text>
+    <Text style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif" }} marginLeft="60px" >
+        <strong>Active Inspection</strong>
+    </Text>
       <List>
         <ListHeader>
           <ListItemHeader>Unit code</ListItemHeader>

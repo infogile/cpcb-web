@@ -2,9 +2,10 @@ import React from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import { Text } from "../../../shared/Text";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CardWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
 const RiverStatsStyled = styled.div`
@@ -18,8 +19,8 @@ const RiverStatsStyled = styled.div`
 export const RiverStats = ({ title, data }) => {
   return (
     <RiverStatsStyled>
-      <Text as="h2" marginLeft="10px">
-        {title}
+      <Text style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif" }} marginLeft="60px" >
+        <strong>{title}</strong>
       </Text>
       <CardWrapper>
         <Card

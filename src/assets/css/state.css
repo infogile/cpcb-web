@@ -78,6 +78,7 @@ border-radius: 11px;
       position: inline-block;
       width: 100%;
       margin-bottom: 200px;
+      margin-top: 50px;
   }
   .tan{
       width: 900px;
@@ -143,7 +144,7 @@ font-size: 24px;
     color: black; }
 
     .export{
-        background-color: rgb(190, 42, 50); 
+        background-color: #f44336; 
   color: white;
   padding: 10px;
   text-align: center;
