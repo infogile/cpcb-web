@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
-import GangaAtr from "./Ganga"
+import FieldReport from "./Action/FieldReport";
+import GangaAtr from "./Action/ActionGanga";
+import YamunaAtr from "./Action/ActionYamuna";
+import TakeAction from "./Action/TakeAction";
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -10,12 +13,25 @@ const MainAreaStyled = styled.div`
   transition: margin-left 0.5s;
 `;
 
-export const MainArea = ({ expand }) => {
+const MainArea = ({ expand }) => {
   return (
     <MainAreaStyled expand={expand}>
-      <Route path="/spcb" exact>Ganga<GangaAtr/></Route>
-      <Route path="/spcb/ganga">Ganga</Route>
-      <Route path="/spcb/yamuna">Yamuna</Route>
+      <Route exact path="/spcb"></Route>
+      <Route exact path="/spcb/ganga">
+          <GangaAtr />
+      </Route>
+      <Route exact path="/spcb/yamuna">
+          <YamunaAtr />
+      </Route>
+      <Route exact path="/spcb/ganga/field_report/:id">
+            <FieldReport />
+        </Route>
+        <Route exact path="/spcb/yamuna/field_report/:id">
+            <FieldReport />
+        </Route>
+        <Route exact path="/spcb/ganga/take_action/:id">
+            <TakeAction />
+        </Route>
     </MainAreaStyled>
   );
 };

@@ -38,37 +38,41 @@ const Button = styled.div`
     background: #00a0f0;
     cursor: pointer;
   }
+  text-align: center;
   border-radius: 5px;
   width: 140px;
-  height: 33px;
+  height: 40px;
   color: white;
-  padding-top: 14px;
+  padding-top: 9px;
   margin: 20px 0px 0px 36%;
 `;
 
 export default function Login() {
-  const { loginValidated, isLoading } = useSelector(
+  const { loginValidated, role, isLoading } = useSelector(
     (state) => state.loginReducer
   );
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); 
   const onLogin = () => {
     store.dispatch(tryLogin(username, password));
   };
   if (isLoading) {
     return "loading...";
   }
-  if (loginValidated) {
+  if (loginValidated && role==="user") {
     return <Redirect to="/home" />;
   }
+  else if (loginValidated && role==="headoffice_user") {
+    return <Redirect to="/spcb" />;
+  }
   return (
-    <div style={{ textAlign: "center" }}>
+    <div>
       <Logo>
-        <img src={logo} alt="Logo" width="12%" />
+        <img src={logo} alt="Logo" width="12%" style={{ marginLeft: "44%"}}/>
       </Logo>
       <Cardstyle>
-        <Text as="div" marginBottom="20px">
-          Username
+        <Text marginBottom="20px" marginRight = "10px">
+          Username : 
         </Text>
         <input
           type="text"
@@ -76,13 +80,14 @@ export default function Login() {
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <Text as="div" marginTop="20px" marginBottom="20px">
-          Password
+        <br />
+        <Text marginTop="20px" marginBottom="20px" marginRight = "10px">
+          Password :
         </Text>
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value) }
         />
         <br />
         <Button type="submit" onClick={onLogin}>

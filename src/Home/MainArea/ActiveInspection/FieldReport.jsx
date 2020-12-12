@@ -95,5 +95,4 @@ export const FieldReport = () => {
     </FieldReportStyled>
   );
 };
-
 export default FieldReport;

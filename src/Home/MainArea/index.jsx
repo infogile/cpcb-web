@@ -5,9 +5,9 @@ import Dashboard from "./Dashboard";
 import ActiveInspection from "./ActiveInspection";
 
 const MainAreaStyled = styled.div`
-  position: relative;
+  position: absolute;
   padding-top: 70px;
-  margin-left: ${(props) => (props.expand ? "30px" : "230px")};
+  margin-left: ${(props) => (props.expand ? "50px" : "310px")};
   transition: margin-left 0.5s;
 `;
 

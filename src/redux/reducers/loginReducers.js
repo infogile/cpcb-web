@@ -10,6 +10,7 @@ export function loginReducer(state, action) {
         ...state,
         loginValidated: true,
         username: action.username,
+        role : action.role,
         isLoading: false,
       };
     case "LOGIN_ERROR":

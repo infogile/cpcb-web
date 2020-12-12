@@ -1,0 +1,119 @@
+import "../../../assets/css/tech.css";
+import { Link } from "react-router-dom";
+import "../../../assets/css/state.css"
+import { getActionGanga } from "../../../redux/services";
+import React, { useEffect } from "react";
+import store from "../../../redux/store";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+const ListItem = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr;
+  background: white;
+  box-shadow: 0px 2px 5px 0px #17171747;
+  margin-top: 22px;
+  margin-left: 20px;
+  margin-right: 20px;
+  :first-child {
+    margin-top: 0px;
+  }
+`;
+
+const ListHeader = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr;
+  margin-top: 22px;
+  margin-left: 20px;
+  margin-right: 20px;
+  :first-child {
+    margin-top: 0px;
+  }
+`;
+
+const ListItemHeader = styled.div`
+  text-align: center;
+  margin: 10px 0px;
+`;
+
+const UnitCode = styled.div`
+  text-align: center;
+  margin: 10px 0px;
+`;
+
+const UnitName = styled.div`
+  text-align: center;
+  margin: 10px 0px;
+`;
+
+const ReportLink = styled(Link)`
+  text-align: center;
+  padding: 10px 0px;
+`;
+
+const List = styled.div`
+  display: block;
+  margin-top: 22px;
+  margin-left: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-width: 1000px;
+  background: #f6f6f6;
+  :first-child {
+    margin-top: 10px;
+  }
+`;
+
+
+export const YamunaAtr = ({title}) => {
+
+    const { data1, isLoading } = useSelector(
+        (state) => state.actionGangaReducers
+      );
+      const { username } = useSelector((state) => state.loginReducer);
+      useEffect(() => {
+        store.dispatch(getActionGanga());
+      }, []);
+    
+      if (isLoading) {
+        return "loading...";
+  
+      }
+      var num =0 ;
+    return(
+        <div class="container" style={{marginBottom:"100px", marginRight:"20px"}}>
+            <table id="state" >
+                <tr>
+                    <th>S. No.</th>
+                    <th>Unit code</th>
+                    <th>Unit name</th>
+                    <th>Sector</th>
+                    <th>Instittute</th>
+                    <th>Region</th>
+                    <th>Field report</th>
+                    <th>Final report</th>
+                    <th>Take action</th>
+                </tr>
+                <tbody>
+                    {data1.map(({id, status, code, name, sector, region, username }) => {
+                        return (
+                        <tr>
+                            <td>{num++}</td>
+                            <td>{code}</td>
+                            <td>{name}</td>
+                            <td>{sector}</td>
+                            <td>{username}</td>
+                            <td>{region}</td>
+                            <td>View Report</td>
+                            <td>View Report</td>
+                            <td></td>
+                        </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+export default YamunaAtr;

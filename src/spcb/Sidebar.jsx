@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { DashboardIcon } from "../icons";
+import { DashboardIcon, Tech, Basin, Active }from "../icons";
 import { useHistory } from "react-router-dom";
+import {Navigation} from 'react-minimal-side-navigation';
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
+
 
 const StyledSidebar = styled.div`
   position: fixed;
@@ -36,22 +39,30 @@ function Sidebar({ show, ...otherProps }) {
 
   return (
     <StyledSidebar show={show}>
-      <NavItem to="/spcb/ganga">
-        <DashboardIcon
-          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
-          size="14px"
-          marginRight="10px"
-        />
-        Ganga (Add ATR)
-      </NavItem>
-      <NavItem to="/spcb/yamuna">
-        <DashboardIcon
-          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
-          size="14px"
-          marginRight="10px"
-        />
-        yamuna (Add ATR)
-      </NavItem>
+        <Navigation
+        activeItemId="/spcb"
+        onSelect={({itemId}) => {
+          // maybe push to the route
+            history.push(itemId)
+        }}
+        items={[
+          {
+            title: 'Add ATR',
+            itemId: '/spcb',
+            elemBefore: () => <Active></Active>,
+          subNav: [
+            {
+              title: 'Ganga',
+              itemId: '/spcb/ganga',
+            },
+            {
+              title: 'Yamuna',
+              itemId: '/spcb/yamuna',
+            },
+          ],
+          },
+        ]}
+      />
     </StyledSidebar>
   );
 }

@@ -76,8 +76,8 @@ export const InspectionsList = ({ title }) => {
   }
   return (
     <>
-      <Text as="h3" marginLeft="10px">
-        Active Inspections
+      <Text style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif" }} marginLeft="60px" >
+        <strong>Active Inspections</strong>
       </Text>
       <List>
         <ListHeader>
@@ -104,5 +104,4 @@ export const InspectionsList = ({ title }) => {
     </>
   );
 };
-
 export default InspectionsList;

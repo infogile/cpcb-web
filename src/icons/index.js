@@ -1,47 +1,50 @@
-export const DashboardIcon = ({
-  size,
-  color,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-}) => (
-  <svg
-    width={size || 50}
-    x="0px"
-    y="0px"
-    viewBox="0 0 397.061 397.061"
-    fill={color}
-    style={{
-      enableBackground: "new 0 0 397.061 397.061",
-      marginLeft,
-      marginRight,
-      marginTop,
-      marginBottom,
-    }}
-  >
-    <g>
-      <g>
-        <g>
-          <rect x="5.224" y="0" width="182.857" height="83.592" rx="30" />
-          <rect x="5.224" y="111.49" width="182.857" height="292.571" rx="30" />
-          <rect
-            x="220.98"
-            y="208.98"
-            width="182.857"
-            height="188.082"
-            rx="30"
-          />
-          <rect x="220.98" y="0" width="182.857" height="188.082" rx="30" />
-        </g>
-      </g>
-    </g>
-  </svg>
-);
+
+import image2 from "../../src/assets/img/tech.png";
+import image from "../../src/assets/img/active.png";
+import dash from "../../src/assets/img/dash.png";
+import styled from "styled-components";
+
+const vect=styled.div`
+
+position: absolute;
+left: 4.08%;
+right: 95.43%;
+top: 21%;
+bottom: 78.03%;
+
+background: #5C5C5C;
+`;
+
+export const DashboardIcon = ()=>{
+  return(
+    <img src={dash} style={{ width:"20px", marginLeft:"0px"}}></img>
+  );
+};
+
+export const Tech=()=>{
+  return (
+      <img src={image2} style={{ width:"20px", marginLeft:"0px"}}></img>
+  );
+}
+
+
+export const Basin=()=>{
+  return (
+    <img src={image2} style={{ width:"20px", marginLeft:"0px"}}></img>
+  );
+}
+
+
+export const Active=()=>{
+  return (
+      <img src={image} style={{ width:"20px", marginLeft:"0px"}}></img>
+  );
+}
 
 export const UploadIcon = () => {
   return (
     <svg
+      version="1.1"
       x="0px"
       y="0px"
       viewBox="0 0 512 512"
@@ -64,6 +67,7 @@ export const UploadIcon = () => {
     </svg>
   );
 };
+
 
 export const BarsIcon = ({ size, color, onClick }) => {
   return (

@@ -18,9 +18,9 @@ const RiverStatsStyled = styled.div`
 export const RiverStats = ({ title, data }) => {
   return (
     <RiverStatsStyled>
-      <Text as="h2" marginLeft="10px">
-        {title}
-      </Text>
+        <Text style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif" }} marginLeft="60px" >
+          <strong>{title}</strong>
+        </Text>
       <CardWrapper>
         <Card
           bg="linear-gradient(270deg,#d83cff -3.15%,#a05cff 103.51%,#9b6bff 103.52%)"

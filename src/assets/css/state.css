@@ -1,0 +1,156 @@
+.iaBNQP {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 2rem 3rem 5.5rem 2rem;
+}
+.fVgyOA {
+    max-width: 121rem;
+    width: 100%;
+    margin-left: 0;
+}
+.food{
+    display: block;
+    background-color: #CEE6ED;
+    height: 30x;
+    width: 900px;
+    padding:35px;
+    margin-left: 0;
+}
+.f1{
+    display: flex;
+    align-items: center;
+}
+
+.style{
+    position: relative;
+width: 219px;
+height: 28px;
+font-family: Roboto;
+font-style: normal;
+font-size: 24px;
+color: #000000;
+}
+.rect{
+    position: relative;
+    margin-left: 550px;
+    width: 136px;
+height: 43px;
+text-align: center;
+font-family: Roboto;
+font-size: 18px;
+color: white;
+background: #423FD2;
+border-radius: 11px;
+}
+
+#state {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #state td, #state th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #state tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #state tr:hover {background-color: #ddd;}
+  
+  #state th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(124, 119, 119);
+    color: white;
+  }
+
+  .tab{
+    display: block;
+    height: 30x;
+    width: 900px;
+    padding:35px;
+    margin-left: 0;
+  }
+  .a{
+      position: inline-block;
+      width: 100%;
+      margin-bottom: 200px;
+      margin-top: 50px;
+  }
+  .tan{
+      width: 900px;
+      padding: 40px;
+      margin-bottom: 20px;
+      font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+font-size: 24px;
+  }
+  
+  .Collapsible {
+    background-color: white; 
+    margin-bottom: 20px;
+    }
+  
+  .Collapsible__contentInner {
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-top: 0; }
+    .Collapsible__contentInner p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 20px; }
+      .Collapsible__contentInner p:last-child {
+        margin-bottom: 0; }
+  
+  .Collapsible__trigger {
+    display: block;
+    font-weight: 400;
+    text-decoration: none;
+    color: #333333;
+    position: relative;
+    border: 1px solid white;
+    padding: 30px;
+    background: #00ac9d;
+    color: white; }
+    .Collapsible__trigger:after {
+      font-family: 'FontAwesome';
+      content: '\f107';
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      display: block;
+      transition: transform 300ms; }
+    .Collapsible__trigger.is-open:after {
+      transform: rotateZ(180deg); }
+    .Collapsible__trigger.is-disabled {
+      opacity: 0.5;
+      background-color: grey; }
+  
+  .CustomTriggerCSS {
+    background-color: lightcoral;
+    transition: background-color 200ms ease; }
+  
+  .CustomTriggerCSS--open {
+    background-color: darkslateblue; }
+  
+  .Collapsible__custom-sibling {
+    padding: 5px;
+    font-size: 12px;
+    background-color: #CBB700;
+    color: black; }
+
+    .export{
+        background-color: #f44336; 
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  margin-left: 94.5%;
+  cursor: pointer;
+  border-radius: 12px;
+    }

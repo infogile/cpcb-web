@@ -12,7 +12,7 @@ const StyledHeader = styled.div`
   position: fixed;
   text-align: center;
   width: 100%;
-  height: 30px;
+  height: 55px;
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
