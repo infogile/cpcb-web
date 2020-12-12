@@ -68,7 +68,7 @@ export const InspectionReport = ({ title }) => {
       </Text>
       <Report>
         <Text as="h4">{data.name}</Text>
-        <InspectionForm status={data.status} />
+        <InspectionForm status={data.status} inspectionDate={data.updatedAt} />
       </Report>
     </InspectionReportStyled>
   );
