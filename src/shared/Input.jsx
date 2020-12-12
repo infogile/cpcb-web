@@ -88,8 +88,7 @@ export const FileInput = ({
           <Input
             ref={fileRef}
             {...{
-              accept:
-                "application/msword, application/vnd.ms-excel, application/pdf",
+              accept: "application/msword, application/pdf",
               name: name,
               id: name,
               type: "file",

@@ -30,6 +30,7 @@ export function getFieldReport(id) {
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
+          data.updatedAt = responseData.updatedAt;
           data.images = responseData.fieldReport?.images || [];
           data.fields = [
             { title: "Unit Name", value: responseData.factory.name },
