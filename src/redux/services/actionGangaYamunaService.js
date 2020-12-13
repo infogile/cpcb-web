@@ -25,7 +25,7 @@ import {
                         basin : inspection.factory.basin.name,
                         sector : inspection.factory.sector.name,
                         region : inspection.factory.region,
-                        username : inspection.assignedTo.username,
+                        username : inspection.assignedTo.username.split(".")[0].toUpperCase(),
                     })
                  }
                  else if(inspection.factory.basin.name.includes("yamuna")){
@@ -37,7 +37,7 @@ import {
                       basin : inspection.factory.basin.name,
                       sector : inspection.factory.sector.name,
                       region : inspection.factory.region,
-                      username : inspection.assignedTo.username,
+                      username : inspection.assignedTo.username.split(".")[0].toUpperCase(),
                   })
                }
             });

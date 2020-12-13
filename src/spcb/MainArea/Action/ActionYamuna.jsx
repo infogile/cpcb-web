@@ -6,6 +6,8 @@ import React, { useEffect } from "react";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { Route } from "react-router-dom";
+import NoData from "./NoData";
 
 const ListItem = styled.div`
   display: grid;
@@ -77,7 +79,12 @@ export const YamunaAtr = ({title}) => {
   
       if (isLoading) {
         return "loading...";
-  
+      }
+      if(data1.length===0)
+      {
+          <Route exact path="/spcb/yamuna">
+            <NoData />
+          </Route>
       }
       var num =1 ;
       return(
@@ -88,14 +95,14 @@ export const YamunaAtr = ({title}) => {
                       <th>Unit code</th>
                       <th>Unit name</th>
                       <th>Sector</th>
-                      <th>Instittute</th>
+                      <th>Institute</th>
                       <th>Region</th>
                       <th>Field report</th>
                       <th>Final report</th>
                       <th>Take action</th>
                   </tr>
                   <tbody>
-                      {data1.map(({id, status, code, name, sector, region, username }) => { 
+                      {data1.map(({id, status, code, name, sector, region, username }) => {
                           if(status===1){
                               return (
                               <tr>
