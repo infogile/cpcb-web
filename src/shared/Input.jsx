@@ -6,6 +6,9 @@ import { Div } from "./Div";
 import { UploadIcon } from "../icons/";
 import { Button } from "./Button";
 import { ProgressBar } from "./ProgressBar";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export const Input = styled.input`
   background: #ffffff;
@@ -150,6 +153,24 @@ export const CheckBox = ({ labelProps, inputProps, ...otherProps }) => {
     </Div>
   );
 };
+
+
+
+export const DateInput = ({ labelProps, inputProps, ...otherProps }) => {
+  const { id } = inputProps;
+  const { label } = labelProps;
+
+  return (
+    <Grid {...otherProps}>
+      <Label {...{ htmlFor: id, ...labelProps }}>{label}</Label>
+      <DatePicker {...{ marginTop: "10px", background: "red",
+      border: "1px solid #aaaaaa",
+      borderRadius: "5px", padding: "5px 15px", ...inputProps }} />
+    </Grid>
+  );
+};
+
+
 
 export const FormButton = (props) => {
   return (

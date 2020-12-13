@@ -67,7 +67,7 @@ export const GangaAtr = ({ title }) => {
                                     <td>{code}</td>
                                     <td>{name}</td>
                                     <td>{sector}</td>
-                                    <td>{username.split(".")[0]}</td>
+                                    <td>{username}</td>
                                     <td>{region}</td>
                                     <td><ReportLink to={`/spcb/ganga/field_report/${id}`}>
                                         View Report

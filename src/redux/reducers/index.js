@@ -6,6 +6,7 @@ import { fieldReportReducers } from "./fieldReportReducers";
 import { inspectionformReducers } from "./inspectionformReducers";
 import { actionGangaReducers } from "./actionGangaYamunaReducers";
 import { submitActionTakenformReducers } from "./takeActionReducers";
+import { inspectionReportReducers } from "./inspectionReportReducers";
 export const rootReducer = combineReducers({
   loginReducer,
   dashboardReducers,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   inspectionformReducers,
   actionGangaReducers,
   submitActionTakenformReducers,
+  inspectionReportReducers,
 });

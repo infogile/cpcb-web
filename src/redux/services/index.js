@@ -6,3 +6,4 @@ export * from "./inspectionformService";
 export * from "./logoutService";
 export * from "./actionGangaYamunaService";
 export * from "./submitActionTakenformService";
+export * from "./inspectionReportService";

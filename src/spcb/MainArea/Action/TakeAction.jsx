@@ -18,9 +18,14 @@ import {
   FormButton,
   Input,
   LabeledInput,
+  DateInput,
 } from "../../../shared/Input";
-import { getFieldReport } from "../../../redux/services/";
+import { getInspectionReport } from "../../../redux/services/";
 import { useParams } from "react-router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 
 const TakeActionStyled = styled(Link)`
@@ -35,19 +40,21 @@ const TakeAction = () => {
     const [formFailure, setFormFailure] = useState(false);
     const [isloading, setIsloading] = useState(false);
     const params = useParams();
+    const [actionDate, setActionDate] = useState(new Date());
 
-
-    const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
+    const { data, isLoading } = useSelector((state) => state.inspectionReportReducers);
     useEffect(() => {
         const id = params.id;
-        store.dispatch(getFieldReport(id));
+        store.dispatch(getInspectionReport(id));
     }, []);
 
 
-    const [inspectionForm, setInspectionForm] = useState({
-      finalrecommendation: "",
-      compliancestatus: "compliance",
-      files: {},
+    const [actionTakenform, setActionTakenForm] = useState({
+        actions : {
+            compliancestatus :"",
+            finalrecommendation : "",
+            file: "",
+        },
     });
     
 
@@ -61,30 +68,29 @@ const TakeAction = () => {
           setShowNonComplianceTerms(true);
         } else {
           setShowNonComplianceTerms(false);
-          setInspectionForm((prevState) => ({
-            ...prevState,
-            compliancestatus: fieldValue,
+          setActionTakenForm((prevState) => ({
+            actions: {...prevState.actions, [name]: fieldValue },
           }));
           return;
         }
       }
-      setInspectionForm((prevState) => ({
+      setActionTakenForm((prevState) => ({
         ...prevState,
-        [name]: fieldValue,
+        actions : {...prevState.actions, [name]: fieldValue},
       }));
     };
 
     const onUploadComplete = (name, fileLocation) => {
-      setInspectionForm((prevState) => ({
+      setActionTakenForm((prevState) => ({
         ...prevState,
-        files: { ...prevState.files, [name]: fileLocation },
+        actions : {...prevState.actions, [name]: fileLocation},
       }));
     };
     
     const onRemoveFile = (name) => {
-      setInspectionForm((prevState) => ({
+        setActionTakenForm((prevState) => ({
         ...prevState,
-        files: { ...prevState.files, [name]: undefined },
+        actions : {...prevState.actions, [name]: undefined},
       }));
     };
 
@@ -92,21 +98,20 @@ const TakeAction = () => {
     const submit = (e) => {
       e.preventDefault();
       if (
-        inspectionForm.compliancestatus === "noncompliance"
+        actionTakenform.actions.compliancestatus === "noncompliance"
       ) {
         return;
       }
       if (
-        !inspectionForm.files.consentcopy ||
-        !inspectionForm.files.inspectionreport
+        !actionTakenform.actions.actionreport
       ) {
         setValidationWarning(
-          "*Please upload Consent Copy and Inspection Report to continue."
+          "*Please upload Report to continue."
         );
       } else {
         setIsloading(true);
         store
-          .dispatch(submitActionTakenform(params.id, inspectionForm))
+          .dispatch(submitActionTakenform(params.id, actionTakenform))
           .then((res) => {
             setIsloading(false);
             if (res.status === 200) {
@@ -203,27 +208,15 @@ const TakeAction = () => {
                     <td>
                         <table id="state">
                             <tr>
-                                <td>Upload Consent Copy</td>
+                                <td>Consent Copy</td>
                                 <td>
-                                    <TakeActionReport
-                                        onUploadComplete={onUploadComplete}
-                                        onRemoveFile={onRemoveFile}
-                                        name="consentcopy"
-                                        label="*Upload Consent Copy"
-                                        id={data.id}
-                                    />
+                                    <a href={data.consent} target="_blank">{data.consent}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Upload Inspection Report</td>
+                                <td>Inspection Report</td>
                                 <td>
-                                    <TakeActionReport
-                                        onUploadComplete={onUploadComplete}
-                                        onRemoveFile={onRemoveFile}
-                                        name="inspectionreport"
-                                        label="*Upload Inspection Report"
-                                        id={data.id}
-                                    />
+                                    <a href={data.inspection} target="_blank">{data.inspection}</a>
                                 </td>
                             </tr>
                         </table>
@@ -284,7 +277,7 @@ const TakeAction = () => {
                             name: "compliancestatus",
                             id: "compliance",
                             value: "compliance",
-                            checked: inspectionForm.compliancestatus === "compliance",
+                            checked: submitActionTakenform.actions.compliancestatus === "compliance",
                             onChange: onInputChange,
                         }}
                     />
@@ -295,18 +288,46 @@ const TakeAction = () => {
                             name: "compliancestatus",
                             id: "noncompliance",
                             value: "noncompliance",
-                            checked: inspectionForm.compliancestatus === "noncompliance",
+                            checked: submitActionTakenform.actions.compliancestatus === "noncompliance",
                             onChange: onInputChange,
                         }}
                     />
                 </Grid>
+                
+
+                <Div marginTop="30px">
+                    <Label marginTop="30px">Action Taken Date</Label>
+                </Div>
+                <DatePicker
+                    marginTop="30px"
+                    selected= {actionDate}
+                    name = "actiondate"
+                    onChange = {date=>{setActionDate(date)}}
+                    inputProps ={{
+                        name: "actiondate",
+                        id: "actiondate",
+                        value: "",
+                        type: "text",
+                        onChange: onInputChange,
+                    }}
+                />
+
+                <TakeActionReport
+                    onUploadComplete={onUploadComplete}
+                    onRemoveFile={onRemoveFile}
+                    name="actionreport"
+                    label="*Upload Report"
+                    id={data.id}
+                />
+
+
                 <LabeledInput
                     marginTop="30px"
                     labelProps={{ label: "Final Recommendation" }}
                     inputProps={{
                         name: "finalrecommendation",
                         id: "finalrecommendation",
-                        value: inspectionForm.finalrecommendation,
+                        value: submitActionTakenform.actions.finalRecommendation,
                         type: "text",
                         onChange: onInputChange,
                     }}
@@ -321,7 +342,7 @@ const TakeAction = () => {
             title="Please Check Above All Conditions Of Non-compliance To Submit Form"
             onClick={submit}
             disable={
-                inspectionForm.compliancestatus === "noncompliance"
+                submitActionTakenform.compliancestatus === "noncompliance"
             }
         />
     </Form>
@@ -330,3 +351,11 @@ const TakeAction = () => {
 };
 
 export default TakeAction;
+
+
+
+
+
+
+
+
