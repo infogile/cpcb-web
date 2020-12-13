@@ -74,46 +74,100 @@ export const YamunaAtr = ({title}) => {
       useEffect(() => {
         store.dispatch(getActionGanga());
       }, []);
-    
+  
       if (isLoading) {
         return "loading...";
   
       }
-      var num =0 ;
-    return(
-        <div class="container" style={{marginBottom:"100px", marginRight:"20px"}}>
-            <table id="state" >
-                <tr>
-                    <th>S. No.</th>
-                    <th>Unit code</th>
-                    <th>Unit name</th>
-                    <th>Sector</th>
-                    <th>Instittute</th>
-                    <th>Region</th>
-                    <th>Field report</th>
-                    <th>Final report</th>
-                    <th>Take action</th>
-                </tr>
-                <tbody>
-                    {data1.map(({id, status, code, name, sector, region, username }) => {
-                        return (
-                        <tr>
-                            <td>{num++}</td>
-                            <td>{code}</td>
-                            <td>{name}</td>
-                            <td>{sector}</td>
-                            <td>{username}</td>
-                            <td>{region}</td>
-                            <td>View Report</td>
-                            <td>View Report</td>
-                            <td></td>
-                        </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-    );
+      var num =1 ;
+      return(
+          <div class="container" style={{marginBottom:"100px", marginRight:"20px"}}>
+              <table id="state" >
+                  <tr>
+                      <th>S. No.</th>
+                      <th>Unit code</th>
+                      <th>Unit name</th>
+                      <th>Sector</th>
+                      <th>Instittute</th>
+                      <th>Region</th>
+                      <th>Field report</th>
+                      <th>Final report</th>
+                      <th>Take action</th>
+                  </tr>
+                  <tbody>
+                      {data1.map(({id, status, code, name, sector, region, username }) => { 
+                          if(status===1){
+                              return (
+                              <tr>
+                                  <td>{num++}</td>
+                                  <td>{code}</td>
+                                  <td>{name}</td>
+                                  <td>{sector}</td>
+                                  <td>{username}</td>
+                                  <td>{region}</td>
+                                  <td><ReportLink to={`/spcb/yamuna/field_report/${id}`}>
+                                          View Report
+                                      </ReportLink>
+                                  </td>
+                                  <td><a href="">Pending Inspection Report</a></td>
+                                  <td><a href="">Pending Acions</a></td>
+                              </tr>
+                              );
+                          }
+                          else if(status===2){
+                              return (
+                                  <tr>
+                                      <td>{num++}</td>
+                                      <td>{code}</td>
+                                      <td>{name}</td>
+                                      <td>{sector}</td>
+                                      <td>{username}</td>
+                                      <td>{region}</td>
+                                      <td><ReportLink to={`/spcb/yamuna/field_report/${id}`}>
+                                          View Report
+                                          </ReportLink>
+                                      </td>
+                                      <td><ReportLink to={`/spcb/yamuna/take_action/${id}`}>
+                                          View Report
+                                          </ReportLink>
+                                      </td>
+                                      <td><ReportLink to={`/spcb/yamuna/take_action/${id}`}>
+                                          View Report
+                                          </ReportLink>
+                                      </td>
+                                  </tr>
+                              );
+                          }
+                          else if(status===3){
+                              return (
+                                  <tr>
+                                      <td>{num++}</td>
+                                      <td>{code}</td>
+                                      <td>{name}</td>
+                                      <td>{sector}</td>
+                                      <td>{username}</td>
+                                      <td>{region}</td>
+                                      <td><ReportLink to={`/spcb/yamuna/field_report/${id}`}>
+                                          View Report
+                                          </ReportLink>
+                                      </td>
+                                      <td><ReportLink to={`/spcb/yamuna/field_report/${id}`}>
+                                          View Inspection Report
+                                          </ReportLink>
+                                      </td>
+                                      <td><ReportLink to={`/spcb/yamuna/field_report/${id}`}>
+                                          View Action
+                                          </ReportLink>
+                                      </td>
+                                  </tr>
+                              );     
+                              }
+                          })
+                      }
+                  </tbody>
+              </table>
+          </div>
+      );
 };
 
 export default YamunaAtr;

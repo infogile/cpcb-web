@@ -62,7 +62,7 @@ export default function Login() {
   if (loginValidated && role==="user") {
     return <Redirect to="/home" />;
   }
-  else if (loginValidated && role==="headoffice_user") {
+  else if (loginValidated && role==="spcb_user") {
     return <Redirect to="/spcb" />;
   }
   return (

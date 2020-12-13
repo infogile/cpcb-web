@@ -32,6 +32,9 @@ const MainArea = ({ expand }) => {
         <Route exact path="/spcb/ganga/take_action/:id">
             <TakeAction />
         </Route>
+        <Route exact path="/spcb/yamuna/take_action/:id">
+            <TakeAction />
+        </Route>
     </MainAreaStyled>
   );
 };

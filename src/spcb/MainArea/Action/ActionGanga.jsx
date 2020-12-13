@@ -77,7 +77,10 @@ export const GangaAtr = ({ title }) => {
                                         View Report
                                         </ReportLink>
                                     </td>
-                                    <td><a href="">Take Acions</a></td>
+                                    <td><ReportLink to={`/spcb/ganga/take_action/${id}`}>
+                                        Take Action
+                                        </ReportLink>
+                                    </td>
                                 </tr>
                             );
                         }
@@ -94,8 +97,14 @@ export const GangaAtr = ({ title }) => {
                                         View Report
                                         </ReportLink>
                                     </td>
-                                    <td><a href="">View Inspection Report</a></td>
-                                    <td><a href="">View Acions</a></td>
+                                    <td><ReportLink to={`/spcb/ganga/field_report/${id}`}>
+                                        View Inspection Report
+                                        </ReportLink>
+                                    </td>
+                                    <td><ReportLink to={`/spcb/ganga/field_report/${id}`}>
+                                        View Action
+                                    </ReportLink>
+                                    </td>
                                 </tr>
                             );     
                             }

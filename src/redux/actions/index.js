@@ -4,3 +4,4 @@ export * from "./activeInspectionActions";
 export * from "./fieldReportActions";
 export * from "./inspectionformActions";
 export * from "./actionGangaYamunaActions";
+export * from "./takeActionsActions";
