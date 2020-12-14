@@ -9,7 +9,6 @@ export function tryLogin(username, password) {
       .then((res) => {
         sessionStorage.setItem("token", res.data.token);
         sessionStorage.setItem("username", res.data.user);
-        sessionStorage.setItem("role", res.data.role);
         axios.interceptors.request.use(
           (config) => {
             config.headers.authorization = res.data.token;
@@ -19,7 +18,11 @@ export function tryLogin(username, password) {
             return Promise.reject(error);
           }
         );
-        dispatch({ ...loginSuccess(), username: res.data.user, role : res.data.role });
+        dispatch({
+          ...loginSuccess(),
+          username: res.data.user,
+          role: res.data.role,
+        });
       })
       .catch((err) => {
         console.log(err);

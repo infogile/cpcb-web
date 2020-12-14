@@ -38,12 +38,11 @@ const Button = styled.div`
     background: #00a0f0;
     cursor: pointer;
   }
-  text-align: center;
   border-radius: 5px;
   width: 140px;
-  height: 40px;
+  height: 33px;
   color: white;
-  padding-top: 9px;
+  padding-top: 14px;
   margin: 20px 0px 0px 36%;
 `;
 
@@ -52,27 +51,28 @@ export default function Login() {
     (state) => state.loginReducer
   );
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
   const onLogin = () => {
     store.dispatch(tryLogin(username, password));
   };
   if (isLoading) {
     return "loading...";
   }
-  if (loginValidated && role==="user") {
-    return <Redirect to="/home" />;
-  }
-  else if (loginValidated && role==="spcb_user") {
-    return <Redirect to="/spcb" />;
+  if (loginValidated) {
+    if (role === "user") {
+      return <Redirect to="/home" />;
+    } else if (role === "spcb_user") {
+      return <Redirect to="/spcb" />;
+    }
   }
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <Logo>
-        <img src={logo} alt="Logo" width="12%" style={{ marginLeft: "44%"}}/>
+        <img src={logo} alt="Logo" width="12%" />
       </Logo>
       <Cardstyle>
-        <Text marginBottom="20px" marginRight = "10px">
-          Username : 
+        <Text as="div" marginBottom="20px">
+          Username
         </Text>
         <input
           type="text"
@@ -80,14 +80,13 @@ export default function Login() {
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <br />
-        <Text marginTop="20px" marginBottom="20px" marginRight = "10px">
-          Password :
+        <Text as="div" marginTop="20px" marginBottom="20px">
+          Password
         </Text>
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value) }
+          onChange={(e) => setPassword(e.target.value)}
         />
         <br />
         <Button type="submit" onClick={onLogin}>

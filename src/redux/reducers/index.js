@@ -4,16 +4,20 @@ import { dashboardReducers } from "./dashboardReducers";
 import { activeInspectionReducers } from "./activeInspectionReducers";
 import { fieldReportReducers } from "./fieldReportReducers";
 import { inspectionformReducers } from "./inspectionformReducers";
-import { actionGangaReducers } from "./actionGangaYamunaReducers";
-import { submitActionTakenformReducers } from "./takeActionReducers";
-import { inspectionReportReducers } from "./inspectionReportReducers";
+import { inspectionReportReducer } from "./inspectionReportReducers";
+import {
+  submitActionformReducer,
+  completedInspectionReducer,
+} from "./takeActionReducers";
+import { showActionReducer } from "./showActionReducers";
 export const rootReducer = combineReducers({
   loginReducer,
   dashboardReducers,
   activeInspectionReducers,
   fieldReportReducers,
   inspectionformReducers,
-  actionGangaReducers,
-  submitActionTakenformReducers,
-  inspectionReportReducers,
+  submitActionformReducer,
+  completedInspectionReducer,
+  inspectionReportReducer,
+  showActionReducer,
 });

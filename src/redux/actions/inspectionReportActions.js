@@ -3,14 +3,13 @@ export function initInspectionReportAction() {
       type: "INIT_INSPECTION_REPORT",
     };
   }
-  export function InspectionReportSuccess() {
+  export function inspectionReportSuccess() {
     return {
       type: "GET_INSPECTION_REPORT",
     };
   }
-  export function InspectionReportError() {
+  export function inspectionReportError() {
     return {
       type: "ERROR_INSPECTION_REPORT",
     };
   }
-  

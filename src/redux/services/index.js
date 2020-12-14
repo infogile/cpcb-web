@@ -4,6 +4,6 @@ export * from "./activeInspectionService";
 export * from "./fieldReportService";
 export * from "./inspectionformService";
 export * from "./logoutService";
-export * from "./actionGangaYamunaService";
-export * from "./submitActionTakenformService";
+export * from "./takeActionService";
 export * from "./inspectionReportService";
+export * from "./showActionService";

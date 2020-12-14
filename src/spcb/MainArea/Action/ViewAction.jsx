@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { getFieldReport } from "../../../redux/services/";
+import { getShowAction } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { ImageGrid } from "../../../shared/ImageGrid";
 
-const FieldReportStyled = styled.div`
+const ViewActionStyled = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
 `;
@@ -55,20 +55,22 @@ const Td = styled.td`
   padding-left: 10px;
 `;
 
-export const FieldReport = () => {
-  const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
+export const ViewAction = () => {
+  const { data, isLoading } = useSelector(
+    (state) => state.showActionReducer
+  );
   const params = useParams();
   useEffect(() => {
     const id = params.id;
-    store.dispatch(getFieldReport(id));
-  }, [params]);
+    store.dispatch(getShowAction(id));
+  }, [params.id]);
   if (isLoading) {
     return "loading...";
   }
   return (
-    <FieldReportStyled>
+    <ViewActionStyled>
       <Text as="h3" marginLeft="10px">
-        Field Report
+        Action Taken by SPCB
       </Text>
       <Report>
         <Text as="h4">{data.name}</Text>
@@ -79,7 +81,14 @@ export const FieldReport = () => {
                 return (
                   <tr key={field.title}>
                     <Th>{field.title}</Th>
-                    <Td>{field.value || "−"}</Td>
+                    {field.link && field.value && (
+                      <Td>
+                        <a href={field.value} target="_blank">
+                          {field.title}
+                        </a>
+                      </Td>
+                    )}
+                    {!field.link && <Td>{field.value || "−"}</Td>}
                   </tr>
                 );
               })}
@@ -92,7 +101,8 @@ export const FieldReport = () => {
           </>
         )}
       </Report>
-    </FieldReportStyled>
+    </ViewActionStyled>
   );
 };
-export default FieldReport;
+
+export default ViewAction;

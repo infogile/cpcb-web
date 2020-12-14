@@ -1,16 +1,31 @@
-export function initsubmitActionTakenFormAction() {
+export function initCompletedInspectionAction() {
     return {
-      type: "INIT_SUBMIT_ACTION_TAKEN_FORM",
+      type: "INIT_COMPLETED_INSPECTION",
     };
   }
-  export function submitActionTakenFormSuccess() {
+  export function getCompletedInspectionSuccess() {
     return {
-      type: "SUBMIT_SUBMIT_ACTION_TAKEN_FORM",
+      type: "GET_COMPLETED_INSPECTION",
     };
   }
-  export function submitActionTakenFormError() {
+  export function getCompletedInspectionError() {
     return {
-      type: "ERROR_SUBMIT_ACTION_TAKEN_FORM",
+      type: "ERROR_COMPLETED_INSPECTION",
     };
   }
   
+  export function initSubmitActionFormAction() {
+    return {
+      type: "INIT_SUBMIT_ACTION_FORM",
+    };
+  }
+  export function submitActionFormSuccess() {
+    return {
+      type: "SUCCESS_SUBMIT_ACTION_FORM",
+    };
+  }
+  export function submitActionFormError() {
+    return {
+      type: "ERROR_SUBMIT_ACTION_FORM",
+    };
+  }

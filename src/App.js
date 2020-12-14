@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import Home from "./Home";
-import SpcbHome from "./spcb";
+import SPCBHome from "./spcb";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
@@ -18,7 +18,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/spcb">
-          <SpcbHome />
+          <SPCBHome />
         </Route>
       </Router>
     </Provider>

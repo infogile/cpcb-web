@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import ReactDatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
 import { Grid } from "./Grid";
 import { Div } from "./Div";
 import { UploadIcon } from "../icons/";
 import { Button } from "./Button";
 import { ProgressBar } from "./ProgressBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 
 export const Input = styled.input`
   background: #ffffff;
@@ -91,8 +89,7 @@ export const FileInput = ({
           <Input
             ref={fileRef}
             {...{
-              accept:
-                "application/msword, application/vnd.ms-excel, application/pdf",
+              accept: "application/msword, application/pdf",
               name: name,
               id: name,
               type: "file",
@@ -154,26 +151,28 @@ export const CheckBox = ({ labelProps, inputProps, ...otherProps }) => {
   );
 };
 
-
-
-export const DateInput = ({ labelProps, inputProps, ...otherProps }) => {
-  const { id } = inputProps;
-  const { label } = labelProps;
-
-  return (
-    <Grid {...otherProps}>
-      <Label {...{ htmlFor: id, ...labelProps }}>{label}</Label>
-      <DatePicker {...{ marginTop: "10px", background: "red",
-      border: "1px solid #aaaaaa",
-      borderRadius: "5px", padding: "5px 15px", ...inputProps }} />
-    </Grid>
-  );
-};
-
-
-
 export const FormButton = (props) => {
   return (
     <Input type="submit" width="160px " bg="#00A8F3" color="white" {...props} />
   );
 };
+
+export const DatePicker = styled(ReactDatePicker)`
+  background: #ffffff;
+  border: 1px solid #aaaaaa;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: ${(props) => (props.height ? props.height : "35px")};
+  font-size: 16px;
+  cursor: ${(props) =>
+    props.disable || props.type !== "submit" ? "" : "pointer"};
+  background: ${(props) => (props.disable ? "grey" : props.bg)};
+  color: ${(props) => props.color};
+  max-width: ${(props) => props.maxWidth};
+  width: ${(props) => (props.width ? props.width : "-webkit-fill-available")};
+  margin-left: ${(props) => props.marginLeft};
+  margin-top: ${(props) => props.marginTop};
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: 5px 15px;
+`;

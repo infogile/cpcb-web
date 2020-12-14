@@ -16,7 +16,7 @@ import UploadReport from "./UploadReport";
 import { submitInspectionform } from "../../../redux/services";
 import store from "../../../redux/store";
 
-const InspectionForm = ({ status }) => {
+const InspectionForm = ({ status, inspectionDate }) => {
   const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
   const [validationWaring, setValidationWarning] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
@@ -131,7 +131,13 @@ const InspectionForm = ({ status }) => {
     } else {
       setIsloading(true);
       store
-        .dispatch(submitInspectionform(params.id, inspectionForm))
+        .dispatch(
+          submitInspectionform(params.id, {
+            ...inspectionForm,
+            inspectionDate: new Date(inspectionDate).toString(),
+            inspectionReportUploadDate: new Date().toString(),
+          })
+        )
         .then((res) => {
           setIsloading(false);
           if (res.status === 200) {

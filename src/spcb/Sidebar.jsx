@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { DashboardIcon, Tech, Basin, Active }from "../icons";
 import { useHistory } from "react-router-dom";
-import {Navigation} from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
-
 
 const StyledSidebar = styled.div`
   position: fixed;
@@ -24,45 +20,27 @@ const StyledSidebar = styled.div`
 
 const NavItem = styled(Link)`
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
-  margin-top: 20px;
   display: block;
   text-decoration: none;
   color: #5c5c5c;
   :hover {
     color: #858585;
+    background: #d7f3ff;
   }
 `;
 
-function Sidebar({ show, ...otherProps }) {
-  const history = useHistory();
+const rivers = ["ganga", "yamuna"];
 
+function Sidebar({ show, ...otherProps }) {
   return (
     <StyledSidebar show={show}>
-        <Navigation
-        activeItemId="/spcb"
-        onSelect={({itemId}) => {
-          // maybe push to the route
-            history.push(itemId)
-        }}
-        items={[
-          {
-            title: 'Add ATR',
-            itemId: '/spcb',
-            elemBefore: () => <Active></Active>,
-          subNav: [
-            {
-              title: 'Ganga',
-              itemId: '/spcb/ganga',
-            },
-            {
-              title: 'Yamuna',
-              itemId: '/spcb/yamuna',
-            },
-          ],
-          },
-        ]}
-      />
+      {rivers.map((river) => (
+        <NavItem to={`/spcb/completed_inspections/${river}`}>
+          &gt;&gt; {river}
+        </NavItem>
+      ))}
     </StyledSidebar>
   );
 }
