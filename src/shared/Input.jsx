@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReactDatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
 import { Grid } from "./Grid";
 import { Div } from "./Div";
@@ -156,3 +157,23 @@ export const FormButton = (props) => {
     <Input type="submit" width="160px " bg="#00A8F3" color="white" {...props} />
   );
 };
+
+export const DatePicker = styled(ReactDatePicker)`
+  background: #ffffff;
+  border: 1px solid #aaaaaa;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: ${(props) => (props.height ? props.height : "35px")};
+  font-size: 16px;
+  cursor: ${(props) =>
+    props.disable || props.type !== "submit" ? "" : "pointer"};
+  background: ${(props) => (props.disable ? "grey" : props.bg)};
+  color: ${(props) => props.color};
+  max-width: ${(props) => props.maxWidth};
+  width: ${(props) => (props.width ? props.width : "-webkit-fill-available")};
+  margin-left: ${(props) => props.marginLeft};
+  margin-top: ${(props) => props.marginTop};
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: 5px 15px;
+`;

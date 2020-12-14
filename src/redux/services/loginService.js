@@ -18,7 +18,11 @@ export function tryLogin(username, password) {
             return Promise.reject(error);
           }
         );
-        dispatch({ ...loginSuccess(), username: res.data.user });
+        dispatch({
+          ...loginSuccess(),
+          username: res.data.user,
+          role: res.data.role,
+        });
       })
       .catch((err) => {
         console.log(err);

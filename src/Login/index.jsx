@@ -47,7 +47,7 @@ const Button = styled.div`
 `;
 
 export default function Login() {
-  const { loginValidated, isLoading } = useSelector(
+  const { loginValidated, role, isLoading } = useSelector(
     (state) => state.loginReducer
   );
   const [username, setUsername] = useState("");
@@ -59,7 +59,11 @@ export default function Login() {
     return "loading...";
   }
   if (loginValidated) {
-    return <Redirect to="/home" />;
+    if (role === "user") {
+      return <Redirect to="/home" />;
+    } else if (role === "spcb_user") {
+      return <Redirect to="/spcb" />;
+    }
   }
   return (
     <div style={{ textAlign: "center" }}>
