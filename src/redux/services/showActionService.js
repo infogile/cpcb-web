@@ -31,7 +31,7 @@ import {
             data.name = responseData.factory.name;
             data.fields = [
                 {
-                    title: "Compliance status as per discharge norms",
+                    title: "Compliance status as per SPCB",
                     value: responseData.action.complianceStatus
                       ? "compliance"
                       : "non-compliance",
