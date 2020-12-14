@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Login";
 import Home from "./Home";
 import SPCBHome from "./spcb";
+import HeadofficeHome from "./headoffice"
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/spcb">
           <SPCBHome />
+        </Route>
+        <Route path="/headoffice">
+          <HeadofficeHome />
         </Route>
       </Router>
     </Provider>

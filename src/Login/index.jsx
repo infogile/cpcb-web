@@ -61,6 +61,10 @@ export default function Login() {
   if (loginValidated) {
     if (role === "user") {
       return <Redirect to="/home" />;
+    } if (role === "user") {
+      return <Redirect to="/home" />;
+    } if (role === "headoffice_user") {
+      return <Redirect to="/headoffice" />;
     } else if (role === "spcb_user") {
       return <Redirect to="/spcb" />;
     }
