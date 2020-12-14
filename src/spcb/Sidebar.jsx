@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { DashboardIcon } from "../icons";
 import { useHistory } from "react-router-dom";
 
 const StyledSidebar = styled.div`
@@ -21,37 +20,27 @@ const StyledSidebar = styled.div`
 
 const NavItem = styled(Link)`
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
-  margin-top: 20px;
   display: block;
   text-decoration: none;
   color: #5c5c5c;
   :hover {
     color: #858585;
+    background: #d7f3ff;
   }
 `;
 
-function Sidebar({ show, ...otherProps }) {
-  const history = useHistory();
+const rivers = ["ganga", "yamuna"];
 
+function Sidebar({ show, ...otherProps }) {
   return (
     <StyledSidebar show={show}>
-      <NavItem to="/spcb/ganga">
-        <DashboardIcon
-          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
-          size="14px"
-          marginRight="10px"
-        />
-        Ganga (Add ATR)
-      </NavItem>
-      <NavItem to="/spcb/yamuna">
-        <DashboardIcon
-          color={history.location.pathname === "/spcb" ? "#4759FB" : "#5c5c5c"}
-          size="14px"
-          marginRight="10px"
-        />
-        yamuna (Add ATR)
-      </NavItem>
+      {rivers.map((river) => (
+        <NavItem to={`/spcb/completed_inspections/${river}`}>
+          &gt;&gt; {river}
+        </NavItem>
+      ))}
     </StyledSidebar>
   );
 }
