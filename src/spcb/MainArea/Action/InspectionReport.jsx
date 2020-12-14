@@ -59,11 +59,7 @@ export const InspectionReport = () => {
   const { data, isLoading } = useSelector(
     (state) => state.inspectionReportReducer
   );
-  const params = useParams();
-  useEffect(() => {
-    const id = params.id;
-    store.dispatch(getInspectionReport(id));
-  }, [params.id]);
+
   if (isLoading) {
     return "loading...";
   }

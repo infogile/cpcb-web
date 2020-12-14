@@ -5,6 +5,7 @@ import { activeInspectionReducers } from "./activeInspectionReducers";
 import { fieldReportReducers } from "./fieldReportReducers";
 import { inspectionformReducers } from "./inspectionformReducers";
 import { inspectionReportReducer } from "./inspectionReportReducers";
+import { showActionReducer } from "./showActionReducers";
 import {
   submitActionformReducer,
   completedInspectionReducer,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
   submitActionformReducer,
   completedInspectionReducer,
   inspectionReportReducer,
+  showActionReducer,
 });

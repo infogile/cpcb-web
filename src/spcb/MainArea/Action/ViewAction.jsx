@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { getInspectionReport } from "../../../redux/services/";
+import { getShowAction } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { ImageGrid } from "../../../shared/ImageGrid";
 
@@ -56,13 +56,11 @@ const Td = styled.td`
 `;
 
 export const ViewAction = () => {
-  const { data, isLoading } = useSelector(
-    (state) => state.inspectionReportReducer
-  );
+  const { data, isLoading } = useSelector((state) => state.showActionReducer);
   const params = useParams();
   useEffect(() => {
     const id = params.id;
-    store.dispatch(getInspectionReport(id));
+    store.dispatch(getShowAction(id));
   }, [params.id]);
   if (isLoading) {
     return "loading...";
@@ -81,13 +79,16 @@ export const ViewAction = () => {
                 return (
                   <tr key={field.title}>
                     <Th>{field.title}</Th>
-                    {field.link && field.value && (
-                      <Td>
-                        <a href={field.value} target="_blank">
-                          {field.title}
-                        </a>
-                      </Td>
-                    )}
+                    {field.link &&
+                      (field.value ? (
+                        <Td>
+                          <a href={field.value} target="_blank">
+                            {field.title}
+                          </a>
+                        </Td>
+                      ) : (
+                        <Td>−</Td>
+                      ))}
                     {!field.link && <Td>{field.value || "−"}</Td>}
                   </tr>
                 );

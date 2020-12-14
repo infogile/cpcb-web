@@ -4,6 +4,7 @@ import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { capitalizeFirstLetter } from "../../../helpers";
 
 const ReportLink = styled(Link)`
   text-align: center;
@@ -51,8 +52,8 @@ export const CompletedInspectionList = () => {
   );
   const params = useParams();
   useEffect(() => {
-    store.dispatch(getCompletedInspection(params.river_name));
-  }, [params]);
+    store.dispatch(getCompletedInspection(params.river_name || ""));
+  }, [params.river_name]);
 
   if (isLoading) {
     return "loading...";
@@ -60,6 +61,11 @@ export const CompletedInspectionList = () => {
   var num = 1;
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
+      <h1>
+        {params.river_name
+          ? `Inspections of ${capitalizeFirstLetter(params.river_name)}`
+          : "All Inspections"}
+      </h1>
       <Table id="state">
         <tr>
           <Th>S. No.</Th>

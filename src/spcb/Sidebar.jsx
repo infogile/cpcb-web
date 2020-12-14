@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { capitalizeFirstLetter } from "../helpers";
 
 const StyledSidebar = styled.div`
   position: fixed;
@@ -31,16 +32,22 @@ const NavItem = styled(Link)`
   }
 `;
 
-const rivers = ["ganga", "yamuna"];
+const rivers = ["", "ganga", "yamuna"];
 
 function Sidebar({ show, ...otherProps }) {
   return (
     <StyledSidebar show={show}>
-      {rivers.map((river) => (
-        <NavItem to={`/spcb/completed_inspections/${river}`}>
-          &gt;&gt; {river}
-        </NavItem>
-      ))}
+      {rivers.map((river) =>
+        river ? (
+          <NavItem to={`/spcb/completed_inspections/${river}`}>
+            <strong> {capitalizeFirstLetter(river)}</strong>
+          </NavItem>
+        ) : (
+          <NavItem to={`/spcb`}>
+            <strong>All</strong>
+          </NavItem>
+        )
+      )}
     </StyledSidebar>
   );
 }

@@ -1,29 +1,24 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
 import { Text } from "../../../shared/Text";
 import TakeActionReport from "./TakeActionReport";
 import { Form } from "../../../shared/Form";
-import { sub } from "../../../redux/services";
 import { Grid } from "../../../shared/Grid";
 import InspectionReport from "./InspectionReport";
 import { FormButton, LabeledInput } from "../../../shared/Input";
 import {
-  getInspectionReport,
   submitActionTakenform,
+  getInspectionReport,
 } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { DatePicker } from "../../../shared/Input";
 import "react-datepicker/dist/react-datepicker.css";
 
 const TakeAction = () => {
-  const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
-  // const [validationWaring, setValidationWarning] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
   const [formFailure, setFormFailure] = useState(false);
   const [isloading, setIsloading] = useState(false);
@@ -33,8 +28,11 @@ const TakeAction = () => {
   const { data, isLoading } = useSelector(
     (state) => state.inspectionReportReducer
   );
-  useEffect(() => {}, []);
-
+  useEffect(() => {
+    const id = params.id;
+    console.log(params);
+    store.dispatch(getInspectionReport(id));
+  }, [params.id]);
   const [actionTakenform, setActionTakenForm] = useState({
     compliancestatus: "compliance",
     finalrecommendation: "",
@@ -87,7 +85,7 @@ const TakeAction = () => {
       });
   };
 
-  if (isloading) {
+  if (isloading || isLoading) {
     return "loading...";
   }
   if (formSuccess) {
@@ -99,7 +97,6 @@ const TakeAction = () => {
   if (data && data.status === 3) {
     return "Action Report Submitted Already.";
   }
-
   return (
     <div style={{ marginBottom: "100px", marginRight: "10px" }}>
       <InspectionReport />
