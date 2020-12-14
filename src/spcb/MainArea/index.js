@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
-import GangaAtr from "./Ganga"
+import FieldReport from "./Action/FieldReport";
+import CompletedInspectionList from "./Action/CompletedInspectionList";
+import TakeAction from "./Action/TakeAction";
+import InspectionReport from "./Action/InspectionReport";
+import ViewAction from "./Action/ViewAction";
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -10,12 +14,27 @@ const MainAreaStyled = styled.div`
   transition: margin-left 0.5s;
 `;
 
-export const MainArea = ({ expand }) => {
+const MainArea = ({ expand }) => {
   return (
     <MainAreaStyled expand={expand}>
-      <Route path="/spcb" exact>Ganga<GangaAtr/></Route>
-      <Route path="/spcb/ganga">Ganga</Route>
-      <Route path="/spcb/yamuna">Yamuna</Route>
+      <Route exact path="/spcb">
+        <CompletedInspectionList />
+      </Route>
+      <Route exact path="/spcb/completed_inspections/:river_name">
+        <CompletedInspectionList />
+      </Route>
+      <Route exact path="/spcb/field_report/:id">
+        <FieldReport />
+      </Route>
+      <Route exact path="/spcb/inspection_report/:id">
+        <InspectionReport />
+      </Route>
+      <Route exact path="/spcb/take_action/:id">
+        <TakeAction />
+      </Route>
+      <Route exact path="/spcb/view_action/:id">
+        <ViewAction />
+      </Route>
     </MainAreaStyled>
   );
 };

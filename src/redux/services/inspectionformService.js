@@ -32,6 +32,8 @@ export function submitInspectionform(id, formdata) {
       unauthorizedDisposal: formdata.unauthorizedDisposal,
       effluent: formdata.effluent,
       invalidCTO: formdata.invalidCTO,
+      inspectionDate: formdata.inspectionDate,
+      inspectionReportUploadDate: formdata.inspectionReportUploadDate,
       report: {
         files: Object.keys(formdata.files).map((file) => formdata.files[file]),
       },

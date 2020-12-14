@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
-import InspectionForm from "./InspectionForm";
-import { getFieldReport } from "../../../redux/services/";
+import { useSelector } from "react-redux";
+import { getInspectionReport } from "../../../redux/services/";
 import { useParams } from "react-router";
+import { ImageGrid } from "../../../shared/ImageGrid";
 
 const InspectionReportStyled = styled.div`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const Report = styled.div`
   display: block;
-  margin-bottom: 50px;
   margin-top: 22px;
   margin-left: 10px;
-  padding: 10px 20px;
+  padding: 20px 20px;
   max-width: 900px;
   background: #f6f6f6;
   box-shadow: 0px 4px 4px 0px #00000033;
@@ -37,27 +37,29 @@ const Table = styled.table`
 
 const Th = styled.th`
   text-align: right;
+  width: 50%;
   border-right: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
   border-top: 1px solid #c0c0c0;
   padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const Td = styled.td`
   text-align: left;
+  width: 50%;
   border-left: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;
   border-top: 1px solid #c0c0c0;
   padding-left: 10px;
 `;
 
-export const InspectionReport = ({ title }) => {
-  const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
-  const params = useParams();
-  useEffect(() => {
-    const id = params.id;
-    store.dispatch(getFieldReport(id));
-  }, []);
+export const InspectionReport = () => {
+  const { data, isLoading } = useSelector(
+    (state) => state.inspectionReportReducer
+  );
+
   if (isLoading) {
     return "loading...";
   }
@@ -68,7 +70,32 @@ export const InspectionReport = ({ title }) => {
       </Text>
       <Report>
         <Text as="h4">{data.name}</Text>
-        <InspectionForm status={data.status} inspectionDate={data.updatedAt} />
+        <Table>
+          <tbody>
+            {data.fields &&
+              data.fields.map((field) => {
+                return (
+                  <tr key={field.title}>
+                    <Th>{field.title}</Th>
+                    {field.link && field.value && (
+                      <Td>
+                        <a href={field.value} target="_blank">
+                          {field.title}
+                        </a>
+                      </Td>
+                    )}
+                    {!field.link && <Td>{field.value || "−"}</Td>}
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+        {data.images && (
+          <>
+            <Text as="h4">Images</Text>
+            <ImageGrid images={data.images} />
+          </>
+        )}
       </Report>
     </InspectionReportStyled>
   );

@@ -8,8 +8,9 @@ export function loginReducer(state, action) {
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        loginValidated: true,
         username: action.username,
+        role: action.role,
+        loginValidated: true,
         isLoading: false,
       };
     case "LOGIN_ERROR":
