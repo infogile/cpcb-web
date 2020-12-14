@@ -25,14 +25,8 @@ const TakeAction = () => {
   const params = useParams();
   const [actionDate, setActionDate] = useState(new Date());
 
-  const { data, isLoading } = useSelector(
-    (state) => state.inspectionReportReducer
-  );
-  useEffect(() => {
-    const id = params.id;
-    console.log(params);
-    store.dispatch(getInspectionReport(id));
-  }, [params.id]);
+  const { data } = useSelector((state) => state.inspectionReportReducer);
+
   const [actionTakenform, setActionTakenForm] = useState({
     compliancestatus: "compliance",
     finalrecommendation: "",
@@ -85,7 +79,7 @@ const TakeAction = () => {
       });
   };
 
-  if (isloading || isLoading) {
+  if (isloading) {
     return "loading...";
   }
   if (formSuccess) {

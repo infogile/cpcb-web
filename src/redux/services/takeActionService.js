@@ -9,7 +9,7 @@ import {
 import axios from "../../axios";
 
 export function getCompletedInspection(river_name) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(initCompletedInspectionAction());
     axios
       .get(`inspection/mycompletedinspections`)
