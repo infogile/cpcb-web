@@ -17,6 +17,9 @@ const MainAreaStyled = styled.div`
 const MainArea = ({ expand }) => {
   return (
     <MainAreaStyled expand={expand}>
+      <Route exact path="/spcb">
+        <CompletedInspectionList />
+      </Route>
       <Route exact path="/spcb/completed_inspections/:river_name">
         <CompletedInspectionList />
       </Route>
