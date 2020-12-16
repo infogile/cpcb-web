@@ -70,6 +70,54 @@ export function getInspectionReport(id) {
                 }),
             },
             {
+              title: "Air consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("airconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }),
+            },
+            {
+              title: "Water Consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("waterconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }),
+            },
+            {
+              title: "CGWA NOC",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("cgwaNoc")) {
+                    return cr;
+                  }
+                  return r;
+                }),
+            },
+            {
+              title: "Hazardous Consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("hazardousconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }),
+            },
+            {
               title: "Final Recommedation",
               value: responseData.finalRecommendation,
             },
