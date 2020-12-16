@@ -51,11 +51,21 @@ const InspectionForm = ({ status, inspectionDate }) => {
   useEffect(() => {
     if (
       inspectionForm.files.consentcopy &&
-      inspectionForm.files.inspectionreport
+      inspectionForm.files.inspectionreport &&
+      inspectionForm.files.airconsent &&
+      inspectionForm.files.waterconsent &&
+      inspectionForm.files.cgwaNoc &&
+      inspectionForm.files.hazardousconsent
     ) {
       setValidationWarning("");
     }
-  }, [inspectionForm.files.consentcopy, inspectionForm.files.inspectionreport]);
+  }, [inspectionForm.files.consentcopy, 
+     inspectionForm.files.inspectionreport,
+     inspectionForm.files.airconsent,
+     inspectionForm.files.waterconsent,
+     inspectionForm.files.cgwaNoc,
+     inspectionForm.files.hazardousconsent
+    ]);
   const onInputChange = (e) => {
     const {
       target: { name, type, checked, value },
@@ -189,6 +199,30 @@ const InspectionForm = ({ status, inspectionDate }) => {
         onRemoveFile={onRemoveFile}
         name="inspectionreport"
         label="*Upload Inspection Report"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="airconsent"
+        label="Upload Air consent"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="waterconsent"
+        label="Upload Water Consent"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="cgwaNoc"
+        label="Upload CGWA NOC"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="hazardousconsent"
+        label="Upload Hazardous Consent"
       />
       <LabeledInput
         marginTop="30px"
