@@ -68,18 +68,18 @@ export const CompletedInspectionList = () => {
           : "All Inspections"}
       </h1>
       <Table id="state">
-        <tr>
-          <Th>S. No.</Th>
-          <Th>Unit code</Th>
-          <Th>Unit name</Th>
-          <Th>Sector</Th>
-          <Th>Institute</Th>
-          <Th>Region</Th>
-          <Th>Field report</Th>
-          <Th>Final report</Th>
-          <Th>Take action</Th>
-        </tr>
         <tbody>
+          <tr>
+            <Th>S. No.</Th>
+            <Th>Unit code</Th>
+            <Th>Unit name</Th>
+            <Th>Sector</Th>
+            <Th>Institute</Th>
+            <Th>Region</Th>
+            <Th>Field report</Th>
+            <Th>Final report</Th>
+            <Th>Take action</Th>
+          </tr>
           {data.map(({ id, status, code, name, sector, region, username }) => {
             return (
               <Tr key={id}>
