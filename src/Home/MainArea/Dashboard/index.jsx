@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import RiverStats from "./RiverStats";
+import { Loading } from "../../../shared/Loading";
 import { Grid } from "../../../shared/Grid";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
@@ -12,7 +13,7 @@ export const Dashboard = () => {
     store.dispatch(getInspections());
   }, []);
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   return (
     <Grid>

@@ -1,5 +1,6 @@
 import { getCompletedInspection } from "../../../redux/services";
 import React, { useEffect } from "react";
+import { Loading } from "../../../shared/Loading";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -56,7 +57,7 @@ export const CompletedInspectionList = () => {
   }, [params.river_name]);
 
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   var num = 1;
   return (
