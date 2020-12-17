@@ -62,7 +62,6 @@ export const InspectionReport = () => {
   const params = useParams();
   useEffect(() => {
     const id = params.id;
-    console.log(params);
     store.dispatch(getInspectionReport(id));
   }, [params.id]);
   if (isLoading) {

@@ -20,6 +20,7 @@ const TakeAction = () => {
   const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
   const [formSaveSuccess, setFormSaveSuccess] = useState(false);
   const [formFailure, setFormFailure] = useState(false);
+  const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const params = useParams();
   const [actionDate, setActionDate] = useState(new Date());
@@ -29,6 +30,7 @@ const TakeAction = () => {
   const [actionTakenform, setActionTakenForm] = useState({
     compliancestatus: "compliance",
     tempclosestatus: "tempclose",
+    showcausenoticestatus: "showcausenotice",
     finalrecommendation: "",
     actionreport: "",
   });
@@ -36,7 +38,6 @@ const TakeAction = () => {
   useEffect(() => {
     if (data.action) {
       const { action } = data;
-      console.log(action.report);
       setActionTakenForm({
         compliancestatus: action.complianceStatus
           ? "compliance"
@@ -44,11 +45,14 @@ const TakeAction = () => {
         tempclosestatus: action.tempcloseStatus
           ? "tempclose"
           : "permanentclose",
-
+        showcausenoticestatus: action.showcausenoticeStatus
+          ? "showcausenotice"
+          : "closure",
         finalrecommendation: action.finalRecommendation || "",
         actionreport: action.report || "",
       });
       setActionDate(new Date(action.date));
+      setShowNonComplianceTerms(!action.complianceStatus);
     }
   }, [data]);
 
@@ -57,12 +61,18 @@ const TakeAction = () => {
       target: { name, type, checked, value },
     } = e;
     const fieldValue = type === "checkbox" ? checked : value;
-    if (name === "compliancestatus" && "tempclosestatus") {
-      setActionTakenForm((prevState) => ({
-        ...prevState,
-        [name]: fieldValue,
-      }));
-      return;
+    if (name === "compliancestatus") {
+      if (fieldValue === "compliance") {
+        setShowNonComplianceTerms(false);
+        setActionTakenForm((prevState) => ({
+          ...prevState,
+          showcausenoticestatus: "showcausenotice",
+          [name]: fieldValue,
+        }));
+        return;
+      } else {
+        setShowNonComplianceTerms(true);
+      }
     }
     setActionTakenForm((prevState) => ({
       ...prevState,
@@ -182,6 +192,38 @@ const TakeAction = () => {
                 id: "noncompliance",
                 value: "noncompliance",
                 checked: actionTakenform.compliancestatus === "noncompliance",
+                onChange: onInputChange,
+              }}
+            />
+          </Grid>
+          <Grid templateColumns="auto" hide={!showNonComplianceTerms}>
+            <Div as="div" marginTop="20px">
+              <Text>*Condition of Non-Compliance</Text>
+            </Div>
+            <RadioInput
+              marginTop="10px"
+              labelProps={{
+                label: "Show-Cause Notice",
+              }}
+              inputProps={{
+                name: "showcausenoticestatus",
+                id: "showcausenotice",
+                value: "showcausenotice",
+                checked:
+                  actionTakenform.showcausenoticestatus === "showcausenotice",
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{
+                label: "Closure",
+              }}
+              inputProps={{
+                name: "showcausenoticestatus",
+                id: "closure",
+                value: "closure",
+                checked: actionTakenform.showcausenoticestatus === "closure",
                 onChange: onInputChange,
               }}
             />

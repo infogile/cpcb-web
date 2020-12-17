@@ -51,6 +51,7 @@ export function submitActionTakenform(id, formdata, submit = false) {
       action: {
         complianceStatus: formdata.compliancestatus === "compliance",
         tempcloseStatus: formdata.tempclosestatus === "tempclose",
+        showcausenoticeStatus: formdata.showcausenoticestatus === "showcausenotice",
         date: formdata.date,
         finalRecommendation: formdata.finalrecommendation,
         report: formdata.actionreport,
