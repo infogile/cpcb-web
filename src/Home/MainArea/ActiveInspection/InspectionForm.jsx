@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Loading } from "../../../shared/Loading";
 import { Form } from "../../../shared/Form";
 import {
   CheckBox,
@@ -160,7 +161,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
     }
   };
   if (isloading) {
-    return "loading...";
+    return <Loading />;
   }
   if (status > 1) {
     return "Inspection Report Submitted Already.";

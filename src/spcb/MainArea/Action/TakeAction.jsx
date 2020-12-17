@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import store from "../../../redux/store";
+import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
@@ -134,7 +135,7 @@ const TakeAction = () => {
   };
 
   if (isloading) {
-    return "loading...";
+    return <Loading />;
   }
   if (formSubmitSuccess) {
     return "Action Report Submitted Successfully.";
