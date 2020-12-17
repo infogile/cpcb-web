@@ -82,11 +82,15 @@ export const InspectionReport = () => {
                 return (
                   <tr key={field.title}>
                     <Th>{field.title}</Th>
-                    {field.link && field.value && (
+                    {field.link && (
                       <Td>
-                        <a href={field.value} target="_blank">
-                          {field.title}
-                        </a>
+                        {field.value ? (
+                          <a href={field.value} target="_blank">
+                            {field.title}
+                          </a>
+                        ) : (
+                          "−"
+                        )}
                       </Td>
                     )}
                     {!field.link && <Td>{field.value || "−"}</Td>}

@@ -12,7 +12,7 @@ import { Text } from "../../../shared/Text";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
-import UploadReport from "./UploadReport";
+import { UploadReport } from "../../../shared/UploadReport";
 import { submitInspectionform } from "../../../redux/services";
 import store from "../../../redux/store";
 
@@ -59,13 +59,14 @@ const InspectionForm = ({ status, inspectionDate }) => {
     ) {
       setValidationWarning("");
     }
-  }, [inspectionForm.files.consentcopy, 
-     inspectionForm.files.inspectionreport,
-     inspectionForm.files.airconsent,
-     inspectionForm.files.waterconsent,
-     inspectionForm.files.cgwaNoc,
-     inspectionForm.files.hazardousconsent
-    ]);
+  }, [
+    inspectionForm.files.consentcopy,
+    inspectionForm.files.inspectionreport,
+    inspectionForm.files.airconsent,
+    inspectionForm.files.waterconsent,
+    inspectionForm.files.cgwaNoc,
+    inspectionForm.files.hazardousconsent,
+  ]);
   const onInputChange = (e) => {
     const {
       target: { name, type, checked, value },

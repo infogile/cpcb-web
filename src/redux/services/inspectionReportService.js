@@ -33,10 +33,11 @@ export function getInspectionReport(id) {
           data.teamNames = responseData.teamNames;
           data.finalRecommendation = responseData.finalRecommendation;
           data.complianceStatus = responseData.complianceStatus
-            .toString()
+            ?.toString()
             .toUpperCase();
           // data.images = responseData.fieldReport?.images || [];
           data.consent = responseData.report.files[0];
+          data.action = responseData.action;
           data.inspection = responseData.report.files[1];
           data.fields = [
             { title: "Unit Name", value: responseData.factory.name },
@@ -55,7 +56,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Inspection Report",
@@ -67,7 +68,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Air consent",
@@ -79,7 +80,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Water Consent",
@@ -91,7 +92,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "CGWA NOC",
@@ -103,7 +104,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Hazardous Consent",
@@ -115,7 +116,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Final Recommedation",
