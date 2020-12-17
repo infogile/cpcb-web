@@ -46,7 +46,7 @@ const TakeAction = () => {
         finalrecommendation: action.finalRecommendation || "",
         actionreport: action.report || "",
       });
-      setActionDate(new Date(action.date));
+      setActionDate(action.date ? new Date(action.date) : new Date());
       setShowNonComplianceTerms(!action.complianceStatus);
     }
   }, [data]);
