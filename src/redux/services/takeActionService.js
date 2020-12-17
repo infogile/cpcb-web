@@ -49,9 +49,9 @@ export function submitActionTakenform(id, formdata, submit = false) {
     const form = {
       status: submit ? 3 : 2,
       action: {
-        complianceStatus: formdata.compliancestatus === "compliance",
-        tempcloseStatus: formdata.tempclosestatus === "tempclose",
-        showcausenoticeStatus: formdata.showcausenoticestatus === "showcausenotice",
+        complianceStatus: formdata.compliancestatus,
+        showcausenoticeStatus:
+          formdata.showcausenoticestatus === "showcausenotice",
         date: formdata.date,
         finalRecommendation: formdata.finalrecommendation,
         report: formdata.actionreport,

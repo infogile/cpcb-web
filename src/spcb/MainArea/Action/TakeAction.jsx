@@ -29,8 +29,7 @@ const TakeAction = () => {
   const { data } = useSelector((state) => state.inspectionReportReducer);
 
   const [actionTakenform, setActionTakenForm] = useState({
-    compliancestatus: "compliance",
-    tempclosestatus: "tempclose",
+    compliancestatus: 1,
     showcausenoticestatus: "showcausenotice",
     finalrecommendation: "",
     actionreport: "",
@@ -40,12 +39,7 @@ const TakeAction = () => {
     if (data.action) {
       const { action } = data;
       setActionTakenForm({
-        compliancestatus: action.complianceStatus
-          ? "compliance"
-          : "noncompliance",
-        tempclosestatus: action.tempcloseStatus
-          ? "tempclose"
-          : "permanentclose",
+        compliancestatus: action.complianceStatus,
         showcausenoticestatus: action.showcausenoticeStatus
           ? "showcausenotice"
           : "closure",
@@ -63,17 +57,18 @@ const TakeAction = () => {
     } = e;
     const fieldValue = type === "checkbox" ? checked : value;
     if (name === "compliancestatus") {
-      if (fieldValue === "compliance") {
+      const complianceValue = parseInt(fieldValue);
+      if (complianceValue !== 0) {
         setShowNonComplianceTerms(false);
-        setActionTakenForm((prevState) => ({
-          ...prevState,
-          showcausenoticestatus: "showcausenotice",
-          [name]: fieldValue,
-        }));
-        return;
       } else {
         setShowNonComplianceTerms(true);
       }
+      setActionTakenForm((prevState) => ({
+        ...prevState,
+        showcausenoticestatus: "showcausenotice",
+        [name]: complianceValue,
+      }));
+      return;
     }
     setActionTakenForm((prevState) => ({
       ...prevState,
@@ -92,7 +87,6 @@ const TakeAction = () => {
   const save = (e) => {
     e.preventDefault();
     setIsloading(true);
-    console.log(actionTakenform);
     store
       .dispatch(
         submitActionTakenform(params.id, {
@@ -180,8 +174,8 @@ const TakeAction = () => {
               inputProps={{
                 name: "compliancestatus",
                 id: "compliance",
-                value: "compliance",
-                checked: actionTakenform.compliancestatus === "compliance",
+                value: 1,
+                checked: actionTakenform.compliancestatus === 1,
                 onChange: onInputChange,
               }}
             />
@@ -191,8 +185,30 @@ const TakeAction = () => {
               inputProps={{
                 name: "compliancestatus",
                 id: "noncompliance",
-                value: "noncompliance",
-                checked: actionTakenform.compliancestatus === "noncompliance",
+                value: 0,
+                checked: actionTakenform.compliancestatus === 0,
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Temporarily Closed" }}
+              inputProps={{
+                name: "compliancestatus",
+                id: "tempclose",
+                value: 2,
+                checked: actionTakenform.compliancestatus === 2,
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Permanent Closed" }}
+              inputProps={{
+                name: "compliancestatus",
+                id: "permanentclose",
+                value: 3,
+                checked: actionTakenform.compliancestatus === 3,
                 onChange: onInputChange,
               }}
             />
@@ -229,34 +245,6 @@ const TakeAction = () => {
               }}
             />
           </Grid>
-          <Div marginTop="30px">
-            <Label marginTop="30px">Close status:</Label>
-          </Div>
-          <Grid templateColumns="auto">
-            <RadioInput
-              marginTop="10px"
-              labelProps={{ label: "Temporarily Closed" }}
-              inputProps={{
-                name: "tempclosestatus",
-                id: "tempclose",
-                value: "tempclose",
-                checked: actionTakenform.tempclosestatus === "tempclose",
-                onChange: onInputChange,
-              }}
-            />
-            <RadioInput
-              marginTop="10px"
-              labelProps={{ label: "Permanent Closed" }}
-              inputProps={{
-                name: "tempclosestatus",
-                id: "permanentclose",
-                value: "permanentclose",
-                checked: actionTakenform.tempclosestatus === "permanentclose",
-                onChange: onInputChange,
-              }}
-            />
-          </Grid>
-
           <Div marginTop="30px">
             <Label marginTop="30px">Action Taken Date</Label>
           </Div>

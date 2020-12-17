@@ -40,14 +40,17 @@ export function getInspectionReport(id) {
           data.action = responseData.action;
           data.inspection = responseData.report.files[1];
           data.fields = [
-            { title: "Unit Name", value: responseData.factory.name },
+            {
+              title: "Unit Name",
+              value: `${responseData.factory.name} (${responseData.factory.unitcode})`,
+            },
             { title: "Unit Sector", value: responseData.factory.sector.name },
             {
               title: "Member of inspection Team",
               value: responseData.teamNames,
             },
             {
-              title: "Consen Copy",
+              title: "Consent Copy",
               link: true,
               value:
                 responseData.report?.files &&
@@ -167,7 +170,9 @@ export function getInspectionReport(id) {
             {
               title: "Contacted Person",
               value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc.map((p) => p.name + ", " + p.number + ", " + p.email).join(",")
+                ? responseData.fieldReport.poc
+                    .map((p) => p.name + ", " + p.number + ", " + p.email)
+                    .join(",")
                 : "",
             },
             {

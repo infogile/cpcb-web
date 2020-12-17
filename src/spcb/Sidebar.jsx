@@ -39,11 +39,11 @@ function Sidebar({ show, ...otherProps }) {
     <StyledSidebar show={show}>
       {rivers.map((river) =>
         river ? (
-          <NavItem to={`/spcb/completed_inspections/${river}`}>
+          <NavItem to={`/spcb/completed_inspections/${river}`} key={river}>
             <strong> {capitalizeFirstLetter(river)}</strong>
           </NavItem>
         ) : (
-          <NavItem to={`/spcb`}>
+          <NavItem to={`/spcb`} key={"all"}>
             <strong>All</strong>
           </NavItem>
         )
