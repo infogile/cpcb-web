@@ -62,7 +62,7 @@ export const FieldReport = () => {
   useEffect(() => {
     const id = params.id;
     store.dispatch(getFieldReport(id));
-  }, [params]);
+  }, [params.id]);
   if (isLoading) {
     return <Loading />;
   }
