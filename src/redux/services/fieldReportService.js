@@ -44,9 +44,9 @@ export function getFieldReport(id) {
               value: responseData.attendance?.entrylocation?.coordinates[1],
             },
             {
-              title: "Point of Contact",
+              title: "Contacted Person",
               value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc.map((p) => p.name).join(",")
+                ? responseData.fieldReport.poc.map((p) => p.name + ", " + p.number + ", " + p.email).join(",")
                 : "",
             },
             {

@@ -34,7 +34,19 @@ import {
                     title: "Compliance status as per SPCB",
                     value: responseData.action.complianceStatus
                       ? "compliance"
-                      : "non-compliance",
+                      : "non-compliance" 
+                },
+                {
+                  title: "Condition of Non-Compliance",
+                  value: responseData.action.complianceStatus
+                    ? ""
+                    : responseData.action.showcausenoticeStatus ? "Show-Cause Notice" : "Closure",
+                },
+                {
+                  title: "Close status",
+                  value: responseData.action.tempcloseStatus
+                    ? "Temporarily Closed"
+                    : "Permanent Closed",
                 },
                 {
                     title: "Date",

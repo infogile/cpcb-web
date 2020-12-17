@@ -5,6 +5,7 @@ export const ButtonStyled = styled.button`
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
   border-radius: 5px;
+  cursor: pointer;
   height: ${(props) => (props.height ? props.height : "35px")};
   font-size: 16px;
   background: ${(props) => props.bg};

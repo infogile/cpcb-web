@@ -43,13 +43,15 @@ export function getCompletedInspection(river_name) {
   };
 }
 
-export function submitActionTakenform(id, formdata) {
+export function submitActionTakenform(id, formdata, submit = false) {
   return (dispatch) => {
     dispatch(initSubmitActionFormAction());
     const form = {
-      status: 3,
+      status: submit ? 3 : 2,
       action: {
         complianceStatus: formdata.compliancestatus === "compliance",
+        tempcloseStatus: formdata.tempclosestatus === "tempclose",
+        showcausenoticeStatus: formdata.showcausenoticestatus === "showcausenotice",
         date: formdata.date,
         finalRecommendation: formdata.finalrecommendation,
         report: formdata.actionreport,
