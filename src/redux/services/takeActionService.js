@@ -50,6 +50,7 @@ export function submitActionTakenform(id, formdata) {
       status: 3,
       action: {
         complianceStatus: formdata.compliancestatus === "compliance",
+        tempcloseStatus: formdata.tempclosestatus === "tempclose",
         date: formdata.date,
         finalRecommendation: formdata.finalrecommendation,
         report: formdata.actionreport,

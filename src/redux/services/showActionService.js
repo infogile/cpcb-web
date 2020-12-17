@@ -37,6 +37,12 @@ import {
                       : "non-compliance",
                 },
                 {
+                  title: "Close status",
+                  value: responseData.action.tempcloseStatus
+                    ? "Temporarily Closed"
+                    : "Permanent Closed",
+              },
+                {
                     title: "Date",
                     value: actionDate,
                 },

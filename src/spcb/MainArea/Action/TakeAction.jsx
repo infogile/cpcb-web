@@ -29,6 +29,7 @@ const TakeAction = () => {
 
   const [actionTakenform, setActionTakenForm] = useState({
     compliancestatus: "compliance",
+    tempclosestatus: "tempclose",
     finalrecommendation: "",
     file: "",
   });
@@ -38,7 +39,7 @@ const TakeAction = () => {
       target: { name, type, checked, value },
     } = e;
     const fieldValue = type === "checkbox" ? checked : value;
-    if (name === "compliancestatus") {
+    if (name === "compliancestatus" && "tempclosestatus") {
       setActionTakenForm((prevState) => ({
         ...prevState,
         [name]: fieldValue,
@@ -115,7 +116,7 @@ const TakeAction = () => {
           <Div marginTop="30px">
             <Label marginTop="30px">Compliance status (as per SPCB)</Label>
           </Div>
-          <Grid templateColumns="auto auto">
+          <Grid templateColumns="auto">
             <RadioInput
               marginTop="10px"
               labelProps={{ label: "Compliance" }}
@@ -135,6 +136,33 @@ const TakeAction = () => {
                 id: "noncompliance",
                 value: "noncompliance",
                 checked: actionTakenform.compliancestatus === "noncompliance",
+                onChange: onInputChange,
+              }}
+            />
+          </Grid>
+          <Div marginTop="30px">
+            <Label marginTop="30px">Close status:</Label>
+          </Div>
+          <Grid templateColumns="auto">
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Temporarily Closed" }}
+              inputProps={{
+                name: "tempclosestatus",
+                id: "tempclose",
+                value: "tempclose",
+                checked: actionTakenform.tempclosestatus === "tempclose",
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Permanent Closed" }}
+              inputProps={{
+                name: "tempclosestatus",
+                id: "permanentclose",
+                value: "permanentclose",
+                checked: actionTakenform.tempclosestatus === "permanentclose",
                 onChange: onInputChange,
               }}
             />
