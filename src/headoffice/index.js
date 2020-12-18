@@ -12,6 +12,7 @@ const HeadofficeHome = () => {
         <>
         <Header toggleNav={toggleNav}/>
         <Sidebar show={showNav}/>
+        <MainArea expand={!showNav} />
         </>
     );
 };

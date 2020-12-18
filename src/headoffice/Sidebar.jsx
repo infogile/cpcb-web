@@ -37,18 +37,18 @@ function Sidebar({ show, ...otherProps }) {
 
   return (
     <StyledSidebar show={show}>
-      <NavItem to="/headofficehome">
+      <NavItem to="/headoffice">
         <DashboardIcon
-          color={history.location.pathname === "/headofficehome" ? "#4759FB" : "#5c5c5c"}
+          color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
           size="14px"
           marginRight="10px"
         />
         Dashboard
       </NavItem>
-      <NavItem to="/headofficehome/tech-reports">
+      <NavItem to="/headoffice/tech-reports">
         <DashboardIcon
           color={
-            history.location.pathname === "/headofficehome/tech-reports"
+            history.location.pathname === "/headoffice/tech-reports"
               ? "#4759FB"
               : "#5c5c5c"
           }
