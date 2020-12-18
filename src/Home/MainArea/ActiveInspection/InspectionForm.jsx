@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Loading } from "../../../shared/Loading";
 import { Form } from "../../../shared/Form";
-import {
-  CheckBox,
-  FormButton,
-  Input,
-  LabeledInput,
-} from "../../../shared/Input";
+import { CheckBox, FormButton, LabeledInput } from "../../../shared/Input";
 import { Grid } from "../../../shared/Grid";
 import { Text } from "../../../shared/Text";
 import { Div } from "../../../shared/Div";
@@ -52,11 +47,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
   useEffect(() => {
     if (
       inspectionForm.files.consentcopy &&
-      inspectionForm.files.inspectionreport &&
-      inspectionForm.files.airconsent &&
-      inspectionForm.files.waterconsent &&
-      inspectionForm.files.cgwaNoc &&
-      inspectionForm.files.hazardousconsent
+      inspectionForm.files.inspectionreport
     ) {
       setValidationWarning("");
     }
@@ -116,23 +107,6 @@ const InspectionForm = ({ status, inspectionDate }) => {
   };
   const submit = (e) => {
     e.preventDefault();
-    if (
-      inspectionForm.compliancestatus === "noncompliance" &&
-      (!inspectionForm.nonInstallationofOCEMS ||
-        !inspectionForm.temperedOCEMS ||
-        !inspectionForm.dissentBypassArrangement ||
-        !inspectionForm.provision ||
-        !inspectionForm.defunctETP ||
-        !inspectionForm.ZLDnorms ||
-        !inspectionForm.standardExceedance ||
-        !inspectionForm.dilutionInETP ||
-        !inspectionForm.dissentWaterDischarge ||
-        !inspectionForm.unauthorizedDisposal ||
-        !inspectionForm.effluent ||
-        !inspectionForm.invalidCTO)
-    ) {
-      return;
-    }
     if (
       !inspectionForm.files.consentcopy ||
       !inspectionForm.files.inspectionreport
@@ -508,30 +482,10 @@ const InspectionForm = ({ status, inspectionDate }) => {
           }}
         />
       </Grid>
-      {/* <Media /> */}
       <Text color="#ec3737" as="div" marginTop="10px">
         {validationWaring}
       </Text>
-      <FormButton
-        marginTop="20px"
-        title="Please Check Above All Conditions Of Non-compliance To Submit Form"
-        onClick={submit}
-        disable={
-          inspectionForm.compliancestatus === "noncompliance" &&
-          (!inspectionForm.nonInstallationofOCEMS ||
-            !inspectionForm.temperedOCEMS ||
-            !inspectionForm.dissentBypassArrangement ||
-            !inspectionForm.provision ||
-            !inspectionForm.defunctETP ||
-            !inspectionForm.ZLDnorms ||
-            !inspectionForm.standardExceedance ||
-            !inspectionForm.dilutionInETP ||
-            !inspectionForm.dissentWaterDischarge ||
-            !inspectionForm.unauthorizedDisposal ||
-            !inspectionForm.effluent ||
-            !inspectionForm.invalidCTO)
-        }
-      />
+      <FormButton marginTop="20px" title="Submit the report" onClick={submit} />
     </Form>
   );
 };
