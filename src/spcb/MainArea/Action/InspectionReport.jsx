@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Loading } from "../../../shared/Loading";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
@@ -62,11 +63,10 @@ export const InspectionReport = () => {
   const params = useParams();
   useEffect(() => {
     const id = params.id;
-    console.log(params);
     store.dispatch(getInspectionReport(id));
   }, [params.id]);
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   return (
     <InspectionReportStyled>
@@ -82,11 +82,15 @@ export const InspectionReport = () => {
                 return (
                   <tr key={field.title}>
                     <Th>{field.title}</Th>
-                    {field.link && field.value && (
+                    {field.link && (
                       <Td>
-                        <a href={field.value} target="_blank">
-                          {field.title}
-                        </a>
+                        {field.value ? (
+                          <a href={field.value} target="_blank">
+                            {field.title}
+                          </a>
+                        ) : (
+                          "−"
+                        )}
                       </Td>
                     )}
                     {!field.link && <Td>{field.value || "−"}</Td>}

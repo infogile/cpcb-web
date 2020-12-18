@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Loading } from "../../../shared/Loading";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
@@ -61,9 +62,9 @@ export const FieldReport = () => {
   useEffect(() => {
     const id = params.id;
     store.dispatch(getFieldReport(id));
-  }, [params]);
+  }, [params.id]);
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   return (
     <FieldReportStyled>

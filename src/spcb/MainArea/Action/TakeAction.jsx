@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import store from "../../../redux/store";
+import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
 import { Text } from "../../../shared/Text";
-import TakeActionReport from "./TakeActionReport";
+import { UploadReport } from "../../../shared/UploadReport";
 import { Form } from "../../../shared/Form";
 import { Grid } from "../../../shared/Grid";
 import InspectionReport from "./InspectionReport";
 import { FormButton, LabeledInput } from "../../../shared/Input";
-import {
-  submitActionTakenform,
-  getInspectionReport,
-} from "../../../redux/services/";
+import { submitActionTakenform } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { DatePicker } from "../../../shared/Input";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button } from "../../../shared/Button";
 
 const TakeAction = () => {
-  const [formSuccess, setFormSuccess] = useState(false);
+  const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
+  const [formSaveSuccess, setFormSaveSuccess] = useState(false);
   const [formFailure, setFormFailure] = useState(false);
+  const [showNonComplianceTerms, setShowNonComplianceTerms] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const params = useParams();
   const [actionDate, setActionDate] = useState(new Date());
@@ -28,10 +29,27 @@ const TakeAction = () => {
   const { data } = useSelector((state) => state.inspectionReportReducer);
 
   const [actionTakenform, setActionTakenForm] = useState({
-    compliancestatus: "compliance",
+    compliancestatus: 1,
+    showcausenoticestatus: "showcausenotice",
     finalrecommendation: "",
-    file: "",
+    actionreport: "",
   });
+
+  useEffect(() => {
+    if (data.action) {
+      const { action } = data;
+      setActionTakenForm({
+        compliancestatus: action.complianceStatus,
+        showcausenoticestatus: action.showcausenoticeStatus
+          ? "showcausenotice"
+          : "closure",
+        finalrecommendation: action.finalRecommendation || "",
+        actionreport: action.report || "",
+      });
+      setActionDate(action.date ? new Date(action.date) : new Date());
+      setShowNonComplianceTerms(!action.complianceStatus);
+    }
+  }, [data]);
 
   const onInputChange = (e) => {
     const {
@@ -39,9 +57,16 @@ const TakeAction = () => {
     } = e;
     const fieldValue = type === "checkbox" ? checked : value;
     if (name === "compliancestatus") {
+      const complianceValue = parseInt(fieldValue);
+      if (complianceValue !== 0) {
+        setShowNonComplianceTerms(false);
+      } else {
+        setShowNonComplianceTerms(true);
+      }
       setActionTakenForm((prevState) => ({
         ...prevState,
-        [name]: fieldValue,
+        showcausenoticestatus: "showcausenotice",
+        [name]: complianceValue,
       }));
       return;
     }
@@ -59,7 +84,7 @@ const TakeAction = () => {
     setActionTakenForm((prevState) => ({ ...prevState, [name]: undefined }));
   };
 
-  const submit = (e) => {
+  const save = (e) => {
     e.preventDefault();
     setIsloading(true);
     store
@@ -72,7 +97,31 @@ const TakeAction = () => {
       .then((res) => {
         setIsloading(false);
         if (res.status === 200) {
-          setFormSuccess(true);
+          setFormSaveSuccess(true);
+        } else {
+          setFormFailure(true);
+        }
+      });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    setIsloading(true);
+    store
+      .dispatch(
+        submitActionTakenform(
+          params.id,
+          {
+            ...actionTakenform,
+            date: actionDate?.toString(),
+          },
+          true
+        )
+      )
+      .then((res) => {
+        setIsloading(false);
+        if (res.status === 200) {
+          setFormSubmitSuccess(true);
         } else {
           setFormFailure(true);
         }
@@ -80,13 +129,16 @@ const TakeAction = () => {
   };
 
   if (isloading) {
-    return "loading...";
+    return <Loading />;
   }
-  if (formSuccess) {
+  if (formSubmitSuccess) {
     return "Action Report Submitted Successfully.";
   }
+  if (formSaveSuccess) {
+    return "Action Report Saved Successfully.";
+  }
   if (formFailure) {
-    return "Action Report was not submitted because of some error.";
+    return "Action Report was not save/submitted because of some error.";
   }
   if (data && data.status === 3) {
     return "Action Report Submitted Already.";
@@ -115,15 +167,15 @@ const TakeAction = () => {
           <Div marginTop="30px">
             <Label marginTop="30px">Compliance status (as per SPCB)</Label>
           </Div>
-          <Grid templateColumns="auto auto">
+          <Grid templateColumns="auto">
             <RadioInput
               marginTop="10px"
               labelProps={{ label: "Compliance" }}
               inputProps={{
                 name: "compliancestatus",
                 id: "compliance",
-                value: "compliance",
-                checked: actionTakenform.compliancestatus === "compliance",
+                value: 1,
+                checked: actionTakenform.compliancestatus === 1,
                 onChange: onInputChange,
               }}
             />
@@ -133,17 +185,71 @@ const TakeAction = () => {
               inputProps={{
                 name: "compliancestatus",
                 id: "noncompliance",
-                value: "noncompliance",
-                checked: actionTakenform.compliancestatus === "noncompliance",
+                value: 0,
+                checked: actionTakenform.compliancestatus === 0,
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Temporarily Closed" }}
+              inputProps={{
+                name: "compliancestatus",
+                id: "tempclose",
+                value: 2,
+                checked: actionTakenform.compliancestatus === 2,
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{ label: "Permanent Closed" }}
+              inputProps={{
+                name: "compliancestatus",
+                id: "permanentclose",
+                value: 3,
+                checked: actionTakenform.compliancestatus === 3,
                 onChange: onInputChange,
               }}
             />
           </Grid>
-
+          <Grid templateColumns="auto" hide={!showNonComplianceTerms}>
+            <Div as="div" marginTop="20px">
+              <Text>*Condition of Non-Compliance</Text>
+            </Div>
+            <RadioInput
+              marginTop="10px"
+              labelProps={{
+                label: "Show-Cause Notice",
+              }}
+              inputProps={{
+                name: "showcausenoticestatus",
+                id: "showcausenotice",
+                value: "showcausenotice",
+                checked:
+                  actionTakenform.showcausenoticestatus === "showcausenotice",
+                onChange: onInputChange,
+              }}
+            />
+            <RadioInput
+              marginTop="10px"
+              labelProps={{
+                label: "Closure",
+              }}
+              inputProps={{
+                name: "showcausenoticestatus",
+                id: "closure",
+                value: "closure",
+                checked: actionTakenform.showcausenoticestatus === "closure",
+                onChange: onInputChange,
+              }}
+            />
+          </Grid>
           <Div marginTop="30px">
             <Label marginTop="30px">Action Taken Date</Label>
           </Div>
           <DatePicker
+            dateFormat="dd/MM/yyyy"
             marginTop="10px"
             selected={actionDate}
             name="actiondate"
@@ -152,9 +258,10 @@ const TakeAction = () => {
             }}
           />
 
-          <TakeActionReport
+          <UploadReport
             onUploadComplete={onUploadComplete}
             onRemoveFile={onRemoveFile}
+            file={actionTakenform.actionreport}
             name="actionreport"
             label="Upload Report"
             id="actionreport"
@@ -166,14 +273,23 @@ const TakeAction = () => {
             inputProps={{
               name: "finalrecommendation",
               id: "finalrecommendation",
-              value: actionTakenform.finalRecommendation,
+              value: actionTakenform.finalrecommendation,
               type: "text",
               onChange: onInputChange,
             }}
           />
         </div>
+        <Button
+          marginTop="20px"
+          onClick={save}
+          primary
+          title="Save the action to update it later"
+        >
+          Save
+        </Button>
         <FormButton
           marginTop="20px"
+          marginLeft="20px"
           title="Please Check Above All Conditions Of Non-compliance To Submit Form"
           onClick={submit}
         />

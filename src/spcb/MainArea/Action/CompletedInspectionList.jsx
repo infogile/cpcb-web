@@ -1,5 +1,6 @@
 import { getCompletedInspection } from "../../../redux/services";
 import React, { useEffect } from "react";
+import { Loading } from "../../../shared/Loading";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -56,7 +57,7 @@ export const CompletedInspectionList = () => {
   }, [params.river_name]);
 
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   var num = 1;
   return (
@@ -67,18 +68,18 @@ export const CompletedInspectionList = () => {
           : "All Inspections"}
       </h1>
       <Table id="state">
-        <tr>
-          <Th>S. No.</Th>
-          <Th>Unit code</Th>
-          <Th>Unit name</Th>
-          <Th>Sector</Th>
-          <Th>Institute</Th>
-          <Th>Region</Th>
-          <Th>Field report</Th>
-          <Th>Final report</Th>
-          <Th>Take action</Th>
-        </tr>
         <tbody>
+          <tr>
+            <Th>S. No.</Th>
+            <Th>Unit code</Th>
+            <Th>Unit name</Th>
+            <Th>Sector</Th>
+            <Th>Institute</Th>
+            <Th>Region</Th>
+            <Th>Field report</Th>
+            <Th>Final report</Th>
+            <Th>Take action</Th>
+          </tr>
           {data.map(({ id, status, code, name, sector, region, username }) => {
             return (
               <Tr key={id}>

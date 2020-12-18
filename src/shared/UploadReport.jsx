@@ -1,13 +1,23 @@
-import React, { useRef, useState } from "react";
-import { FileInput } from "../../../shared/Input";
+import React, { useEffect, useRef, useState } from "react";
+import { FileInput } from "./Input";
 import { CancelToken } from "axios";
-import axios from "../../../axios";
+import axios from "../axios";
 
-const UploadReport = ({ onUploadComplete, onRemoveFile, name, label }) => {
+export const UploadReport = ({
+  onUploadComplete,
+  onRemoveFile,
+  file,
+  name,
+  label,
+}) => {
   const [progress, setProgress] = useState(-1);
   const [fileLink, setFileLink] = useState("");
   const [source, setSource] = useState(CancelToken.source());
   const fileRef = useRef(null);
+  useEffect(() => {
+    if (file) setProgress(101);
+    setFileLink(file);
+  }, [file]);
   const onClick = () => {
     const file = fileRef.current.files[0];
     if (file) {
@@ -63,5 +73,3 @@ const UploadReport = ({ onUploadComplete, onRemoveFile, name, label }) => {
     />
   );
 };
-
-export default UploadReport;

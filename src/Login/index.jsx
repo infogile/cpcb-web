@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import store from "../redux/store";
+import { Loading } from "../shared/Loading";
 import { tryLogin } from "../redux/services";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -56,7 +57,7 @@ export default function Login() {
     store.dispatch(tryLogin(username, password));
   };
   if (isLoading) {
-    return "loading...";
+    return <Loading />;
   }
   if (loginValidated) {
     if (role === "user") {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Loading } from "../../../shared/Loading";
 import { Form } from "../../../shared/Form";
 import {
   CheckBox,
@@ -12,7 +13,7 @@ import { Text } from "../../../shared/Text";
 import { Div } from "../../../shared/Div";
 import { RadioInput } from "../../../shared/Input";
 import { Label } from "../../../shared/Input";
-import UploadReport from "./UploadReport";
+import { UploadReport } from "../../../shared/UploadReport";
 import { submitInspectionform } from "../../../redux/services";
 import store from "../../../redux/store";
 
@@ -51,11 +52,22 @@ const InspectionForm = ({ status, inspectionDate }) => {
   useEffect(() => {
     if (
       inspectionForm.files.consentcopy &&
-      inspectionForm.files.inspectionreport
+      inspectionForm.files.inspectionreport &&
+      inspectionForm.files.airconsent &&
+      inspectionForm.files.waterconsent &&
+      inspectionForm.files.cgwaNoc &&
+      inspectionForm.files.hazardousconsent
     ) {
       setValidationWarning("");
     }
-  }, [inspectionForm.files.consentcopy, inspectionForm.files.inspectionreport]);
+  }, [
+    inspectionForm.files.consentcopy,
+    inspectionForm.files.inspectionreport,
+    inspectionForm.files.airconsent,
+    inspectionForm.files.waterconsent,
+    inspectionForm.files.cgwaNoc,
+    inspectionForm.files.hazardousconsent,
+  ]);
   const onInputChange = (e) => {
     const {
       target: { name, type, checked, value },
@@ -149,7 +161,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
     }
   };
   if (isloading) {
-    return "loading...";
+    return <Loading />;
   }
   if (status > 1) {
     return "Inspection Report Submitted Already.";
@@ -189,6 +201,30 @@ const InspectionForm = ({ status, inspectionDate }) => {
         onRemoveFile={onRemoveFile}
         name="inspectionreport"
         label="*Upload Inspection Report"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="airconsent"
+        label="Upload Air consent"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="waterconsent"
+        label="Upload Water Consent"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="cgwaNoc"
+        label="Upload CGWA NOC"
+      />
+      <UploadReport
+        onUploadComplete={onUploadComplete}
+        onRemoveFile={onRemoveFile}
+        name="hazardousconsent"
+        label="Upload Hazardous Consent"
       />
       <LabeledInput
         marginTop="30px"

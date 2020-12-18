@@ -79,8 +79,8 @@ export const FileInput = ({
   inputProps,
   ...otherProps
 }) => {
-  const fileLinkPath = fileLink.split("/");
-  const fileName = fileLinkPath[fileLinkPath.length - 1];
+  const fileLinkPath = fileLink?.split("/");
+  const fileName = fileLinkPath && fileLinkPath[fileLinkPath.length - 1];
   return (
     <Grid {...otherProps}>
       <Label {...labelProps}>{label}</Label>

@@ -33,20 +33,24 @@ export function getInspectionReport(id) {
           data.teamNames = responseData.teamNames;
           data.finalRecommendation = responseData.finalRecommendation;
           data.complianceStatus = responseData.complianceStatus
-            .toString()
+            ?.toString()
             .toUpperCase();
           // data.images = responseData.fieldReport?.images || [];
           data.consent = responseData.report.files[0];
+          data.action = responseData.action;
           data.inspection = responseData.report.files[1];
           data.fields = [
-            { title: "Unit Name", value: responseData.factory.name },
+            {
+              title: "Unit Name",
+              value: `${responseData.factory.name} (${responseData.factory.unitcode})`,
+            },
             { title: "Unit Sector", value: responseData.factory.sector.name },
             {
               title: "Member of inspection Team",
               value: responseData.teamNames,
             },
             {
-              title: "Consen Copy",
+              title: "Consent Copy",
               link: true,
               value:
                 responseData.report?.files &&
@@ -55,7 +59,7 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
             },
             {
               title: "Inspection Report",
@@ -67,7 +71,55 @@ export function getInspectionReport(id) {
                     return cr;
                   }
                   return r;
-                }),
+                }, ""),
+            },
+            {
+              title: "Air consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("airconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }, ""),
+            },
+            {
+              title: "Water Consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("waterconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }, ""),
+            },
+            {
+              title: "CGWA NOC",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("cgwaNoc")) {
+                    return cr;
+                  }
+                  return r;
+                }, ""),
+            },
+            {
+              title: "Hazardous Consent",
+              link: true,
+              value:
+                responseData.report?.files &&
+                responseData.report.files.reduce((r, cr) => {
+                  if (cr.includes("hazardousconsent")) {
+                    return cr;
+                  }
+                  return r;
+                }, ""),
             },
             {
               title: "Final Recommedation",
@@ -116,9 +168,11 @@ export function getInspectionReport(id) {
               value: responseData.attendance?.entrylocation?.coordinates[1],
             },
             {
-              title: "Point of Contact",
+              title: "Contacted Person",
               value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc.map((p) => p.name).join(",")
+                ? responseData.fieldReport.poc
+                    .map((p) => p.name + ", " + p.number + ", " + p.email)
+                    .join(",")
                 : "",
             },
             {

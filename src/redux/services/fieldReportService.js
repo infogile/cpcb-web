@@ -33,7 +33,10 @@ export function getFieldReport(id) {
           data.updatedAt = responseData.updatedAt;
           data.images = responseData.fieldReport?.images || [];
           data.fields = [
-            { title: "Unit Name", value: responseData.factory.name },
+            {
+              title: "Unit Name",
+              value: `${responseData.factory.name} (${responseData.factory.unitcode})`,
+            },
             { title: "Unit Sector", value: responseData.factory.sector.name },
             {
               title: "Latitude",
@@ -44,9 +47,11 @@ export function getFieldReport(id) {
               value: responseData.attendance?.entrylocation?.coordinates[1],
             },
             {
-              title: "Point of Contact",
+              title: "Contacted Person",
               value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc.map((p) => p.name).join(",")
+                ? responseData.fieldReport.poc
+                    .map((p) => p.name + ", " + p.number + ", " + p.email)
+                    .join(",")
                 : "",
             },
             {
