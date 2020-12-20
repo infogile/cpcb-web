@@ -6,9 +6,11 @@ import axios from "../axios";
 export const UploadReport = ({
   onUploadComplete,
   onRemoveFile,
+  hideRemove,
   file,
   name,
   label,
+  ...otherProps
 }) => {
   const [progress, setProgress] = useState(-1);
   const [fileLink, setFileLink] = useState("");
@@ -40,7 +42,6 @@ export const UploadReport = ({
           cancelToken: source.token,
         })
         .then((res) => {
-          console.log("res", res);
           onUploadComplete(name, res.data.fileLocation);
           setFileLink(res.data.fileLocation);
           setProgress(101);
@@ -65,11 +66,13 @@ export const UploadReport = ({
       onUpload={onClick}
       onCancel={onCancel}
       onRemove={onRemove}
+      hideRemove={hideRemove}
       label={label}
       fileRef={fileRef}
       fileLink={fileLink}
       progress={progress}
       marginTop="30px"
+      {...otherProps}
     />
   );
 };

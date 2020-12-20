@@ -20,6 +20,12 @@ export function inspectionReportReducer(
         ...state,
         isLoading: false,
       };
+    case "REMOVE_INSPECTION_REPORT":
+      return {
+        ...state,
+        data: {},
+        isLoading: false,
+      };
     default:
       return {
         ...state,
