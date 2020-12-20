@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { getShowAction } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { ImageGrid } from "../../../shared/ImageGrid";
+import { Div } from "../../../shared/Div";
 
 const ViewActionStyled = styled.div`
   margin-top: 30px;
@@ -80,17 +81,27 @@ export const ViewAction = () => {
                 return (
                   <tr key={field.title}>
                     <Th>{field.title}</Th>
-                    {field.link &&
-                      (field.value ? (
+                    {field.links ? (
+                      field.value && field.value.length > 0 ? (
                         <Td>
-                          <a href={field.value} target="_blank">
-                            {field.title}
-                          </a>
+                          {field.value.map((report, i) => {
+                            return (
+                              report && (
+                                <Div marginTop="10px">
+                                  <a href={report} target="_blank">
+                                    {`${field.title} ${i + 1}`}
+                                  </a>
+                                </Div>
+                              )
+                            );
+                          })}
                         </Td>
                       ) : (
                         <Td>−</Td>
-                      ))}
-                    {!field.link && <Td>{field.value || "−"}</Td>}
+                      )
+                    ) : (
+                      <Td>{field.value || "−"}</Td>
+                    )}
                   </tr>
                 );
               })}

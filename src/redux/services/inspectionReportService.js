@@ -2,6 +2,7 @@ import {
   initInspectionReportAction,
   inspectionReportSuccess,
   inspectionReportError,
+  removeInspectionReport,
 } from "../actions";
 import axios from "../../axios";
 
@@ -37,7 +38,7 @@ export function getInspectionReport(id) {
             .toUpperCase();
           // data.images = responseData.fieldReport?.images || [];
           data.consent = responseData.report.files[0];
-          data.action = responseData.action;
+          data.actions = responseData.actions;
           data.inspection = responseData.report.files[1];
           data.fields = [
             {
@@ -187,5 +188,11 @@ export function getInspectionReport(id) {
         console.log(err);
         dispatch(inspectionReportError());
       });
+  };
+}
+
+export function removeData() {
+  return (dispatch) => {
+    dispatch(removeInspectionReport());
   };
 }

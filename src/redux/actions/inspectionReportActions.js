@@ -13,3 +13,9 @@ export function inspectionReportError() {
     type: "ERROR_INSPECTION_REPORT",
   };
 }
+
+export function removeInspectionReport() {
+  return {
+    type: "REMOVE_INSPECTION_REPORT",
+  };
+}

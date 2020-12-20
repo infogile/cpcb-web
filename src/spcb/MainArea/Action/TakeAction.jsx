@@ -14,6 +14,7 @@ import { FormButton, LabeledInput } from "../../../shared/Input";
 import { submitActionTakenform } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { DatePicker } from "../../../shared/Input";
+import { UploadedReportList } from "./UploadedReportList";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "../../../shared/Button";
 
@@ -33,18 +34,21 @@ const TakeAction = () => {
     showcausenoticestatus: "showcausenotice",
     finalrecommendation: "",
     actionreport: "",
+    uploadedActionReports: [],
   });
 
   useEffect(() => {
-    if (data.action) {
-      const { action } = data;
+    const { actions } = data;
+    if (actions && actions.length > 0) {
+      const action = actions[actions.length - 1];
       setActionTakenForm({
         compliancestatus: action.complianceStatus,
         showcausenoticestatus: action.showcausenoticeStatus
           ? "showcausenotice"
           : "closure",
         finalrecommendation: action.finalRecommendation || "",
-        actionreport: action.report || "",
+        actionreport: "",
+        uploadedActionReports: action.reports || [],
       });
       setActionDate(action.date ? new Date(action.date) : new Date());
       setShowNonComplianceTerms(!action.complianceStatus);
@@ -77,7 +81,10 @@ const TakeAction = () => {
   };
 
   const onUploadComplete = (name, fileLocation) => {
-    setActionTakenForm((prevState) => ({ ...prevState, [name]: fileLocation }));
+    setActionTakenForm((prevState) => ({
+      ...prevState,
+      actionreport: fileLocation,
+    }));
   };
 
   const onRemoveFile = (name) => {
@@ -91,16 +98,22 @@ const TakeAction = () => {
       .dispatch(
         submitActionTakenform(params.id, {
           ...actionTakenform,
+          actionreports: actionTakenform.actionreport
+            ? [
+                ...actionTakenform.uploadedActionReports,
+                actionTakenform.actionreport,
+              ]
+            : actionTakenform.uploadedActionReports,
           date: actionDate?.toString(),
         })
       )
       .then((res) => {
         setIsloading(false);
-        if (res.status === 200) {
-          setFormSaveSuccess(true);
-        } else {
-          setFormFailure(true);
-        }
+        setFormSaveSuccess(true);
+      })
+      .catch(() => {
+        setIsloading(false);
+        setFormFailure(true);
       });
   };
 
@@ -113,6 +126,12 @@ const TakeAction = () => {
           params.id,
           {
             ...actionTakenform,
+            actionreports: actionTakenform.actionreport
+              ? [
+                  ...actionTakenform.uploadedActionReports,
+                  actionTakenform.actionreport,
+                ]
+              : actionTakenform.uploadedActionReports,
             date: actionDate?.toString(),
           },
           true
@@ -120,11 +139,11 @@ const TakeAction = () => {
       )
       .then((res) => {
         setIsloading(false);
-        if (res.status === 200) {
-          setFormSubmitSuccess(true);
-        } else {
-          setFormFailure(true);
-        }
+        setFormSubmitSuccess(true);
+      })
+      .catch(() => {
+        setIsloading(false);
+        setFormFailure(true);
       });
   };
 
@@ -141,7 +160,12 @@ const TakeAction = () => {
     return "Action Report was not save/submitted because of some error.";
   }
   if (data && data.status === 3) {
-    return "Action Report Submitted Already.";
+    return (
+      <div style={{ marginBottom: "100px", marginRight: "10px" }}>
+        <InspectionReport />
+        <Text fontWeight="bold">Action Report Submitted Already.</Text>
+      </div>
+    );
   }
   return (
     <div style={{ marginBottom: "100px", marginRight: "10px" }}>
@@ -165,7 +189,9 @@ const TakeAction = () => {
             <strong>Action Taken By SPCB</strong>
           </Text>
           <Div marginTop="30px">
-            <Label marginTop="30px">Compliance status (as per SPCB)</Label>
+            <Label marginTop="30px" fontWeight="bold" color="dimgray">
+              Compliance status (as per SPCB):
+            </Label>
           </Div>
           <Grid templateColumns="auto">
             <RadioInput
@@ -215,7 +241,9 @@ const TakeAction = () => {
           </Grid>
           <Grid templateColumns="auto" hide={!showNonComplianceTerms}>
             <Div as="div" marginTop="20px">
-              <Text>*Condition of Non-Compliance</Text>
+              <Text fontWeight="bold" color="dimgray">
+                *Condition of Non-Compliance:
+              </Text>
             </Div>
             <RadioInput
               marginTop="10px"
@@ -246,7 +274,9 @@ const TakeAction = () => {
             />
           </Grid>
           <Div marginTop="30px">
-            <Label marginTop="30px">Action Taken Date</Label>
+            <Label marginTop="30px" fontWeight="bold" color="dimgray">
+              Action Taken Date:
+            </Label>
           </Div>
           <DatePicker
             dateFormat="dd/MM/yyyy"
@@ -257,19 +287,28 @@ const TakeAction = () => {
               setActionDate(date);
             }}
           />
-
+          <UploadedReportList
+            marginTop="20px"
+            label={"Uploaded Reports:"}
+            links={actionTakenform.uploadedActionReports}
+          />
           <UploadReport
             onUploadComplete={onUploadComplete}
             onRemoveFile={onRemoveFile}
             file={actionTakenform.actionreport}
             name="actionreport"
-            label="Upload Report"
+            label="Upload Report:"
+            labelProps={{ fontWeight: "bold", color: "dimgray" }}
             id="actionreport"
           />
 
           <LabeledInput
             marginTop="30px"
-            labelProps={{ label: "Final Recommendation" }}
+            labelProps={{
+              label: "Final Recommendation:",
+              fontWeight: "bold",
+              color: "dimgray",
+            }}
             inputProps={{
               name: "finalrecommendation",
               id: "finalrecommendation",
