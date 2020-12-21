@@ -6,4 +6,4 @@ export const TechInstituteReports = () => {
     )
   };
   
-  export default TechInstituteReports;
+export default TechInstituteReports;

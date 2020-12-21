@@ -5,7 +5,7 @@ export function getHeadofficedashboard(){
     return (dispatch) => {
         dispatch(initHeadofficeDashboardAction());
         axios
-        .post('/inspection/count')
+        .post('/inspection')
         .then((res) => {
             console.log(res.data)
             dispatch({ ...HeadofficeDashboardSuccess(), data: dashboardArray });
