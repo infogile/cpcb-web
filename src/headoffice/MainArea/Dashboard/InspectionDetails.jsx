@@ -1,5 +1,5 @@
-import RiverStats from "./RiverStats";
 import React, { useEffect } from "react";
+import RiverStats from "../../../Home/MainArea/Dashboard/RiverStats";
 import { Loading } from "../../../shared/Loading";
 import { Grid } from "../../../shared/Grid";
 import store from "../../../redux/store";
