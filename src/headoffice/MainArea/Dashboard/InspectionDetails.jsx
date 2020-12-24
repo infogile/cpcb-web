@@ -17,6 +17,7 @@ export const InspectionDetails = () => {
         return <Loading />;
     }
     return(
+        <>
         <Grid>
         {data &&
             data.map((riverData) => {
@@ -32,6 +33,10 @@ export const InspectionDetails = () => {
             "There are no Inspections alloted"}
         {/* <RiverStats title="Yamuna Dashboard"></RiverStats> */}
         </Grid>
+        <Grid>
+        <iframe width="95%" height="1200px" src="https://datastudio.google.com/embed/reporting/ea2b21de-7e3c-4804-a719-c54a68789280/page/LnUuB" ></iframe>
+        </Grid>
+        </>
     )
   };
   
