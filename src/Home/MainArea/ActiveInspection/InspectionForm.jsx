@@ -22,7 +22,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
   const [inspectionForm, setInspectionForm] = useState({
     teamnames: "",
     finalrecommendation: "",
-    compliancestatus: "compliance",
+    compliancestatus: 1,
     watergeneration: "",
     waterdischarge: "",
     BOD: "",
@@ -65,13 +65,19 @@ const InspectionForm = ({ status, inspectionDate }) => {
     } = e;
     const fieldValue = type === "checkbox" ? checked : value;
     if (name === "compliancestatus") {
-      if (fieldValue === "noncompliance") {
+      const complianceValue = parseInt(fieldValue);
+      if (complianceValue === 0) {
         setShowNonComplianceTerms(true);
+        setInspectionForm((prevState) => ({
+          ...prevState,
+          compliancestatus: complianceValue,
+        }));
+        return;
       } else {
         setShowNonComplianceTerms(false);
         setInspectionForm((prevState) => ({
           ...prevState,
-          compliancestatus: fieldValue,
+          compliancestatus: complianceValue,
           nonInstallationofOCEMS: false,
           temperedOCEMS: false,
           dissentBypassArrangement: false,
@@ -221,8 +227,8 @@ const InspectionForm = ({ status, inspectionDate }) => {
           inputProps={{
             name: "compliancestatus",
             id: "compliance",
-            value: "compliance",
-            checked: inspectionForm.compliancestatus === "compliance",
+            value: 1,
+            checked: inspectionForm.compliancestatus === 1,
             onChange: onInputChange,
           }}
         />
@@ -232,8 +238,30 @@ const InspectionForm = ({ status, inspectionDate }) => {
           inputProps={{
             name: "compliancestatus",
             id: "noncompliance",
-            value: "noncompliance",
-            checked: inspectionForm.compliancestatus === "noncompliance",
+            value: 0,
+            checked: inspectionForm.compliancestatus === 0,
+            onChange: onInputChange,
+          }}
+        />
+        <RadioInput
+          marginTop="10px"
+          labelProps={{ label: "Temporarily Closed" }}
+          inputProps={{
+            name: "compliancestatus",
+            id: "tempclosed",
+            value: 2,
+            checked: inspectionForm.compliancestatus === 2,
+            onChange: onInputChange,
+          }}
+        />
+        <RadioInput
+          marginTop="10px"
+          labelProps={{ label: "Permanently Closed" }}
+          inputProps={{
+            name: "compliancestatus",
+            id: "permclosed",
+            value: 3,
+            checked: inspectionForm.compliancestatus === 3,
             onChange: onInputChange,
           }}
         />
