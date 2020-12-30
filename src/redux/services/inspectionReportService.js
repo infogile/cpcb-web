@@ -28,6 +28,12 @@ export function getInspectionReport(id) {
           );
           inspectionDate = `${da}-${mo}-${ye}`;
         }
+        const compliaceTitle = {
+          0: "Non-compliace",
+          1: "Compliance",
+          2: "Temporarily Closed",
+          3: "Permanent Closed",
+        };
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
@@ -128,9 +134,7 @@ export function getInspectionReport(id) {
             },
             {
               title: "Compliance status as per discharge norms",
-              value: responseData.complianceStatus
-                ? "compliance"
-                : "non-compliance",
+              value: compliaceTitle[responseData.complianceStatus],
             },
             {
               title: "Waste water generation",

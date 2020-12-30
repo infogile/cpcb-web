@@ -12,7 +12,7 @@ export function submitInspectionform(id, formdata) {
       status: 2,
       teamNames: formdata.teamnames,
       finalRecommendation: formdata.finalrecommendation,
-      complianceStatus: formdata.compliancestatus === "compliance",
+      complianceStatus: formdata.compliancestatus,
       wasteWaterGeneration: formdata.watergeneration,
       wasteWaterDischarge: formdata.waterdischarge,
       bod: formdata.BOD,
