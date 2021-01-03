@@ -13,9 +13,18 @@ export const DashboardIcon = ()=>{
   );
 };
 
-export const UpDown = ({ size, onClick }) =>{
+export const UpDown = ({ size, up, onClick }) =>{
   return (
-    <img src={updown} height={size} onClick={onClick} style={{ cursor: "pointer" }}></img>
+    <img 
+      src={updown} 
+      height={size} 
+      onClick={onClick} 
+      style={{ 
+        cursor: "pointer",
+        transform: up? "rotate(0deg)": "rotate(180deg)",
+      }}
+      >
+      </img>
   );
 }
 export const UploadIcon = () => {

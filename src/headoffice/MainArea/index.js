@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
 import {InspectionDetails} from "./Dashboard/InspectionDetails";
-import {TechInstituteReports} from "./TechInstituteReports/TechInstituteReports"
+import {TechInstituteReports} from "./TechInstituteReports"
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -18,7 +18,10 @@ const MainArea = ({ expand }) => {
         <Route exact path="/headoffice">
           <InspectionDetails />
         </Route>
-        <Route path="/headoffice/tech-reports">
+        <Route path="/headoffice/tir/ganga">
+          <TechInstituteReports />
+        </Route>
+        <Route path="/headoffice/tir/yamuna">
           <TechInstituteReports />
         </Route>
       </MainAreaStyled>

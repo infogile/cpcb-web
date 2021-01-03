@@ -4,8 +4,7 @@ import { Text } from "../shared/Text";
 import { Link } from "react-router-dom";
 import { DashboardIcon, Tech, Basin, Active, UpDown} from "../icons";
 import { useHistory } from "react-router-dom";
-import {Navigation} from 'react-minimal-side-navigation';
-
+import { capitalizeFirstLetter } from "../helpers";
 
 const StyledSidebar = styled.div`
   position: fixed;
@@ -52,6 +51,8 @@ color: black;
 background: black;
 `;
 
+const rivers = ["ganga", "yamuna"];
+
 function Sidebar({ show, showItem, ...otherProps }) {
   const [showItemNav, setShowItemNav] = useState(true);
   const toggleItem = () => {
@@ -76,33 +77,26 @@ function Sidebar({ show, showItem, ...otherProps }) {
             marginRight="10px"
           />
           Technical Institute Reports
-          <UpDown size="20px" onClick={toggleItem} />
+          <UpDown size="20px" up={showItemNav} onClick={toggleItem} />
       </span>
       <Nav showItem={showItemNav}>
-        <NavItem to="/headoffice/ganga">
-          <Basin
-            color={
-              history.location.pathname === "/headoffice/ganga"
-                ? "#4759FB"
-                : "#5c5c5c"
-            }
-            size="14px"
-            marginRight="10px"
-          />
-        Ganga
-      </NavItem>
-      <NavItem to="/headoffice/yamuna">
-        <Basin
-          color={
-            history.location.pathname === "/headoffice/yamuna"
-              ? "#4759FB"
-              : "#5c5c5c"
-          }
-          size="14px"
-          marginRight="10px"
-        />
-        Yamuna
-      </NavItem>
+        {rivers.map((river) =>
+          river ? (
+            <NavItem to={`/headoffice/tir/${river}`}>
+              <strong>
+                <Basin 
+                  color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
+                  size="14px"
+                  marginRight="10px">
+                </Basin>{capitalizeFirstLetter(river)}
+              </strong>
+            </NavItem>
+          ) : (
+            <NavItem to={`/headoffice`}>
+              <strong>All</strong>
+            </NavItem>
+          )
+        )}
       </Nav>
      
       {/* <NavItem to="/headoffice/schedule">Schedule</NavItem> */}
