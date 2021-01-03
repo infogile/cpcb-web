@@ -1,6 +1,8 @@
 import image2 from "../../src/assets/img/tech.png";
 import image from "../../src/assets/img/active.png";
 import dash from "../../src/assets/img/dash.png";
+import updown from "../../src/assets/img/1123247-200.png";
+import left from "../../src/assets/img/left.png";
 import styled from "styled-components";
 
 
@@ -11,7 +13,11 @@ export const DashboardIcon = ()=>{
   );
 };
 
-
+export const UpDown = ({ size, onClick }) =>{
+  return (
+    <img src={updown} height={size} onClick={onClick} style={{ cursor: "pointer" }}></img>
+  );
+}
 export const UploadIcon = () => {
   return (
     <svg
@@ -114,7 +120,7 @@ export const Tech=()=>{
 
 export const Basin=()=>{
   return (
-    <img src={image2} style={{ width:"20px", marginLeft:"0px"}}></img>
+    <img src={left} style={{ width:"20px", marginLeft:"0px"}}></img>
   );
 }
 

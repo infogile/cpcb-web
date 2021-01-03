@@ -1,10 +1,11 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Text } from "../shared/Text";
 import { Link } from "react-router-dom";
-import { DashboardIcon, Tech, Basin, Active } from "../icons";
+import { DashboardIcon, Tech, Basin, Active, UpDown} from "../icons";
 import { useHistory } from "react-router-dom";
 import {Navigation} from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+
 
 const StyledSidebar = styled.div`
   position: fixed;
@@ -12,7 +13,7 @@ const StyledSidebar = styled.div`
     props.show ? "translate(0px, 0px)" : "translate(-400px, 0px)"};
   text-align: left;
   height: 100%;
-  width: 290px;
+  width: 250px;
   color: black;
   padding-top: 50px;
   background: white;
@@ -22,10 +23,19 @@ const StyledSidebar = styled.div`
   float: left;
 `;
 
+const Nav =styled.div`
+transform: ${(props) =>
+  props.showItem ?"translate(20px, 0px)":"translate(20px, -2000px)"};
+height: 200px;
+width: 200px;
+background: white;
+z-index: 1;
+`;
 const NavItem = styled(Link)`
   padding-top: 20px;
   padding-left: 20px;
   margin-top: 20px;
+  margin-bottom: 30px;
   display: block;
   text-decoration: none;
   color: #5c5c5c;
@@ -34,44 +44,67 @@ const NavItem = styled(Link)`
   }
 `;
 
-function Sidebar({ show, ...otherProps }) {
+const Up= styled.div`
+position: fixed;
+height: 10px;
+width: 10px;
+color: black;
+background: black;
+`;
+
+function Sidebar({ show, showItem, ...otherProps }) {
+  const [showItemNav, setShowItemNav] = useState(true);
+  const toggleItem = () => {
+    setShowItemNav(!showItemNav);
+  };
   const history = useHistory();
   console.log(history);
   return (
-  <StyledSidebar show={show}>
-      <Navigation
-        activeItemId="/headoffice"
-        onSelect={({itemId}) => {
-          // maybe push to the route
-            history.push(itemId)
-        }}
-
-        items={[
-          {
-            title: 'Dashboard',
-            itemId: '/headoffice',
-            elemBefore: () => <DashboardIcon
+    <StyledSidebar show={show}>
+        <NavItem to="/headoffice">
+          <DashboardIcon
             color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
+            size="14px"
+            marginRight="10px"
           />
-          },
-          {
-            title: 'Tech Institute Reports',
-            elemBefore :() => <Tech
+        Dashboard
+      </NavItem>
+      <span style={{ marginLeft:"18px", textAlign: "left", marginTop:"30px"}}>
+          <Tech
             color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
-            />, 
-            subNav: [
-              {
-                title: 'Ganga',
-                itemId: '/headoffice/tir/ganga',
-              },
-              {
-                title: 'Yamuna',
-                itemId: '/headoffice/tir/yamuna',
-              },
-            ],
-          },
-        ]}
-      />
+            size="14px"
+            marginRight="10px"
+          />
+          Technical Institute Reports
+          <UpDown size="20px" onClick={toggleItem} />
+      </span>
+      <Nav showItem={showItemNav}>
+        <NavItem to="/headoffice/ganga">
+          <Basin
+            color={
+              history.location.pathname === "/headoffice/ganga"
+                ? "#4759FB"
+                : "#5c5c5c"
+            }
+            size="14px"
+            marginRight="10px"
+          />
+        Ganga
+      </NavItem>
+      <NavItem to="/headoffice/yamuna">
+        <Basin
+          color={
+            history.location.pathname === "/headoffice/yamuna"
+              ? "#4759FB"
+              : "#5c5c5c"
+          }
+          size="14px"
+          marginRight="10px"
+        />
+        Yamuna
+      </NavItem>
+      </Nav>
+     
       {/* <NavItem to="/headoffice/schedule">Schedule</NavItem> */}
     </StyledSidebar>
   );

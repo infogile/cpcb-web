@@ -7,3 +7,4 @@ export const TechInstituteReports = () => {
   };
   
   export default TechInstituteReports;
+  
