@@ -99,7 +99,7 @@ export const RiverReports =({ title })=>{
                     <h3 style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
                         <sTrong>{title}</sTrong>
                     </h3>
-                    <State to="/headoffice/tir/:river_name/statewise">State Wise Report</State>
+                    <State to={`/headoffice/tir/${params.river_name}/statewise`}>State Wise Report</State>
                 </Head>
             </div>
         </header>
