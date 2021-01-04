@@ -7,7 +7,7 @@ import {TechInstituteReports} from "./TechInstituteReports"
 const MainAreaStyled = styled.div`
   position: relative;
   padding-top: 70px;
-  margin-left: ${(props) => (props.expand ? "30px" : "270px")};
+  margin-left: ${(props) => (props.expand ? "30px" : "230px")};
   transition: margin-left 0.5s;
 `;
 

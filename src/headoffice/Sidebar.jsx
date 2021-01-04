@@ -30,6 +30,7 @@ width: 200px;
 background: white;
 z-index: 1;
 `;
+
 const NavItem = styled(Link)`
   padding-top: 20px;
   padding-left: 20px;

@@ -1,10 +1,10 @@
 export function headofficeDashboardReducers(
     state = {
         data:[],
-        isloading: true,
+        isLoading: true,
         },
         action
-) {
+    ) {
     const {data, type} = action;
     switch (type) {
         case "INIT_HEADOFFICE_DAHBOARD":
