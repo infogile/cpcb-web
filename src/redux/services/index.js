@@ -8,3 +8,4 @@ export * from "./takeActionService";
 export * from "./inspectionReportService";
 export * from "./showActionService";
 export * from "./headofficeDashboardService";
+export * from "./riverReportServices";

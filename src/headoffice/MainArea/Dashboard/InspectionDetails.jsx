@@ -18,7 +18,7 @@ export const InspectionDetails = () => {
     }
     return(
         <>
-        <Grid>
+        <Grid style={{ marginLeft: "140px"}}>
         {data &&
             data.map((riverData) => {
             return (

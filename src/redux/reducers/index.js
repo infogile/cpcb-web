@@ -10,7 +10,9 @@ import {
   submitActionformReducer,
   completedInspectionReducer,
 } from "./takeActionReducers";
-import {headofficeDashboardReducers} from "./headofficeDashboardReducers"
+import {headofficeDashboardReducers} from "./headofficeDashboardReducers";
+import { riverReportReducers } from "./riverReportReducers";
+
 export const rootReducer = combineReducers({
   loginReducer,
   dashboardReducers,
@@ -22,4 +24,5 @@ export const rootReducer = combineReducers({
   inspectionReportReducer,
   showActionReducer,
   headofficeDashboardReducers,
+  riverReportReducers
 });
