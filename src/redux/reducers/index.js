@@ -11,6 +11,7 @@ import {
   completedInspectionReducer,
 } from "./takeActionReducers";
 import {headofficeDashboardReducers} from "./headofficeDashboardReducers"
+import { factoryReducers } from "./factorylistReducers";
 export const rootReducer = combineReducers({
   loginReducer,
   dashboardReducers,
@@ -22,4 +23,5 @@ export const rootReducer = combineReducers({
   inspectionReportReducer,
   showActionReducer,
   headofficeDashboardReducers,
+  factoryReducers,
 });
