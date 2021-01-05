@@ -116,9 +116,9 @@ const params = useParams();
                         <span>
                             <VictoryPie
                                 data={[
-                                { x: "Total Alloted", y: inst.totalAlloted },
-                                { x: "Inspected", y: inst.inspectionReportSubmitted },]}
-                            style={{labels: {fontSize: 30},}}/>
+                                    { x: `Total Alloted : ${inst.totalAlloted}`, y: inst.totalAlloted },
+                                    { x: `Inspected : ${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted },]}
+                                style={{labels: {fontSize: 17},}}/>
                             <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p>
                         </span>
                     </Graph>
