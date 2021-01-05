@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import RiverReports from "./RiverReports";
-import StateWise from './StateWise';
-import store from "../../../redux/store";
-import { useSelector } from "react-redux";
-import { getTechInstituteReports } from "../../../redux/services/";
+import SectorWise from './SectorWise';
+import FieldReport from "./FieldReport";
+import InspectionReport from "./InspectionReport";
 import styled from "styled-components";
 
 const TechInstituteReportStyled = styled.div`
@@ -19,8 +18,14 @@ export const TechInstituteReports = ({ expand })=>{
             <Route exact path="/headoffice/tir/:river_name">
                 <RiverReports title="Technical Institute Reports: Dashboard"/>
             </Route>
-            <Route exact path="/headoffice/tir/:river_name/statewise">
-                <StateWise title="Technical Institute Reports: State Wise"/>
+            <Route exact path="/headoffice/tir/:river_name/sectorwise">
+                <SectorWise title="Technical Institute Reports: Sector Wise"/>
+            </Route>
+            <Route exact path="/headoffice/tir/:river_name/sectorwise/field_report/:id">
+                <FieldReport />
+            </Route>
+            <Route exact path="/headoffice/tir/:river_name/sectorwise/inspection_report/:id">
+                <InspectionReport />
             </Route>
         </TechInstituteReportStyled>
     );

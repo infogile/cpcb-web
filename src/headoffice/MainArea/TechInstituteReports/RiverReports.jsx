@@ -6,6 +6,7 @@ import store from "../../../redux/store";
 import { getRiverReport } from "../../../redux/services/";
 import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
+import { capitalizeFirstLetter } from "../../../helpers";
 
 const Head = styled.div`
     display : flex;
@@ -102,9 +103,9 @@ const params = useParams();
             <div>
                 <Head>
                     <h3 style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
-                        <sTrong>{title}</sTrong>
+                        <sTrong>{title}-{capitalizeFirstLetter(params.river_name)}</sTrong>
                     </h3>
-                    <State to={`/headoffice/tir/${params.river_name}/statewise`}>State Wise Report</State>
+                    <State to={`/headoffice/tir/${params.river_name}/sectorwise`}>Sector Wise Report</State>
                 </Head>
             </div>
         </header>
