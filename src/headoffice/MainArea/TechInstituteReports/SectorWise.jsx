@@ -6,6 +6,8 @@ import { getSectorWise } from "../../../redux/services/";
 import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../helpers";
+import jsPDF from 'jspdf';  
+import html2canvas from 'html2canvas';
 import "../../../assets/css/collapse.css";
 
 class Collapsible extends React.Component {
@@ -311,13 +313,29 @@ Collapsible.defaultProps = {
   padding: 10px 0px;
 `;
 
+
+
 export const SectorWise =({ title })=>{
   const params = useParams();
   const { isLoading, data } = useSelector((state) => state.sectorWiseReducers);
     useEffect(() => {
         store.dispatch(getSectorWise(params.river_name || ""));
     }, [params.river_name]);
-    
+
+    const printDocument= (sectorn) => {  
+      const input = document.getElementById('pdfdiv');  
+      html2canvas(input)  
+        .then((canvas) => {  
+          var imgWidth = 200;    
+          var imgHeight = canvas.height * imgWidth / canvas.width;  
+          const imgData = canvas.toDataURL('image/png');  
+          const pdf = new jsPDF('p', 'mm', 'a4')  
+          var position = 0;  
+          pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
+          pdf.save(`${sectorn}.pdf`);  
+        });  
+    };
+
     if (isLoading) {
         return <Loading />;
     }
@@ -336,8 +354,8 @@ export const SectorWise =({ title })=>{
                 var num=1;
                 return (
                   <Collapsible trigger={capitalizeFirstLetter(sect[0].sectorname)}>
-                    <Export>Export</Export>
-                    <Table>
+                    <Export onClick={() => printDocument(capitalizeFirstLetter(sect[0].sectorname))} >Export</Export>
+                    <Table id="pdfdiv">
                       <Tr>
                         <Th>S. NO.</Th>
                         <Th>UNIT CODE</Th>
