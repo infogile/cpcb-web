@@ -27,6 +27,7 @@ export const UpDown = ({ size, up, onClick }) =>{
       </img>
   );
 }
+
 export const UploadIcon = () => {
   return (
     <svg
@@ -120,6 +121,7 @@ export const ImageIcon = ({ size }) => {
     </svg>
   );
 };
+
 export const Tech=()=>{
   return (
       <img src={image2} style={{ width:"20px", marginLeft:"0px"}}></img>
@@ -139,3 +141,4 @@ export const Active=()=>{
       <img src={image} style={{ width:"20px", marginLeft:"0px"}}></img>
   );
 }
+

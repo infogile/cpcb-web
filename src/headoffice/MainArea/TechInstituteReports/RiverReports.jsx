@@ -3,7 +3,9 @@ import { VictoryPie } from 'victory';
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import store from "../../../redux/store";
-import { getCompletedInspection } from "../../../redux/services";
+import { getRiverReport } from "../../../redux/services/";
+import { Loading } from "../../../shared/Loading";
+import { useSelector } from "react-redux";
 
 const Head = styled.div`
     display : flex;
@@ -83,13 +85,16 @@ const Td = styled.td`
   }
 `;
 
-
 export const RiverReports =({ title })=>{
-    const params = useParams();
+const params = useParams();
+  const { isLoading, data } = useSelector((state) => state.riverReportReducers);
     useEffect(() => {
-    store.dispatch(getCompletedInspection(params.river_name || ""));
-  }, [params.river_name]);
-
+        store.dispatch(getRiverReport(params.river_name || ""));
+    }, [params.river_name]);
+    
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
     <>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50" left="400px">
@@ -104,68 +109,20 @@ export const RiverReports =({ title })=>{
             </div>
         </header>
         <div>
-            <div class="img-text-wrapper">
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                        style={{labels: {fontSize: 30},}}/>
-                        CPRI
-                    </span>
-                </Graph>
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                            style={{labels: {fontSize: 30},}}/> 
-                        <p>DTU</p>
-                    </span>
-                </Graph>
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                            style={{labels: {fontSize:30},}}/> 
-                        <p>IIT Delhi</p>
-                    </span>
-                </Graph>
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                            style={{labels: {fontSize: 30},}}/> 
-                        <p>IIT Roorkee</p>
-                    </span>
-                </Graph>
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                        style={{labels: {fontSize: 30},}}/> 
-                        <p>NEERI</p>
-                    </span>
-                </Graph>
-                <Graph>
-                    <span>
-                        <VictoryPie
-                            data={[
-                            { x: "Total Alloted", y: 35 },
-                            { x: "Inspected", y: 40 },]}
-                            style={{labels: {fontSize: 30},}}/> 
-                        <p>JMI</p>
-                    </span>
-                </Graph>
-            </div>         
+            {data.map((inst) => {
+                return (
+                    <Graph>
+                        <span>
+                            <VictoryPie
+                                data={[
+                                { x: "Total Alloted", y: inst.totalAlloted },
+                                { x: "Inspected", y: inst.inspectionReportSubmitted },]}
+                            style={{labels: {fontSize: 30},}}/>
+                            <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p>
+                        </span>
+                    </Graph>
+                );
+            })}         
         </div>
         <div class="container" style={{marginBottom:"100px", marginRight:"20px", marginTop: "100px"}}>
             <Table>
@@ -178,42 +135,19 @@ export const RiverReports =({ title })=>{
                     <Th>Report Submitted WiThin 10 Days</Th>
                     <Th>Submitted More Than 10 Days</Th>
                 </Tr>
-                <Tr>
-                    <Td>CPRI</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                </Tr>
-                <Tr>
-                    <Td>DTU</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                </Tr>
-                <Tr>
-                    <Td>IIT Delhi</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                </Tr>
-                <Tr>
-                    <Td>IIT Roorkee</Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                    <Td></Td>
-                </Tr>
+                {data && data.map((insts)=>{
+                    return (
+                        <Tr>
+                            <Td>{insts.insts.toUpperCase()}</Td>
+                            <Td>{insts.totalAlloted}</Td>
+                            <Td>{insts.pending}</Td>
+                            <Td>{insts.fieldReportSubmitted}</Td>
+                            <Td>{insts.inspectionReportSubmitted}</Td>
+                            <Td>{}</Td>
+                            <Td>{}</Td>
+                        </Tr>
+                    );
+                })}
             </Table>
         </div>
     </body>

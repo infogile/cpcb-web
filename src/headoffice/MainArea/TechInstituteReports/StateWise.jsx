@@ -308,12 +308,12 @@ export const StateWise =({ title })=>{
         <div>
             <header>
                 <div class="container">
-                  <h3 style={{ fontSize: "30px",marginTop:"10px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
+                  <h3 style={{ marginLeft : "30px", fontSize: "30px",marginTop:"10px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
                     <sTrong>{title}</sTrong>
                   </h3>
                 </div>
             </header>
-            <body style={{marginRight:"40px"}}>
+            <body style={{marginRight:"40px", marginLeft :"25px"}}>
                 <Col>
                   <Collapsible trigger="Food and Beverages">
                       <Export>Export</Export>
