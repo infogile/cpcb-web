@@ -1,13 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
-import {InspectionDetails} from "./Dashboard/InspectionDetails";
-import {TechInstituteReports} from "./TechInstituteReports"
-import { FactoryLists } from "./Dashboard/FactoryLists";
-import { FieldReport } from "../../spcb/MainArea/Action/FieldReport";
-import { InspectionReport } from "../../spcb/MainArea/Action/InspectionReport";
-import { ViewAction } from "../../spcb/MainArea/Action/ViewAction";
-
+import {Dashboard} from "./Dashboard";
+import {TechInstituteReports} from "./TechInstituteReports";
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -20,23 +15,11 @@ const MainAreaStyled = styled.div`
 const MainArea = ({ expand }) => {
     return (
       <MainAreaStyled expand={expand}>
-        <Route exact path="/headoffice">
-          <InspectionDetails />
+        <Route path="/headoffice">
+          <Dashboard />
         </Route>
-        <Route path="/headoffice/tir/">
+        <Route path="/headoffice/tir">
           <TechInstituteReports />
-        </Route>
-        <Route path="/headoffice/:status/:river">
-          <FactoryLists />
-        </Route>
-        <Route path="/headoffice/field_report/:id">
-        <FieldReport />
-        </Route>
-        <Route path="/headoffice/inspection_report/:id">
-          <InspectionReport />
-        </Route>
-        <Route path="/headoffice/view_action/:id">
-          <ViewAction />
         </Route>
       </MainAreaStyled>
     );

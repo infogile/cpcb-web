@@ -73,7 +73,6 @@ function Sidebar({ show, showItem, ...otherProps }) {
       </NavItem>
       <span style={{ marginLeft:"18px", textAlign: "left", marginTop:"30px"}}>
           <Tech
-            color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
             size="14px"
             marginRight="10px"
           />
@@ -86,14 +85,14 @@ function Sidebar({ show, showItem, ...otherProps }) {
             <NavItem to={`/headoffice/tir/${river}`}>
               <strong>
                 <Basin 
-                  color={history.location.pathname === "/headoffice" ? "#4759FB" : "#5c5c5c"}
+                  color={history.location.pathname === `/headoffice/tir/${river}` ? "#4759FB" : "#5c5c5c"}
                   size="14px"
                   marginRight="10px">
                 </Basin>{capitalizeFirstLetter(river)}
               </strong>
             </NavItem>
           ) : (
-            <NavItem to={`/headoffice`}>
+            <NavItem to={`/headoffice/tir`}>
               <strong>All</strong>
             </NavItem>
           )

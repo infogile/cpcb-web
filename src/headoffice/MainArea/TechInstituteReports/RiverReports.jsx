@@ -118,7 +118,7 @@ const params = useParams();
                                 { x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted },
                             ]}
                             style={{labels: {fontSize: 17, marginTop: "5px"}, }}/>
-                        <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p>   
+                        <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p> 
                     </Graph>
                 );
             })}         
