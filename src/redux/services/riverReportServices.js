@@ -26,6 +26,7 @@ export function getRiverReport(river){
                             pending: 0,
                             fieldReportSubmitted: 0,
                             inspectionReportSubmitted: 0,
+                            days: 0,
                         };
                     }
                     institutes[insts].totalAlloted =
@@ -38,6 +39,12 @@ export function getRiverReport(river){
                     } else if (inspection.status === 2 || 3) {
                         institutes[insts].inspectionReportSubmitted =
                         institutes[insts].inspectionReportSubmitted + 1;
+                        if(inspection.status === 2){
+                            var startDate = Date.parse(inspection.inspectionDate && inspection.inspectionDate.split("T")[0]);
+                            var endDate = Date.parse(inspection.inspectionReportUploadDate && inspection.inspectionReportUploadDate.split("T")[0]);
+                            var timeDiff = endDate - startDate;
+                            institutes[insts].days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                        }
                     }
                   }
               });

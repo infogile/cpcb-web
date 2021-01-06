@@ -11,6 +11,7 @@ import { capitalizeFirstLetter } from "../../../helpers";
 const Head = styled.div`
     display : flex;
     margin-left: 20px;
+    margin-bottom: 80px;
     widTh: 100%;
 `;
 
@@ -30,10 +31,8 @@ const Graph = styled.span`
 display: inline-block;
 widTh: 300px;
 height: 200px;
-padding: 10px;
+padding: 30px 40px;
 font-size: 18px;
-padding-top: 50px;
-padding-bottom: 30px;
 margin-top: 20px;
 margin-left: 13px;
 margin-right: 20px;
@@ -100,27 +99,26 @@ const params = useParams();
     <>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50" left="400px">
         <header>
-            <div>
-                <Head>
-                    <h3 style={{ fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
-                        <sTrong>{title}-{capitalizeFirstLetter(params.river_name)}</sTrong>
-                    </h3>
-                    <State to={`/headoffice/tir/${params.river_name}/sectorwise`}>Sector Wise Report</State>
-                </Head>
-            </div>
+            <Head>
+                <h3 style={{ position:"absolute", left:"30px" ,fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
+                    <strong>{title}</strong>
+                </h3>
+                <State to={`/headoffice/tir/${params.river_name}/sectorwise`}>Sector Wise Report</State>
+            </Head>      
         </header>
         <div>
             {data.map((inst) => {
                 return (
                     <Graph>
-                        <span>
-                            <VictoryPie
-                                data={[
-                                    { x: `Total Alloted : ${inst.totalAlloted}`, y: inst.totalAlloted },
-                                    { x: `Inspected : ${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted },]}
-                                style={{labels: {fontSize: 17},}}/>
-                            <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p>
-                        </span>
+                        <VictoryPie 
+                            colorScale={["tomato", "orange", "gold"]}
+                            data={[
+                                { x: `Total Alloted:${inst.totalAlloted}`, y: inst.totalAlloted },
+                                { x: `Inspection Report:${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted },
+                                { x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted },
+                            ]}
+                            style={{labels: {fontSize: 17, marginTop: "5px"}, }}/>
+                        <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p>   
                     </Graph>
                 );
             })}         
@@ -144,8 +142,8 @@ const params = useParams();
                             <Td>{insts.pending}</Td>
                             <Td>{insts.fieldReportSubmitted}</Td>
                             <Td>{insts.inspectionReportSubmitted}</Td>
-                            <Td>{}</Td>
-                            <Td>{}</Td>
+                            <Td>{(insts.days>0 && insts.days<=10)?`True ${insts.days}`: (insts.days===0?"Pending" :`False ${insts.days}`) }</Td>
+                            <Td>{(insts.days>0 && insts.days>10)?`True ${insts.days}`: (insts.days===0?"Pending" :`False ${insts.days}`) }</Td>
                         </Tr>
                     );
                 })}
