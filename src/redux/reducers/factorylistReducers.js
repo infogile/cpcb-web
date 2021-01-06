@@ -1,24 +1,24 @@
-export function headofficeDashboardReducers(
+export function factoryReducers(
     state = {
-        data:[],
+        factorylist:[],
         isLoading: true,
         },
         action
     ) {
-    const {data, type} = action;
+    const {factorylist, type} = action;
     switch (type) {
-        case "INIT_HEADOFFICE_DASHBOARD":
+        case "INIT_FACTORY_LIST":
             return {
                 ...state,
                 isLoading: true,
                 };
-        case "GET_HEADOFFICE_DASHBOARD":
+        case "GET_FACTORY_LIST":
         return {
             ...state,
-            data,
+            factorylist,
             isLoading: false,
             };
-        case "ERROR_HEADOFFICE_DASHBOARD":
+        case "ERROR_FACTORY_LIST":
             return {
                 ...state,
                 isLoading: false,

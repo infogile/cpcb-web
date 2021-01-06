@@ -47,18 +47,15 @@ export function submitActionTakenform(id, formdata, submit = false) {
   return (dispatch) => {
     dispatch(initSubmitActionFormAction());
     const form = {
-      status: submit ? 3 : 2,
-      action: {
-        complianceStatus: formdata.compliancestatus,
-        showcausenoticeStatus:
-          formdata.showcausenoticestatus === "showcausenotice",
-        date: formdata.date,
-        finalRecommendation: formdata.finalrecommendation,
-        report: formdata.actionreport,
-      },
+      complianceStatus: formdata.compliancestatus,
+      showcausenoticeStatus:
+        formdata.showcausenoticestatus === "showcausenotice",
+      date: formdata.date,
+      finalRecommendation: formdata.finalrecommendation,
+      reports: formdata.actionreports,
     };
     return axios
-      .put(`/inspection/${id}`, form)
+      .put(`/inspection/action/${id}${submit ? "/submit" : ""}`, form)
       .then((res) => {
         dispatch({ ...submitActionFormSuccess() });
         return res;

@@ -13,6 +13,7 @@ import {
 import {headofficeDashboardReducers} from "./headofficeDashboardReducers";
 import { riverReportReducers } from "./riverReportReducers";
 import { sectorWiseReducers } from "./sectorWiseReducers";
+import { factoryReducers } from "./factorylistReducers";
 export const rootReducer = combineReducers({
   loginReducer,
   dashboardReducers,
@@ -26,4 +27,5 @@ export const rootReducer = combineReducers({
   headofficeDashboardReducers,
   riverReportReducers,
   sectorWiseReducers,
+  factoryReducers,
 });

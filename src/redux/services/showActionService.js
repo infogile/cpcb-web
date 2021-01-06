@@ -14,8 +14,10 @@ export function getShowAction(id) {
         const responseData = res.data;
         let data = {};
         let actionDate = "";
-        if (responseData.action.date) {
-          const iDate = new Date(responseData.action.date);
+        const actions = res.data.actions;
+        const action = actions[actions.length - 1];
+        if (action.date) {
+          const iDate = new Date(action.date);
           const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
             iDate
           );
@@ -38,13 +40,13 @@ export function getShowAction(id) {
           data.fields = [
             {
               title: "Compliance status as per SPCB",
-              value: compliaceTitle[responseData.action.complianceStatus],
+              value: compliaceTitle[action.complianceStatus],
             },
             {
               title: "Condition of Non-Compliance",
-              value: responseData.action.complianceStatus
+              value: action.complianceStatus
                 ? ""
-                : responseData.action.showcausenoticeStatus
+                : action.showcausenoticeStatus
                 ? "Show-Cause Notice"
                 : "Closure",
             },
@@ -54,12 +56,12 @@ export function getShowAction(id) {
             },
             {
               title: "Final Recommedation",
-              value: responseData.action.finalRecommendation,
+              value: action.finalRecommendation,
             },
             {
               title: "Report",
-              link: true,
-              value: responseData.action.report,
+              links: true,
+              value: action.reports,
             },
           ];
         }

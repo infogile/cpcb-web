@@ -4,7 +4,7 @@ import { Loading } from "../../../shared/Loading";
 import { Text } from "../../../shared/Text";
 import store from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { getInspectionReport } from "../../../redux/services/";
+import { getInspectionReport, removeData } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { ImageGrid } from "../../../shared/ImageGrid";
 
@@ -64,6 +64,9 @@ export const InspectionReport = () => {
   useEffect(() => {
     const id = params.id;
     store.dispatch(getInspectionReport(id));
+    return () => {
+      store.dispatch(removeData());
+    };
   }, [params.id]);
   if (isLoading) {
     return <Loading />;

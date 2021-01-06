@@ -2,6 +2,7 @@ import {
   initInspectionReportAction,
   inspectionReportSuccess,
   inspectionReportError,
+  removeInspectionReport,
 } from "../actions";
 import axios from "../../axios";
 
@@ -27,6 +28,12 @@ export function getInspectionReport(id) {
           );
           inspectionDate = `${da}-${mo}-${ye}`;
         }
+        const compliaceTitle = {
+          0: "Non-compliace",
+          1: "Compliance",
+          2: "Temporarily Closed",
+          3: "Permanent Closed",
+        };
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
@@ -37,7 +44,7 @@ export function getInspectionReport(id) {
             .toUpperCase();
           // data.images = responseData.fieldReport?.images || [];
           data.consent = responseData.report.files[0];
-          data.action = responseData.action;
+          data.actions = responseData.actions;
           data.inspection = responseData.report.files[1];
           data.fields = [
             {
@@ -127,9 +134,7 @@ export function getInspectionReport(id) {
             },
             {
               title: "Compliance status as per discharge norms",
-              value: responseData.complianceStatus
-                ? "compliance"
-                : "non-compliance",
+              value: compliaceTitle[responseData.complianceStatus],
             },
             {
               title: "Waste water generation",
@@ -187,5 +192,11 @@ export function getInspectionReport(id) {
         console.log(err);
         dispatch(inspectionReportError());
       });
+  };
+}
+
+export function removeData() {
+  return (dispatch) => {
+    dispatch(removeInspectionReport());
   };
 }

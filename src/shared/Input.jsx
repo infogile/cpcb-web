@@ -47,7 +47,8 @@ export const MediaInput = (props) => {
 };
 
 export const Label = styled.label`
-  color: black;
+  color: ${(props) => props.color || "black"};
+  font-weight: ${(props) => props.fontWeight};
   margin-left: ${(props) => props.marginLeft};
   margin-top: ${(props) => props.marginTop};
   margin-right: ${(props) => props.marginRight};
@@ -75,6 +76,7 @@ export const FileInput = ({
   progress,
   onCancel,
   onRemove,
+  hideRemove,
   labelProps,
   inputProps,
   ...otherProps
@@ -114,9 +116,11 @@ export const FileInput = ({
           <a href={fileLink.split()} target="_blank">
             {fileName}
           </a>
-          <Button onClick={onRemove} name={name} marginLeft="10px">
-            Remove
-          </Button>
+          {!hideRemove && (
+            <Button onClick={onRemove} name={name} marginLeft="10px">
+              Remove
+            </Button>
+          )}
         </Div>
       )}
     </Grid>
