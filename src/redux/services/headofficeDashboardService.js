@@ -41,7 +41,6 @@ export function getHeadofficedashboard(){
             const dashboardArray = Object.keys(dashboard).map(
               (river) => dashboard[river]
             );
-            console.log(dashboardArray)
             dispatch({ ...HeadofficeDashboardSuccess(), data: dashboardArray });
           })
         .catch((err) => {

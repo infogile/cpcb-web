@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import RiverStats from "../../../Home/MainArea/Dashboard/RiverStats";
+import RiverStats from "./RiverStats";
 import { Loading } from "../../../shared/Loading";
 import { Grid } from "../../../shared/Grid";
 import store from "../../../redux/store";
@@ -26,6 +26,7 @@ export const InspectionDetails = () => {
                 key={riverData.title}
                 title={`${capitalizeFirstLetter(riverData.title)} Dashboard`}
                 data={riverData}
+                name={riverData.title}
                 />
             );
             })}
