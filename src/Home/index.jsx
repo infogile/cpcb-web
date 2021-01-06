@@ -8,6 +8,7 @@ const Home = () => {
   const toggleNav = () => {
     setShowNav(!showNav);
   };
+  
   return (
     <>
       <Header toggleNav={toggleNav} />
