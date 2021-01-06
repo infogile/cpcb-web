@@ -142,8 +142,8 @@ const params = useParams();
                             <Td>{insts.pending}</Td>
                             <Td>{insts.fieldReportSubmitted}</Td>
                             <Td>{insts.inspectionReportSubmitted}</Td>
-                            <Td>{(insts.days>0 && insts.days<=10)?`True ${insts.days}`: (insts.days===0?"Pending" :`False ${insts.days}`) }</Td>
-                            <Td>{(insts.days>0 && insts.days>10)?`True ${insts.days}`: (insts.days===0?"Pending" :`False ${insts.days}`) }</Td>
+                            <Td>{(insts.days>0 && insts.days<=10)?`True ${insts.days} days`: (insts.days===0?"Pending" :`False ${insts.days} days`) }</Td>
+                            <Td>{(insts.days>0 && insts.days>10)?`True ${insts.days} days`: (insts.days===0?"Pending" :`False ${insts.days} days`) }</Td>
                         </Tr>
                     );
                 })}
