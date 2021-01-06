@@ -19,16 +19,16 @@ export const Dashboard = ({ expand })=>{
             <Route exact path="/headoffice">
                 <InspectionDetails />
             </Route>
-            <Route path="/headoffice/dashboard/:status/:river">
+            <Route exact path="/headoffice/dashboard/:status/:river">
                 <FactoryLists />
             </Route>
-            <Route path="/headoffice/dashboard/:status/:river/field_report/:id">
+            <Route exact path="/headoffice/dashboard/:status/:river/field_report/:id">
                 <FieldReport />
             </Route>
-            <Route path="/headoffice/dashboard/:status/:river/inspection_report/:id">
+            <Route exact path="/headoffice/dashboard/:status/:river/inspection_report/:id">
                 <InspectionReport />
             </Route>
-            <Route path="/headoffice/dashboard/:status/:river/view_action/:id">
+            <Route exact path="/headoffice/dashboard/:status/:river/view_action/:id">
                 <ViewAction />
             </Route>
         </DashboardStyled>

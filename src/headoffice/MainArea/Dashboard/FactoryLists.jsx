@@ -7,6 +7,12 @@ import { useSelector } from "react-redux";
 import { getFactorylist } from "../../../redux/services/";
 import { Link, useParams } from "react-router-dom";
 
+const FactoryListsStyled = styled.div`
+  margin-top: 30px;
+  margin-left: 40px;
+  margin-bottom: 30px;
+`;
+
 const ListItem = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
@@ -95,7 +101,6 @@ const List = styled.div`
   }
 `;
 
-
 export const FactoryLists = () => {
 
   const params = useParams();  
@@ -108,7 +113,7 @@ export const FactoryLists = () => {
         return <Loading />;
     }
     return (
-      <>
+      <FactoryListsStyled >
         <Text as="h3" marginLeft="10px">
          Factories
         </Text>
@@ -155,7 +160,7 @@ export const FactoryLists = () => {
             </ListItem>
           ))}
         </List>
-      </>
+      </FactoryListsStyled>
     );
   };
 
