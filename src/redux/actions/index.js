@@ -8,3 +8,4 @@ export * from "./inspectionReportActions";
 export * from "./showActionActions";
 export * from "./headofiiceDahboardAction";
 export * from "./riverReportActions";
+export * from "./sectorWiseActions";
