@@ -378,7 +378,7 @@ export const SectorWise =({ title })=>{
                             <Td fontSize="15px">
                               {sector.status === 0 && "Pending"}
                               {sector.status > 0 && (
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/sectorwise/field_report/${sector.id}`}>
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/sectorwise/field_report/${sector.id}`} target="_blank">
                                   View Report
                                 </ReportLink>
                               )}
@@ -386,7 +386,7 @@ export const SectorWise =({ title })=>{
                             <Td fontSize="15px">
                               {(sector.status === 1 || sector.status === 0) && "Pending"}
                               {sector.status >= 2 && (
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/sectorwise/inspection_report/${sector.id}`}>
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/sectorwise/inspection_report/${sector.id}` } target="_blank">
                                   View Report
                                 </ReportLink>
                               )}

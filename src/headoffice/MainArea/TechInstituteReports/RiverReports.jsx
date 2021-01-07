@@ -114,8 +114,8 @@ const params = useParams();
                             colorScale={["tomato", "green", "gold"]}
                             data={[
                                 { x: `Total Alloted:${inst.totalAlloted}`, y: inst.totalAlloted },
-                                { x: `Inspection Report:${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted },
-                                { x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted },
+                                inst.inspectionReportSubmitted >= 1? ({ x: `Insp Report:${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted } ) : (null ),
+                                inst.fieldReportSubmitted >= 1?{ x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted } : null,
                             ]}
                             style={{labels: {fontSize: 17, marginTop: "5px"}, }}/>
                         <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p> 
