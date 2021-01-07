@@ -6,8 +6,7 @@ import { getSectorWise } from "../../../redux/services/";
 import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../helpers";
-import jsPDF from 'jspdf';  
-import html2canvas from 'html2canvas';
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "../../../assets/css/collapse.css";
 
 class Collapsible extends React.Component {
@@ -248,6 +247,7 @@ Collapsible.defaultProps = {
   background: white;
   border-spacing: 0px;
   text-align: center;
+  margin-top: 40px;
   `;
   
   
@@ -292,14 +292,14 @@ Collapsible.defaultProps = {
       margin-top: 50px;
   `;
 
-  const Export = styled.button`
-  background-color: #f44336; 
+  const Export = styled.div`
+  position : absolute;
   color: white;
   padding: 10px;
   text-align: center;
   text-decoration: none;
   font-size: 12px;
-  margin-left: 94.5%;
+  right: 40px;
   cursor: pointer;
   border-radius: 12px;
   `;
@@ -321,21 +321,7 @@ export const SectorWise =({ title })=>{
     useEffect(() => {
         store.dispatch(getSectorWise(params.river_name || ""));
     }, [params.river_name]);
-
-    const printDocument= (sectorn) => {  
-      const input = document.getElementById('pdfdiv');  
-      html2canvas(input)  
-        .then((canvas) => {  
-          var imgWidth = 200;    
-          var imgHeight = canvas.height * imgWidth / canvas.width;  
-          const imgData = canvas.toDataURL('image/png');  
-          const pdf = new jsPDF('p', 'mm', 'a4')  
-          var position = 0;  
-          pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
-          pdf.save(`${sectorn}.pdf`);  
-        });  
-    };
-
+    
     if (isLoading) {
         return <Loading />;
     }
@@ -354,7 +340,17 @@ export const SectorWise =({ title })=>{
                 var num=1;
                 return (
                   <Collapsible trigger={capitalizeFirstLetter(sect[0].sectorname)}>
-                    <Export onClick={() => printDocument(capitalizeFirstLetter(sect[0].sectorname))} >Export</Export>
+                  <Export>
+                    <ReactHTMLTableToExcel
+                      id="test-table-xls-button"
+                      className="download-table-xls-button"
+                      table="pdfdiv"
+                      filename={capitalizeFirstLetter(sect[0].sectorname)}
+                      sheet="tablexls"
+                      buttonText="Export"
+                      style = {{ marginLeft : "100px"}}
+                    />
+                  </Export>
                     <Table id="pdfdiv">
                       <Tr>
                         <Th>S. NO.</Th>
