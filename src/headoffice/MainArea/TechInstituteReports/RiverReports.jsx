@@ -114,8 +114,8 @@ const params = useParams();
                             colorScale={["tomato", "green", "gold"]}
                             data={[
                                 { x: `Total Alloted:${inst.totalAlloted}`, y: inst.totalAlloted },
-                                { x: `Inspection Report:${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted },
-                                { x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted },
+                                inst.inspectionReportSubmitted >= 1? ({ x: `Insp Report:${inst.inspectionReportSubmitted}`, y: inst.inspectionReportSubmitted } ) : (null ),
+                                inst.fieldReportSubmitted >= 1?{ x: `Field Report:${inst.fieldReportSubmitted}`, y: inst.fieldReportSubmitted } : null,
                             ]}
                             style={{labels: {fontSize: 17, marginTop: "5px"}, }}/>
                         <p style={{ marginTop :  "25px" }}>{inst.insts.toUpperCase()}</p> 
@@ -131,8 +131,8 @@ const params = useParams();
                     <Th>Inspection Pending</Th>
                     <Th>Field Report Submitted</Th>
                     <Th>Inspection Report Submitted</Th>
-                    <Th>Report Submitted WiThin 10 Days</Th>
-                    <Th>Submitted More Than 10 Days</Th>
+                    <Th>Report Submitted WiThin 15 Days</Th>
+                    <Th>Submitted More Than 15 Days</Th>
                 </Tr>
                 {data && data.map((insts)=>{
                     return (
@@ -142,8 +142,8 @@ const params = useParams();
                             <Td>{insts.pending}</Td>
                             <Td>{insts.fieldReportSubmitted}</Td>
                             <Td>{insts.inspectionReportSubmitted}</Td>
-                            <Td>{(insts.days>0 && insts.days<=10)?`Yes ${insts.days} days`: (insts.days===0?"Pending" :`No`) }</Td>
-                            <Td>{(insts.days>0 && insts.days>10)?`Yes ${insts.days} days`: (insts.days===0?"Pending" :`No`) }</Td>
+                            <Td>{insts.lessthan15days}</Td>
+                            <Td>{insts.morethan15days}</Td>
                         </Tr>
                     );
                 })}

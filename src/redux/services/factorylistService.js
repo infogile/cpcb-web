@@ -28,7 +28,7 @@ export function getFactorylist(status,river){
                     unitcode: inspection.factory.unitcode,
                     unitname: inspection.factory.name,
                     sector: inspection.factory.sector.name,
-                    assignto: inspection.assignedTo.username,
+                    assignto: inspection.assignedTo.username.split(".")[0],
                     status: inspection.status
                     }));
             
