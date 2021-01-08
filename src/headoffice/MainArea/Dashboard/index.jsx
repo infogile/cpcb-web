@@ -22,7 +22,7 @@ export const Dashboard = ({ expand })=>{
             <Route exact path="/headoffice/dashboard/:status/:river">
                 <FactoryLists />
             </Route>
-            <Route exact path="/headoffice/dashboard/:status/:river/field_report/:id">
+            <Route path="/headoffice/dashboard/:status/:river/field_report/:id" >
                 <FieldReport />
             </Route>
             <Route exact path="/headoffice/dashboard/:status/:river/inspection_report/:id">

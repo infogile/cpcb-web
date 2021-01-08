@@ -26,6 +26,8 @@ export function getRiverReport(river){
                             pending: 0,
                             fieldReportSubmitted: 0,
                             inspectionReportSubmitted: 0,
+                            morethan15days: 0,
+                            lessthan15days: 0,
                             days: 0,
                         };
                     }
@@ -39,11 +41,20 @@ export function getRiverReport(river){
                     } else if (inspection.status === 2 || 3) {
                         institutes[insts].inspectionReportSubmitted =
                         institutes[insts].inspectionReportSubmitted + 1;
+
                         if(inspection.status === 2){
                             var startDate = Date.parse(inspection.inspectionDate && inspection.inspectionDate.split("T")[0]);
                             var endDate = Date.parse(inspection.inspectionReportUploadDate && inspection.inspectionReportUploadDate.split("T")[0]);
                             var timeDiff = endDate - startDate;
-                            institutes[insts].days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                            if (days>15){
+                                institutes[insts].morethan15days =
+                                institutes[insts].morethan15days + 1;
+                            }else if(days>=0 && days<15){
+                                institutes[insts].lessthan15days =
+                                institutes[insts].lessthan15days + 1;
+                            }
+
                         }
                     }
                   }

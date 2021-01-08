@@ -28,6 +28,7 @@ const Th = styled.th`
 `;
 
 const Tr = styled.tr`
+  color: ${(props) => props.Color};
   :nth-child(even) {
     background-color: #f2f2f2;
   }
@@ -70,7 +71,7 @@ export const CompletedInspectionList = () => {
       <Table id="state">
         <tbody>
           <tr>
-            <Th>S. No.</Th>
+            <Th >S. No.</Th>
             <Th>Unit code</Th>
             <Th>Unit name</Th>
             <Th>Sector</Th>
@@ -81,45 +82,86 @@ export const CompletedInspectionList = () => {
             <Th>Take action</Th>
           </tr>
           {data.map(({ id, status, code, name, sector, region, username }) => {
-            return (
+            if(status>=3){
+              return (
+                <Tr  Color = "green" key={id}>
+                  <Td>{num++}</Td>
+                  <Td whiteSpace="nowrap">{code}</Td>
+                  <Td fontSize="15px">{name}</Td>
+                  <Td>{sector}</Td>
+                  <Td>{username}</Td>
+                  <Td>{region}</Td>
+                  <Td fontSize="15px">
+                    {status === 0 && "Pending"}
+                    {status > 0 && (
+                      <ReportLink to={`/spcb/field_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status >= 2 && (
+                      <ReportLink to={`/spcb/inspection_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status === 2 && (
+                      <ReportLink to={`/spcb/take_action/${id}`}>
+                        Take Action
+                      </ReportLink>
+                    )}
+                    {status >= 3 && (
+                      <ReportLink to={`/spcb/view_action/${id}`}>
+                        View Action
+                      </ReportLink>
+                    )}
+                  </Td>
+                </Tr>
+              );
+            } else return(
               <Tr key={id}>
-                <Td>{num++}</Td>
-                <Td whiteSpace="nowrap">{code}</Td>
-                <Td fontSize="15px">{name}</Td>
-                <Td>{sector}</Td>
-                <Td>{username}</Td>
-                <Td>{region}</Td>
-                <Td fontSize="15px">
-                  {status === 0 && "Pending"}
-                  {status > 0 && (
-                    <ReportLink to={`/spcb/field_report/${id}`}>
-                      View Report
-                    </ReportLink>
-                  )}
-                </Td>
-                <Td fontSize="15px">
-                  {(status === 1 || status === 0) && "Pending"}
-                  {status >= 2 && (
-                    <ReportLink to={`/spcb/inspection_report/${id}`}>
-                      View Report
-                    </ReportLink>
-                  )}
-                </Td>
-                <Td fontSize="15px">
-                  {(status === 1 || status === 0) && "Pending"}
-                  {status === 2 && (
-                    <ReportLink to={`/spcb/take_action/${id}`}>
-                      Take Action
-                    </ReportLink>
-                  )}
-                  {status >= 3 && (
-                    <ReportLink to={`/spcb/view_action/${id}`}>
-                      View Action
-                    </ReportLink>
-                  )}
-                </Td>
-              </Tr>
-            );
+                  <Td >{num++}</Td>
+                  <Td whiteSpace="nowrap">{code}</Td>
+                  <Td fontSize="15px">{name}</Td>
+                  <Td>{sector}</Td>
+                  <Td>{username}</Td>
+                  <Td>{region}</Td>
+                  <Td fontSize="15px">
+                    {status === 0 && "Pending"}
+                    {status > 0 && (
+                      <ReportLink to={`/spcb/field_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status >= 2 && (
+                      <ReportLink to={`/spcb/inspection_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status === 2 && (
+                      <ReportLink to={`/spcb/take_action/${id}`}>
+                        Take Action
+                      </ReportLink>
+                    )}
+                    {status >= 3 && (
+                      <ReportLink to={`/spcb/view_action/${id}`}>
+                        View Action
+                      </ReportLink>
+                    )}
+                  </Td>
+                </Tr>
+            )
+            
           })}
         </tbody>
       </Table>
