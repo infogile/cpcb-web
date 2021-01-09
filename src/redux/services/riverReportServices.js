@@ -42,7 +42,7 @@ export function getRiverReport(river){
                         institutes[insts].inspectionReportSubmitted =
                         institutes[insts].inspectionReportSubmitted + 1;
 
-                        if(inspection.status === 2){
+                        if(inspection.status >= 2){
                             var startDate = Date.parse(inspection.inspectionDate && inspection.inspectionDate.split("T")[0]);
                             var endDate = Date.parse(inspection.inspectionReportUploadDate && inspection.inspectionReportUploadDate.split("T")[0]);
                             var timeDiff = endDate - startDate;
@@ -50,7 +50,7 @@ export function getRiverReport(river){
                             if (days>15){
                                 institutes[insts].morethan15days =
                                 institutes[insts].morethan15days + 1;
-                            }else if(days>=0 && days<15){
+                            }else if(days>=0 && days<=15){
                                 institutes[insts].lessthan15days =
                                 institutes[insts].lessthan15days + 1;
                             }
