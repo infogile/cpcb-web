@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Route } from "react-router-dom";
 import {Dashboard} from "./Dashboard";
 import {TechInstituteReports} from "./TechInstituteReports";
+import {ComplianceStatus} from "./ComplianceStatus"
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -17,6 +18,9 @@ const MainArea = ({ expand }) => {
       <MainAreaStyled expand={expand}>
         <Route path="/headoffice">
           <Dashboard />
+        </Route>
+        <Route path="/headoffice/compliance-status">
+          <ComplianceStatus />
         </Route>
         <Route path="/headoffice/tir">
           <TechInstituteReports />

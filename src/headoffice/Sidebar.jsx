@@ -70,7 +70,15 @@ function Sidebar({ show, showItem, ...otherProps }) {
             marginRight="10px"
           />
         Dashboard
-      </NavItem>
+        </NavItem>
+        <NavItem to="/headoffice/compliance-status">
+          <Tech
+            color={history.location.pathname === "/headoffice/compliance-status" ? "#4759FB" : "#5c5c5c"}
+            size="14px"
+            marginRight="10px"
+          />
+        Compliance status
+        </NavItem>
       <span style={{ marginLeft:"18px", textAlign: "left", marginTop:"30px"}}>
           <Tech
             size="14px"

@@ -34,4 +34,3 @@ export const Dashboard = ({ expand })=>{
         </DashboardStyled>
     );
 };
-export default Dashboard;
