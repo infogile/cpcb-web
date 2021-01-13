@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import store from "../../../redux/store";
+import { Loading } from "../../../shared/Loading";
+import { useSelector } from "react-redux";
+import { getComplianceStatus } from "../../../redux/services/";
+import { useParams } from "react-router-dom";
 
 
 const Table = styled.table`
@@ -40,12 +45,24 @@ const Td = styled.td`
 `;
 
 export const ComplianceStatusList = () => {
-  
+
+  const params = useParams();
+
+  const { isLoading, data } = useSelector((state) => state.complianceStatusReducers);
+    useEffect(() => {
+        store.dispatch(getComplianceStatus());
+    }, []);
+    if (isLoading) {
+        return <Loading />;
+    }
+    var num = 1;
+
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
-      <h2>Compliance status for Ganga GPIs</h2>
+      <h2>Compliance status</h2>
       <Table key="ganga">
         <tbody>
+          
           <tr>
             <Th >S. No.</Th>
             <Th>State</Th>
@@ -53,64 +70,26 @@ export const ComplianceStatusList = () => {
             <Th>Complied</Th>
             <Th>Temporary Close</Th>
             <Th>Permanent Close</Th>
-            <Th>Non Complied
-              <Tr>
-                <Td>Show Cause Notice</Td>
-                <Td>Closer Direction</Td>
-              </Tr>
-            </Th>
-            <Th>Revoke
-              <Tr>
-                <Td>SCN with Drawn</Td>
-                <Td>Closure Revoke</Td>
-              </Tr>
-            </Th>
+            <Th>Show Cause Notice <i>(Non Complied)</i></Th>
+            <Th>Closer Direction <i>(Non Complied)</i></Th>
+            <Th>SCN with Drawn <i>(Revoke)</i></Th>
+            <Th>Closure Revoke <i>(Revoke)</i></Th>   
           </tr>
-                <Tr>
-                  <Td>1</Td>
-                  <Td>Bihar</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                </Tr>
-        </tbody>
-      </Table>
-      <h2>Compliance status for Yamuna GPIs</h2>
-      <Table key="yamuna">
-      <tbody>
-          <tr>
-            <Th >S. No.</Th>
-            <Th>State</Th>
-            <Th>Action Completed</Th>
-            <Th>Complied</Th>
-            <Th>Temporary Close</Th>
-            <Th>Permanent Close</Th>
-            <Th>Non Complied
-              <Tr>
-                <Td>Show Cause Notice</Td>
-                <Td>Closer Direction</Td>
-              </Tr>
-            </Th>
-            <Th>Revoke
-              <Tr>
-                <Td>SCN with Drawn</Td>
-                <Td>Closure Revoke</Td>
-              </Tr>
-            </Th>
-          </tr>
-                <Tr>
-                  <Td>1</Td>
-                  <Td>Bihar</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                  <Td>0</Td>
-                </Tr>
+          {data && data.map((stat) => {
+            return (<Tr key = {stat.id}>
+              <Td>{num++}</Td>
+              <Td>{stat.statename}</Td>
+              <Td>{stat.actioncompleted}</Td>
+              <Td>{stat.complied}</Td>
+              <Td>{stat.tempclose}</Td>
+              <Td>{stat.permanentclose}</Td>
+              <Td>{stat.showcausenotice}</Td>
+              <Td>{stat.closerdirection}</Td>
+              <Td>{stat.scnwithdrawn}</Td>
+              <Td>{stat.closurerevoke}</Td>
+          </Tr>
+          );
+          })};
         </tbody>
       </Table>
     </div>
