@@ -15,6 +15,7 @@ import { riverReportReducers } from "./riverReportReducers";
 import { sectorWiseReducers } from "./sectorWiseReducers";
 import { factoryReducers } from "./factorylistReducers";
 import { stateWiseReducers } from "./stateWiseReducers";
+import { complianceStatusReducers } from "./complianceStatusReducers";
 
 export const rootReducer = combineReducers({
   loginReducer,
@@ -31,4 +32,5 @@ export const rootReducer = combineReducers({
   sectorWiseReducers,
   factoryReducers,
   stateWiseReducers,
+  complianceStatusReducers,
 });
