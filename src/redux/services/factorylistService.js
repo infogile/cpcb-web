@@ -20,7 +20,7 @@ export function getFactorylist(status,river){
                     else if (status === "fdone_factory" && inspection.status === 1 && inspection.factory.basin.name.includes(river)){
                         return true;
                     }
-                    else if (status === "idone_factory" && inspection.status === 2 && inspection.factory.basin.name.includes(river)){
+                    else if (status === "idone_factory" && inspection.status >= 2 && inspection.factory.basin.name.includes(river)){
                         return true;
                     }
                 }).map((inspection) => ( {
