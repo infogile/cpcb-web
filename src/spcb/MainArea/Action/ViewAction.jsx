@@ -8,6 +8,7 @@ import { getShowAction } from "../../../redux/services/";
 import { useParams } from "react-router";
 import { ImageGrid } from "../../../shared/ImageGrid";
 import { Div } from "../../../shared/Div";
+import InspectionReport from "./InspectionReport";
 
 const ViewActionStyled = styled.div`
   margin-top: 30px;
@@ -68,6 +69,8 @@ export const ViewAction = () => {
     return <Loading />;
   }
   return (
+    <div>
+    <InspectionReport />
     <ViewActionStyled>
       <Text as="h3" marginLeft="10px">
         Action Taken by SPCB
@@ -115,6 +118,7 @@ export const ViewAction = () => {
         )}
       </Report>
     </ViewActionStyled>
+    </div>
   );
 };
 
