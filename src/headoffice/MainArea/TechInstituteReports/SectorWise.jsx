@@ -348,7 +348,6 @@ export const SectorWise =({ title })=>{
                       filename={capitalizeFirstLetter(sect[0].sectorname)}
                       sheet="tablexls"
                       buttonText="Export"
-                      style = {{ marginLeft : "100px"}}
                     />
                   </Export>
                     <Table id="pdfdiv">

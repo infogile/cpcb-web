@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import {Dashboard} from "./Dashboard";
 import {TechInstituteReports} from "./TechInstituteReports";
 import {ComplianceStatus} from "./ComplianceStatus"
+import {StateWise} from "./StateWise";
 
 const MainAreaStyled = styled.div`
   position: relative;
@@ -24,6 +25,9 @@ const MainArea = ({ expand }) => {
         </Route>
         <Route path="/headoffice/tir">
           <TechInstituteReports />
+        </Route>
+        <Route  path="/headoffice/statewise">
+          <StateWise />
         </Route>
       </MainAreaStyled>
     );

@@ -24,18 +24,19 @@ const StyledSidebar = styled.div`
 
 const Nav =styled.div`
 transform: ${(props) =>
-  props.showItem ?"translate(20px, 0px)":"translate(20px, -2000px)"};
-height: 200px;
+  props.showItem ?"translate(10px, 0px)":"translate(10px, -2000px)"};
+height: 100px;
 width: 200px;
 background: white;
+margin-bottom: 30px;
 z-index: 1;
+
 `;
 
 const NavItem = styled(Link)`
   padding-top: 20px;
   padding-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 10px;
   display: block;
   text-decoration: none;
   color: #5c5c5c;
@@ -56,9 +57,15 @@ const rivers = ["ganga", "yamuna"];
 
 function Sidebar({ show, showItem, ...otherProps }) {
   const [showItemNav, setShowItemNav] = useState(true);
+  const [showItemNav1, setShowItemNav1] = useState(true);
+
   const toggleItem = () => {
     setShowItemNav(!showItemNav);
   };
+  const toggleItem1 = () => {
+    setShowItemNav1(!showItemNav1);
+  };
+
   const history = useHistory();
   console.log(history);
   return (
@@ -71,15 +78,15 @@ function Sidebar({ show, showItem, ...otherProps }) {
           />
         Dashboard
         </NavItem>
-        <NavItem to="/headoffice/compliance-status">
+        <NavItem to="/headoffice/compliance-status" style={{ marginBottom : "30px"}}>
           <Tech
             color={history.location.pathname === "/headoffice/compliance-status" ? "#4759FB" : "#5c5c5c"}
             size="14px"
             marginRight="10px"
           />
-        Compliance status
+          Compliance status
         </NavItem>
-      <span style={{ marginLeft:"18px", textAlign: "left", marginTop:"30px"}}>
+      <span style={{ marginLeft:"18px", textAlign: "left"}}>
           <Tech
             size="14px"
             marginRight="10px"
@@ -106,7 +113,33 @@ function Sidebar({ show, showItem, ...otherProps }) {
           )
         )}
       </Nav>
-     
+      <span style={{ marginLeft:"18px", textAlign: "left"}}>
+          <Tech
+            size="14px"
+            marginRight="10px"
+          />
+          State Board Reports
+          <UpDown size="20px" up={showItemNav1} onClick={toggleItem1} />
+      </span>
+      <Nav showItem={showItemNav1}>
+        {rivers.map((river) =>
+          river ? (
+            <NavItem to={`/headoffice/statewise/${river}`}>
+              <strong>
+                <Basin 
+                  color={history.location.pathname === `/headoffice/statewise/${river}` ? "#4759FB" : "#5c5c5c"}
+                  size="14px"
+                  marginRight="10px">
+                </Basin>{capitalizeFirstLetter(river)}
+              </strong>
+            </NavItem>
+          ) : (
+            <NavItem to={`/headoffice/statewise`}>
+              <strong>All</strong>
+            </NavItem>
+          )
+        )}
+      </Nav>
       {/* <NavItem to="/headoffice/schedule">Schedule</NavItem> */}
     </StyledSidebar>
   );
