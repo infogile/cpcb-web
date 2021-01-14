@@ -11,4 +11,5 @@ export * from "./headofficeDashboardService";
 export * from "./riverReportServices";
 export * from "./sectorWiseService";
 export * from "./factorylistService";
+export * from "./stateWiseService";
 export * from "./complianceStatusServices"
