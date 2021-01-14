@@ -12,7 +12,7 @@ export function getComplianceStatus(river) {
                 if (resdata && resdata.length > 0) {
                     resdata.forEach((inspection) => {
                         // if (inspection.factory.basin.name.includes(river)) {
-                          const state=inspection.factory.state.name;
+                          const state=inspection.factory.district.state.name;
                           if (!data[state]){
                               data[state] = {
                                 id: inspection._id,
