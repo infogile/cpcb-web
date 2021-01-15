@@ -56,7 +56,7 @@ export function getComplianceStatus(river) {
                         (state) => data[state]
                       );
                 dispatch({ ...compliancestatusSuccess(), data: stateArray});
-                console.log(data)
+                
             })
             .catch((err) => {
                 console.log(err)
