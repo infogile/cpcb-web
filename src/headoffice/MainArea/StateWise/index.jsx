@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
 import {StateRiverReports} from "./StateRiverReport";
+import { FactoryLists } from "../Dashboard/FactoryLists";
 
 const StateWiseStyled = styled.div`
 position: relative;
@@ -14,6 +15,9 @@ export const StateWise = ({ expand }) => {
         <StateWiseStyled expand={expand}>
             <Route exact path="/headoffice/statewise/:river_name">
               <StateRiverReports title="State Board Reports: Dashboard"/>
+            </Route>
+            <Route path="/headoffice/statewise/:river/:states/:status">
+                <FactoryLists />
             </Route>
         </StateWiseStyled>
     )
