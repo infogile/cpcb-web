@@ -4,8 +4,9 @@ import store from "../../../redux/store";
 import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { getComplianceStatus } from "../../../redux/services/";
-import { useParams } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../../helpers";
+import {useHistory} from "react-router-dom";
 
 const Table = styled.table`
 margin-left: 20px;
@@ -54,10 +55,18 @@ const Td = styled.td`
   }
 `;
 
+const ReportLink = styled(Link)`
+  text-align: center;
+  text-decoration: none;
+  color: #00a8f3;
+  font-weight: 600;
+  padding: 10px 0px;
+`;
+
 export const ComplianceStatusList = () => {
 
   const params = useParams();
-
+  const history = useHistory();
   const { isLoading, data } = useSelector((state) => state.complianceStatusReducers);
     useEffect(() => {
         store.dispatch(getComplianceStatus());
@@ -94,14 +103,46 @@ export const ComplianceStatusList = () => {
                     <Tr key = {state.id}>
                       <Td>{num++}</Td>
                       <Td>{state.statename}</Td>
-                      <Td>{state.actioncompleted}</Td>
-                      <Td>{state.complied}</Td>
-                      <Td>{state.tempclose}</Td>
-                      <Td>{state.permanentclose}</Td>
-                      <Td>{state.showcausenotice}</Td>
-                      <Td>{state.closerdirection}</Td>
-                      <Td>{state.scnwithdrawn}</Td>
-                      <Td>{state.closurerevoke}</Td>
+                      <Td>{state.actioncompleted && 
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/actioncompleted`} target="_blank">
+                          {state.actioncompleted}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.complied && 
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/complied`} target="_blank">
+                          {state.complied}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.tempclose &&
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tempclose`} target="_blank">
+                          {state.tempclose}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.permanentclose &&
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/permanentclose`} target="_blank">
+                          {state.permanentclose}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.showcausenotice &&
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/showcausenotice`} target="_blank">
+                          {state.showcausenotice}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.closerdirection &&
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closerdirection`} target="_blank">
+                          {state.closerdirection}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.scnwithdrawn && 
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tscnwithdrawn`} target="_blank">
+                          {state.scnwithdrawn}
+                        </ReportLink>
+                      }</Td>
+                      <Td>{state.closurerevoke &&
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closurerevoke`} target="_blank">
+                          {state.closurerevoke}
+                        </ReportLink>
+                      }</Td>
                     </Tr>
                   );
                 })};
