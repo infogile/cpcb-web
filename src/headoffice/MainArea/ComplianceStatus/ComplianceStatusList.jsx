@@ -5,21 +5,31 @@ import { Loading } from "../../../shared/Loading";
 import { useSelector } from "react-redux";
 import { getComplianceStatus } from "../../../redux/services/";
 import { useParams } from "react-router-dom";
-
+import { capitalizeFirstLetter } from "../../../helpers";
 
 const Table = styled.table`
-  border-spacing: 0px;
-  margin-top:40px;
-  width: 95%;
+margin-left: 20px;
+font-family: Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+width: 100%;
+background: white;
+border-spacing: 0px;
+text-align: center;
 `;
 
 const Th = styled.th`
-  color: #353535;
-  border-bottom: solid 1px #cccccc;
-  border-left: solid 1px #cccccc;
-  :first-child {
-    border-left: ;
-  }
+border-bottom: solid 1px #cccccc;
+border-left: solid 1px #cccccc;
+:first-child {
+  border-left: none;
+}
+border: 1px solid #ddd;
+padding: 8px;
+padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(124, 119, 119);
+  color: white;
 `;
 
 const Tr = styled.tr`
@@ -55,43 +65,51 @@ export const ComplianceStatusList = () => {
     if (isLoading) {
         return <Loading />;
     }
-    var num = 1;
-
+    var i=0;
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
       <h2>Compliance status</h2>
-      <Table key="ganga">
-        <tbody>
-          
-          <tr>
-            <Th >S. No.</Th>
-            <Th>State</Th>
-            <Th>Action Completed</Th>
-            <Th>Complied</Th>
-            <Th>Temporary Close</Th>
-            <Th>Permanent Close</Th>
-            <Th>Show Cause Notice <i>(Non Complied)</i></Th>
-            <Th>Closer Direction <i>(Non Complied)</i></Th>
-            <Th>SCN with Drawn <i>(Revoke)</i></Th>
-            <Th>Closure Revoke <i>(Revoke)</i></Th>   
-          </tr>
-          {data && data.map((stat) => {
-            return (<Tr key = {stat.id}>
-              <Td>{num++}</Td>
-              <Td>{stat.statename}</Td>
-              <Td>{stat.actioncompleted}</Td>
-              <Td>{stat.complied}</Td>
-              <Td>{stat.tempclose}</Td>
-              <Td>{stat.permanentclose}</Td>
-              <Td>{stat.showcausenotice}</Td>
-              <Td>{stat.closerdirection}</Td>
-              <Td>{stat.scnwithdrawn}</Td>
-              <Td>{stat.closurerevoke}</Td>
-          </Tr>
-          );
-          })};
-        </tbody>
-      </Table>
+      {data && data.map((river)=>{
+        const rivers = ["Ganga", "Yamuna"];
+        var num = 1;
+        return(
+          <>
+            <h3>{rivers[i]}</h3>
+            <Table key={rivers[i++]}>
+              <tbody>  
+                <tr>
+                  <Th >S. No.</Th>
+                  <Th>State</Th>
+                  <Th>Action Completed</Th>
+                  <Th>Complied</Th>
+                  <Th>Temporary Close</Th>
+                  <Th>Permanent Close</Th>
+                  <Th>Show Cause Notice <i>(Non Complied)</i></Th>
+                  <Th>Closer Direction <i>(Non Complied)</i></Th>
+                  <Th>SCN with Drawn <i>(Revoke)</i></Th>
+                  <Th>Closure Revoke <i>(Revoke)</i></Th>   
+                </tr>
+                {river && river.map((state) => {
+                  return (
+                    <Tr key = {state.id}>
+                      <Td>{num++}</Td>
+                      <Td>{state.statename}</Td>
+                      <Td>{state.actioncompleted}</Td>
+                      <Td>{state.complied}</Td>
+                      <Td>{state.tempclose}</Td>
+                      <Td>{state.permanentclose}</Td>
+                      <Td>{state.showcausenotice}</Td>
+                      <Td>{state.closerdirection}</Td>
+                      <Td>{state.scnwithdrawn}</Td>
+                      <Td>{state.closurerevoke}</Td>
+                    </Tr>
+                  );
+                })};
+              </tbody>
+            </Table>
+          </>
+        );
+      })}
     </div>
   );
 };
