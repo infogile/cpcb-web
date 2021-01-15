@@ -83,7 +83,7 @@ export const ComplianceStatusList = () => {
         var num = 1;
         return(
           <>
-            <h3>{rivers[i]}</h3>
+            <h3>{rivers[i]} GPIs</h3>
             <Table key={rivers[i++]}>
               <tbody>  
                 <tr>
