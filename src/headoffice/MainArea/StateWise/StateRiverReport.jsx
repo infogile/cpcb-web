@@ -84,6 +84,13 @@ const Td = styled.td`
     border-left: none;
   }
 `;
+const ReportLink = styled(Link)`
+  text-align: center;
+  text-decoration: none;
+  color: #00a8f3;
+  font-weight: 600;
+  padding: 10px 0px;
+`;
 
 export const StateRiverReports =({ title })=>{
 const params = useParams();
@@ -137,12 +144,36 @@ const params = useParams();
                     return (
                         <Tr>
                             <Td>{state.state}</Td>
-                            <Td>{state.totalAlloted}</Td>
-                            <Td>{state.pending}</Td>
-                            <Td>{state.fieldReportSubmitted}</Td>
-                            <Td>{state.inspectionReportSubmitted}</Td>
-                            <Td>{state.lessthan15days}</Td>
-                            <Td>{state.morethan15days}</Td>
+                            <Td>{state.totalAlloted &&
+                                <ReportLink to={`/headoffice/statewise/${state.title}/${state.state}/totalAlloted`} target="_blank">
+                                    {state.totalAlloted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{state.pending  &&
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/pending`} target="_blank">
+                                    {state.pending}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{state.fieldReportSubmitted  &&
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/fieldReportSubmitted`} target="_blank">
+                                    {state.fieldReportSubmitted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{state.inspectionReportSubmitted  &&
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/inspectionReportSubmitted`} target="_blank">
+                                    {state.inspectionReportSubmitted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{state.lessthan15days  &&
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/lessthan15days`} target="_blank">
+                                    {state.lessthan15days}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{state.morethan15days  &&
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/morethan15days`} target="_blank">
+                                    {state.morethan15days}
+                                </ReportLink>
+                            }</Td>
                         </Tr>
                     );
                 })}

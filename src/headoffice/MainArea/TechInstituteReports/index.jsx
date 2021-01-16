@@ -5,6 +5,7 @@ import SectorWise from './SectorWise';
 import FieldReport from "./FieldReport";
 import InspectionReport from "./InspectionReport";
 import styled from "styled-components";
+import { FactoryLists } from "../Dashboard/FactoryLists";
 
 const TechInstituteReportStyled = styled.div`
 position: relative;
@@ -26,6 +27,9 @@ export const TechInstituteReports = ({ expand })=>{
             </Route>
             <Route path="/headoffice/tir/:river_name/sectorwise/inspection_report/:id">
                 <InspectionReport />
+            </Route>
+            <Route path="/headoffice/tir/:river/:insts/:status">
+                <FactoryLists />
             </Route>
         </TechInstituteReportStyled>
     );

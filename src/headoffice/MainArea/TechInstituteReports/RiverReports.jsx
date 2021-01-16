@@ -85,6 +85,14 @@ const Td = styled.td`
   }
 `;
 
+const ReportLink = styled(Link)`
+  text-align: center;
+  text-decoration: none;
+  color: #00a8f3;
+  font-weight: 600;
+  padding: 10px 0px;
+`;
+
 export const RiverReports =({ title })=>{
 const params = useParams();
   const { isLoading, data } = useSelector((state) => state.riverReportReducers);
@@ -138,12 +146,36 @@ const params = useParams();
                     return (
                         <Tr>
                             <Td>{insts.insts.toUpperCase()}</Td>
-                            <Td>{insts.totalAlloted}</Td>
-                            <Td>{insts.pending}</Td>
-                            <Td>{insts.fieldReportSubmitted}</Td>
-                            <Td>{insts.inspectionReportSubmitted}</Td>
-                            <Td>{insts.lessthan15days}</Td>
-                            <Td>{insts.morethan15days}</Td>
+                            <Td>{insts.totalAlloted &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/totalAlloted`} target="_blank">
+                                    {insts.totalAlloted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{insts.pending  &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/pending`} target="_blank">
+                                    {insts.pending}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{insts.fieldReportSubmitted  &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/fieldReportSubmitted`} target="_blank">
+                                    {insts.fieldReportSubmitted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{insts.inspectionReportSubmitted  &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/inspectionReportSubmitted`} target="_blank">
+                                    {insts.inspectionReportSubmitted}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{insts.lessthan15days  &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/lessthan15days`} target="_blank">
+                                    {insts.lessthan15days}
+                                </ReportLink>
+                            }</Td>
+                            <Td>{insts.morethan15days  &&
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/morethan15days`} target="_blank">
+                                    {insts.morethan15days}
+                                </ReportLink>
+                            }</Td>
                         </Tr>
                     );
                 })}

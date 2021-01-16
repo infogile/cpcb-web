@@ -1,7 +1,7 @@
 import {initfactorylistAction, factorylistSuccess,factorylistError} from "../actions";
 import axios from "../../axios"
 
-export function getFactorylist(status,river, state){
+export function getFactorylist(status, river, state, insts, states){
     return (dispatch) => {
         dispatch(initfactorylistAction());
         axios
@@ -33,7 +33,37 @@ export function getFactorylist(status,river, state){
                 }));
 
                 data.forEach((inspection) => {
-                    if(inspection.status >= 3 && 
+                    var days = 0;
+                    if(inspection.factory.basin.name.includes(river) && 
+                    ( (insts && inspection.assignedTo.username.split(".")[0].includes(insts) && !states) || 
+                    (!insts && inspection.factory.district.state.name.includes(states)))){
+                        
+                        if(inspection.status >= 2){
+                            var startDate = Date.parse(inspection.inspectionDate && inspection.inspectionDate.split("T")[0]);
+                            var endDate = Date.parse(inspection.inspectionReportUploadDate && inspection.inspectionReportUploadDate.split("T")[0]);
+                            var timeDiff = endDate - startDate;
+                            days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                        }
+                        if(status === "totalAlloted"){
+                            flag = true;
+                        }
+                        else if(status === "pending" && inspection.status === 0){
+                            flag = true;
+                        }
+                        else if(status === "fieldReportSubmitted" && inspection.status === 1){
+                            flag = true;
+                        }
+                        else if(status === "inspectionReportSubmitted" && (inspection.status === 2 || 3) ){
+                            flag = true;
+                        }
+                        else if(status === "morethan15days" && days>15){
+                            flag = true;
+                        }
+                        else if(status === "lessthan15days" && days>=0 && days<=15){
+                            flag = true;
+                        }
+                    }
+                    else if(!insts && inspection.status >= 3 && 
                     inspection.factory.basin.name.includes(river) && 
                     inspection.factory.district.state.name.includes(state)){
                         if(status === "actioncompleted" ){
@@ -73,20 +103,20 @@ export function getFactorylist(status,river, state){
                         inspection.actions[inspection.actions.length-1].complianceStatus === 1){
                             flag = true;
                         }    
-
-                        if(flag === true)
-                        {
-                            factorylist.push({
-                                id: inspection._id,
-                                unitcode: inspection.factory.unitcode,
-                                unitname: inspection.factory.name,
-                                sector: inspection.factory.sector.name,
-                                assignto: inspection.assignedTo.username.split(".")[0],
-                                status: inspection.status
-                            })
-                            flag = false;
-                        }  
                     }
+                    if(flag === true)
+                    {
+                        flag = false;
+                        factorylist.push({
+                            id: inspection._id,
+                            unitcode: inspection.factory.unitcode,
+                            unitname: inspection.factory.name,
+                            sector: inspection.factory.sector.name,
+                            assignto: inspection.assignedTo.username.split(".")[0],
+                            status: inspection.status
+                        })
+                    }          
+                    
                 });
             }
             dispatch({ ...factorylistSuccess(),  factorylist});
