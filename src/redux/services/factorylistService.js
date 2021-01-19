@@ -53,7 +53,7 @@ export function getFactorylist(status, river, state, insts, states){
                         else if(status === "fieldReportSubmitted" && inspection.status === 1){
                             flag = true;
                         }
-                        else if(status === "inspectionReportSubmitted" && (inspection.status === 2 || 3) ){
+                        else if(status === "inspectionReportSubmitted" && (inspection.status >=2) ){
                             flag = true;
                         }
                         else if(status === "morethan15days" && days>15){
