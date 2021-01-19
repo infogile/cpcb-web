@@ -52,6 +52,14 @@ const TakeAction = () => {
       });
       setActionDate(action.date ? new Date(action.date) : new Date());
       setShowNonComplianceTerms(!action.complianceStatus);
+    } else {
+      setActionTakenForm({
+        compliancestatus: 1,
+        showcausenoticestatus: "showcausenotice",
+        finalrecommendation: "",
+        actionreport: "",
+        uploadedActionReports: [],
+      });
     }
   }, [data]);
 
