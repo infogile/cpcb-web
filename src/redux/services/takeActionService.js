@@ -27,6 +27,7 @@ export function getCompletedInspection(river_name) {
                 basin: inspection.factory.basin.name,
                 sector: inspection.factory.sector.name,
                 region: inspection.factory.region,
+                actioncount:inspection.actions.length,
                 username:
                   inspection.assignedTo &&
                   inspection.assignedTo.username.split(".")[0].toUpperCase(),

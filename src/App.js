@@ -3,6 +3,7 @@ import Login from "./Login";
 import Home from "./Home";
 import SPCBHome from "./spcb";
 import HeadofficeHome from "./headoffice"
+import PublicLink from "./PublicLink";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/headoffice">
           <HeadofficeHome />
+        </Route>
+        <Route path="/public_cpcb" exact>
+          <PublicLink />
         </Route>
       </Router>
     </Provider>
