@@ -81,10 +81,50 @@ export const CompletedInspectionList = () => {
             <Th>Final report</Th>
             <Th>Take action</Th>
           </tr>
-          {data.map(({ id, status, code, name, sector, region, username }) => {
+          {data.map(({ id, status, code, name, sector, region, username, actioncount }) => {
             if(status>=3){
               return (
                 <Tr  Color = "green" key={id}>
+                  <Td>{num++}</Td>
+                  <Td whiteSpace="nowrap">{code}</Td>
+                  <Td fontSize="15px">{name}</Td>
+                  <Td>{sector}</Td>
+                  <Td>{username}</Td>
+                  <Td>{region}</Td>
+                  <Td fontSize="15px">
+                    {status === 0 && "Pending"}
+                    {status > 0 && (
+                      <ReportLink to={`/spcb/field_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status >= 2 && (
+                      <ReportLink to={`/spcb/inspection_report/${id}`}>
+                        View Report
+                      </ReportLink>
+                    )}
+                  </Td>
+                  <Td fontSize="15px">
+                    {(status === 1 || status === 0) && "Pending"}
+                    {status === 2 && (
+                      <ReportLink to={`/spcb/take_action/${id}`}>
+                        Take Action
+                      </ReportLink>
+                    )}
+                    {status >= 3 && (
+                      <ReportLink to={`/spcb/view_action/${id}`}>
+                        View Action
+                      </ReportLink>
+                    )}
+                  </Td>
+                </Tr>
+              );
+            } else if(actioncount > 0 && status ===2){
+              return (
+                <Tr  Color = "#cc7a00" key={id}>
                   <Td>{num++}</Td>
                   <Td whiteSpace="nowrap">{code}</Td>
                   <Td fontSize="15px">{name}</Td>
