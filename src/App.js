@@ -2,7 +2,8 @@ import React from "react";
 import Login from "./Login";
 import Home from "./Home";
 import SPCBHome from "./spcb";
-import HeadofficeHome from "./headoffice"
+import HeadofficeHome from "./headoffice";
+import Public from "./Public";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/headoffice">
           <HeadofficeHome />
+        </Route>
+        <Route exact path = "/public_portal" >
+          <Public />
         </Route>
       </Router>
     </Provider>
