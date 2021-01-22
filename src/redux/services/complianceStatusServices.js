@@ -34,7 +34,7 @@ export function getComplianceStatus() {
                                         closurerevoke: 0,
                                     };
                                 }
-                                if (inspection.status >= 3) {
+                                if (inspection.status >= 3 || inspection.actions.length > 0) {
                                     data[river][state].actioncompleted = data[river][state].actioncompleted + 1;
                                     if (inspection.actions[inspection.actions.length-1].complianceStatus === 1){
                                         data[river][state].complied = data[river][state].complied + 1;
@@ -61,6 +61,7 @@ export function getComplianceStatus() {
                                     }
                                 }   
                             }
+                            console.log(resdata)
                         });
                     });
                 }
@@ -75,7 +76,6 @@ export function getComplianceStatus() {
                     (river) => data[river]
                 );    
                 dispatch({ ...compliancestatusSuccess(), data: riverArray});
-                console.log(data)
             })
             .catch((err) => {
                 console.log(err)

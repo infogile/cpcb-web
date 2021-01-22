@@ -63,9 +63,10 @@ export function getFactorylist(status, river, state, insts, states){
                             flag = true;
                         }
                     }
-                    else if(!insts && inspection.status >= 3 && 
+                    else if(!insts && inspection.status >= 2 && 
                     inspection.factory.basin.name.includes(river) && 
-                    inspection.factory.district.state.name.includes(state)){
+                    inspection.factory.district.state.name.includes(state)
+                    && inspection.actions.length > 0){
                         if(status === "actioncompleted" ){
                             flag = true;
                         }
