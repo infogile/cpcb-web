@@ -61,7 +61,6 @@ export function getComplianceStatus() {
                                     }
                                 }   
                             }
-                            console.log(resdata)
                         });
                     });
                 }
