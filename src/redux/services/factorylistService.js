@@ -105,6 +105,7 @@ export function getFactorylist(status, river, state, insts, states){
                             flag = true;
                         }    
                     }
+
                     if(flag === true)
                     {
                         flag = false;
@@ -114,7 +115,8 @@ export function getFactorylist(status, river, state, insts, states){
                             unitname: inspection.factory.name,
                             sector: inspection.factory.sector.name,
                             assignto: inspection.assignedTo.username.split(".")[0],
-                            status: inspection.status
+                            status: inspection.status,
+                            actioncount: inspection.actions.length
                         })
                     }          
                     
