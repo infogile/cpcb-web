@@ -127,7 +127,7 @@ export const FactoryLists = () => {
             <ListItemHeader>Inspection report</ListItemHeader>
             <ListItemHeader>Action</ListItemHeader>
           </ListHeader>
-          {factorylist.map(({ id, unitcode, unitname, sector, assignto, status }) => (
+          {factorylist.map(({ id, unitcode, unitname, sector, assignto, status, actioncount}) => (
             <ListItem key = {id} >
               <UnitCode>{unitcode}</UnitCode>
               <UnitName>{unitname}</UnitName>
@@ -150,8 +150,8 @@ export const FactoryLists = () => {
               )}
               </InspectionReport>
               <Action>
-              {(status === 1 || status === 0 || status === 2) && "Pending"}
-              {status >= 3 && (
+              {((status === 1 || status === 0 || status === 2) && (actioncount === 0)) && "Pending"}
+              {(actioncount > 0 && status >= 2) && (
                 <ReportLink to={`/headoffice/dashboard/${params.status}/${params.river}/view_action/${id}`}>
                     View Action
                 </ReportLink>
