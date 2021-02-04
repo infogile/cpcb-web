@@ -67,9 +67,8 @@ export const PublicLink = () => {
 
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
-      <h2>Compliance status</h2>
           <>
-            <h3>Ganga GPIs</h3>
+            <h3>Compliance status Ganga GPIs</h3>
             <Table>
               <tbody>  
                 <tr>
@@ -81,7 +80,32 @@ export const PublicLink = () => {
                   <Th>Temporary Close</Th> 
                   <Th>Permanent Close</Th>   
                 </tr>
-                   {data.map((item,i) => (
+                   {data.slice(0, 7).map((item,i) => (
+                    <Tr key={i}>
+                      <Td>{i+1}</Td>
+                      <Td>{item.state}</Td>
+                      <Td>{item.actionCompleted}</Td>
+                      <Td>{item.Complied}</Td>
+                      <Td>{item.NonComplied}</Td>
+                      <Td>{item.temporaryClose}</Td>
+                      <Td>{item.permanentClose}</Td>
+                    </Tr>
+                    ))}
+              </tbody>
+            </Table>
+            <h3>Compliance status Yamuna GPIs</h3>
+            <Table>
+              <tbody>  
+                <tr>
+                  <Th >S. No.</Th>
+                  <Th>State</Th>
+                  <Th>Action Completed</Th>
+                  <Th>Complied</Th>
+                  <Th>Non Complied</Th>
+                  <Th>Temporary Close</Th> 
+                  <Th>Permanent Close</Th>   
+                </tr>
+                   {data.slice(9, 17).map((item,i) => (
                     <Tr key={i}>
                       <Td>{i+1}</Td>
                       <Td>{item.state}</Td>
@@ -376,6 +400,7 @@ export const PublicLink = () => {
                     </Tr>
               </tbody>
             </Table>
+            {/* <a href="https://infogile.com/">Infogile</a> */}
           </>
     </div>
   );
