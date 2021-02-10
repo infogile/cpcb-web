@@ -70,25 +70,37 @@ export const PublicLink = () => {
           <>
             <h3>Compliance status Ganga GPIs</h3>
             <Table>
-              <tbody>  
+            <thead>  
                 <tr>
-                  <Th >S. No.</Th>
+                  <Th>S. No.</Th>
                   <Th>State</Th>
-                  <Th>Action Completed</Th>
+                  <Th>Total No. of GPIs</Th>
+                  <Th>Inspection Completed by TPAs</Th>
+                  <Th>Report Submitted to SPCBs/PCC</Th>
+                  <Th>Action Completed by SPCBs/PCC</Th>
                   <Th>Complied</Th>
                   <Th>Non Complied</Th>
                   <Th>Temporary Close</Th> 
-                  <Th>Permanent Close</Th>   
+                  <Th>Permanent Close</Th>
+                  <Th>Action pending with SPCBs/PCC for more than 15 days</Th>
+                  <Th>Action pending with SPCBs/PCC for more than 30 days</Th>       
                 </tr>
+            </thead>
+            <tbody>
                    {data.slice(0, 7).map((item,i) => (
                     <Tr key={i}>
                       <Td>{i+1}</Td>
                       <Td>{item.state}</Td>
+                      <Td>{item.totalGPIs}</Td>
+                      <Td>{item.insCompletedByTPAs}</Td>
+                      <Td>{item.reportSubToSPCB}</Td>                    
                       <Td>{item.actionCompleted}</Td>
                       <Td>{item.Complied}</Td>
                       <Td>{item.NonComplied}</Td>
                       <Td>{item.temporaryClose}</Td>
                       <Td>{item.permanentClose}</Td>
+                      <Td>{item.actionPending15}</Td>
+                      <Td>{item.actionPending30}</Td> 
                     </Tr>
                     ))}
               </tbody>
@@ -97,24 +109,34 @@ export const PublicLink = () => {
             <Table>
               <tbody>  
                 <tr>
-                  <Th >S. No.</Th>
+                  <Th>S. No.</Th>
                   <Th>State</Th>
-                  <Th>Action Completed</Th>
+                  <Th>Total No. of GPIs</Th>
+                  <Th>Inspection Completed by TPAs</Th>
+                  <Th>Report Submitted to SPCBs/PCC</Th>
+                  <Th>Action Completed by SPCBs/PCC</Th>
                   <Th>Complied</Th>
                   <Th>Non Complied</Th>
                   <Th>Temporary Close</Th> 
-                  <Th>Permanent Close</Th>   
+                  <Th>Permanent Close</Th>
+                  <Th>Action pending with SPCBs/PCC for more than 15 days</Th>
+                  <Th>Action pending with SPCBs/PCC for more than 30 days</Th> 
                 </tr>
                    {data.slice(9, 17).map((item,i) => (
-                    <Tr key={i}>
-                      <Td>{i+1}</Td>
-                      <Td>{item.state}</Td>
-                      <Td>{item.actionCompleted}</Td>
-                      <Td>{item.Complied}</Td>
-                      <Td>{item.NonComplied}</Td>
-                      <Td>{item.temporaryClose}</Td>
-                      <Td>{item.permanentClose}</Td>
-                    </Tr>
+                  <Tr key={i}>
+                    <Td>{i+1}</Td>
+                    <Td>{item.state}</Td>
+                    <Td>{item.totalGPIs}</Td>
+                    <Td>{item.insCompletedByTPAs}</Td>
+                    <Td>{item.reportSubToSPCB}</Td>                    
+                    <Td>{item.actionCompleted}</Td>
+                    <Td>{item.Complied}</Td>
+                    <Td>{item.NonComplied}</Td>
+                    <Td>{item.temporaryClose}</Td>
+                    <Td>{item.permanentClose}</Td>
+                    <Td>{item.actionPending15}</Td>
+                    <Td>{item.actionPending30}</Td> 
+                  </Tr>
                     ))}
               </tbody>
             </Table>
