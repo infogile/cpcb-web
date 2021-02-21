@@ -15,7 +15,7 @@ const FactoryListsStyled = styled.div`
 
 const ListItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   background: white;
   box-shadow: 0px 2px 5px 0px #17171747;
   margin-top: 22px;
@@ -28,7 +28,7 @@ const ListItem = styled.div`
 
 const ListHeader = styled.div`
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-top: 22px;
   margin-left: 20px;
   margin-right: 20px;
@@ -58,6 +58,11 @@ const Sector = styled.div`
 `;
 
 const Assign = styled.div`
+  text-align: center;
+  margin: 10px 0px;
+`;
+
+const Date = styled.div`
   text-align: center;
   margin: 10px 0px;
 `;
@@ -123,16 +128,20 @@ export const FactoryLists = () => {
             <ListItemHeader>Unitname</ListItemHeader>
             <ListItemHeader>Sector</ListItemHeader>
             <ListItemHeader>Assign-to</ListItemHeader>
+            <ListItemHeader>Inspection report submission date</ListItemHeader>
+            <ListItemHeader>Last action taken date</ListItemHeader>
             <ListItemHeader>Field report</ListItemHeader>
             <ListItemHeader>Inspection report</ListItemHeader>
             <ListItemHeader>Action</ListItemHeader>
           </ListHeader>
-          {factorylist.map(({ id, unitcode, unitname, sector, assignto, status, actioncount}) => (
+          {factorylist.map(({ id, unitcode, unitname, sector, assignto, status, actioncount, insRepSubDate, lastActDate}) => (
             <ListItem key = {id} >
               <UnitCode>{unitcode}</UnitCode>
               <UnitName>{unitname}</UnitName>
               <Sector>{sector}</Sector>
               <Assign>{assignto}</Assign>
+              <Date>{insRepSubDate}</Date>
+              <Date>{lastActDate}</Date>
               <FieldReport>
               {status === 0 && "Pending"}
               {status > 0 && (
