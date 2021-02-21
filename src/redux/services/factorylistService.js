@@ -30,7 +30,9 @@ export function getFactorylist(status, river, state, insts, states){
                     sector: inspection.factory.sector.name,
                     assignto: inspection.assignedTo.username.split(".")[0],
                     status: inspection.status,
-                    actioncount: inspection.actions.length
+                    actioncount: inspection.actions.length,
+                    insRepSubDate: inspection.inspectionReportUploadDate !== undefined ? inspection.inspectionReportUploadDate.split("T")[0] : 'Pending',
+                    lastActDate: inspection.actions[inspection.actions.length-1] == undefined ? 'Pending' : inspection.actions[inspection.actions.length-1].date.split("T")[0],
                 }));
 
                 data.forEach((inspection) => {
