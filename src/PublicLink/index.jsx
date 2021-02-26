@@ -66,46 +66,51 @@ export const PublicLink = () => {
   console.log(data)
 
   return (
-    <div style={{ marginBottom: "100px", marginRight: "20px" }}>
+    <div style={{ marginBottom: "100px", marginRight: "261px", marginLeft:"233px" }}>
           <>
-            <h3>Compliance status Ganga GPIs</h3>
+            <h3>Annual inspection of Grossly Polluting Industries (GPIs)</h3>
+            <p>
+              Grossly Polluting Industries (GPIs) are those industrial units having potential to generate pollution load of 100 kg/day and/or handling Hazardous Chemicals as specified under The Manufacture, Storage and Import of Hazardous Chemical Rules of 1989 and have potential to discharge into surface water bodies. To ensure compliance of effluent discharge standards by about 2357 GPIs having potential to discharge their effluent into river Ganga and its tributaries through drainage system and adequacy of functional effluent treatment plant (ETP), a programme of inspection of all GPIs has been taken up by CPCB. CPCB has engaged services of reputed technical institutes to ensure inspection of all GPIs operating in river Ganga main stem states and Yamuna basin.
+            </p>
+            <p>
+              The team comprises of experts from technical institutes and officials from State Pollution Control Boards (SPCBs), State Mission Clean Ganga (SMCGs) and District Ganga Committees (DGCs). Inspection reports are provided to SPCBs for their scrutiny and action based on compliance status. 
+            </p>
+            <p>
+            In 2020, about 1277 GPIs located in Yamuna river basin are also included for compliance verification. CPCB in consultation with concern SPCBs/SPCCs carried out inventorization of 1080 nos. of GPIs in Ganga main stem and 1277 GPIs in Yamuna basin. Inspection of grossly polluted industries (GPIs) located in river Ganga basin including river Yamuna in seven states i.e. Uttarakhand, Haryana, Delhi Uttar Pradesh, Bihar, Jharkhand and West Bengal is commenced from October, 2020. The status of inspection carried out by expert technical institutes and action taken by concerned SPCBs/PCC in 2020-21 is as below.
+            </p>
             <Table>
             <thead>  
                 <tr>
                   <Th>S. No.</Th>
-                  <Th>State</Th>
+                  <Th>States</Th>
                   <Th>Total No. of GPIs</Th>
-                  <Th>Inspection Completed by TPAs</Th>
-                  <Th>Report Submitted to SPCBs/PCC</Th>
-                  <Th>Action Completed by SPCBs/PCC</Th>
+                  <Th>Inspection Completed</Th>
+                  <Th>Action initiated by SPCBs/PCC</Th>
                   <Th>Complied</Th>
-                  <Th>Non Complied</Th>
-                  <Th>Temporary Close</Th> 
-                  <Th>Permanent Close</Th>
-                  <Th>Action pending with SPCBs/PCC for more than 15 days</Th>
-                  <Th>Action pending with SPCBs/PCC for more than 30 days</Th>       
+                  <Th>Not Complied</Th>
+                  <Th>Temporarily Closed</Th> 
+                  <Th>Permanently Closed</Th>
+                  <Th>Action pending with SPCBs/PCC</Th>
                 </tr>
             </thead>
             <tbody>
-                   {data.slice(0, 7).map((item,i) => (
+                   {data.map((item,i) => (
                     <Tr key={i}>
                       <Td>{i+1}</Td>
-                      <Td>{item.state}</Td>
-                      <Td>{item.totalGPIs}</Td>
-                      <Td>{item.insCompletedByTPAs}</Td>
-                      <Td>{item.reportSubToSPCB}</Td>                    
-                      <Td>{item.actionCompleted}</Td>
+                      <Td>{item.STATE}</Td>
+                      <Td>{item.Total_Number_of_GPIs}</Td>
+                      <Td>{item.Inspection_completed}</Td>
+                      <Td>{item.Action_initiated_by_SPCB_PCC}</Td>                    
                       <Td>{item.Complied}</Td>
-                      <Td>{item.NonComplied}</Td>
-                      <Td>{item.temporaryClose}</Td>
-                      <Td>{item.permanentClose}</Td>
-                      <Td>{item.actionPending15}</Td>
-                      <Td>{item.actionPending30}</Td> 
+                      <Td>{item.Not_Complied}</Td>
+                      <Td>{item.Temporary_closed}</Td>
+                      <Td>{item.Permanently_closed}</Td>
+                      <Td>{item.Action_pending_with_SPCB_PCC}</Td>
                     </Tr>
                     ))}
               </tbody>
             </Table>
-            <h3>Compliance status Yamuna GPIs</h3>
+            {/* <h3>Compliance status Yamuna GPIs</h3>
             <Table>
               <tbody>  
                 <tr>
@@ -421,7 +426,7 @@ export const PublicLink = () => {
                       <Td>1277</Td>
                     </Tr>
               </tbody>
-            </Table>
+            </Table> */}
             {/* <a href="https://infogile.com/">Infogile</a> */}
           </>
     </div>
