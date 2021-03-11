@@ -104,42 +104,42 @@ export const ComplianceStatusList = () => {
                       <Td>{num++}</Td>
                       <Td>{state.statename}</Td>
                       <Td>{state.actioncompleted && 
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/actioncompleted`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/actioncompleted`}>
                           {state.actioncompleted}
                         </ReportLink>
                       }</Td>
                       <Td>{state.complied && 
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/complied`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/complied`}>
                           {state.complied}
                         </ReportLink>
                       }</Td>
                       <Td>{state.tempclose &&
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tempclose`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tempclose`}>
                           {state.tempclose}
                         </ReportLink>
                       }</Td>
                       <Td>{state.permanentclose &&
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/permanentclose`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/permanentclose`}>
                           {state.permanentclose}
                         </ReportLink>
                       }</Td>
                       <Td>{state.showcausenotice &&
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/showcausenotice`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/showcausenotice`} >
                           {state.showcausenotice}
                         </ReportLink>
                       }</Td>
                       <Td>{state.closerdirection &&
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closerdirection`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closerdirection`}>
                           {state.closerdirection}
                         </ReportLink>
                       }</Td>
                       <Td>{state.scnwithdrawn && 
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tscnwithdrawn`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/tscnwithdrawn`}>
                           {state.scnwithdrawn}
                         </ReportLink>
                       }</Td>
                       <Td>{state.closurerevoke &&
-                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closurerevoke`} target="_blank">
+                        <ReportLink to={`/headoffice/compliance-status/${state.title}/${state.statename}/closurerevoke`}>
                           {state.closurerevoke}
                         </ReportLink>
                       }</Td>
