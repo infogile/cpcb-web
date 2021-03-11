@@ -145,32 +145,32 @@ const params = useParams();
                         <Tr>
                             <Td>{state.state}</Td>
                             <Td>{state.totalAlloted &&
-                                <ReportLink to={`/headoffice/statewise/${state.title}/${state.state}/totalAlloted`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${state.title}/${state.state}/totalAlloted`}>
                                     {state.totalAlloted}
                                 </ReportLink>
                             }</Td>
                             <Td>{state.pending  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/pending`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/pending`}>
                                     {state.pending}
                                 </ReportLink>
                             }</Td>
                             <Td>{state.fieldReportSubmitted  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/fieldReportSubmitted`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/fieldReportSubmitted`}>
                                     {state.fieldReportSubmitted}
                                 </ReportLink>
                             }</Td>
                             <Td>{state.inspectionReportSubmitted  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/inspectionReportSubmitted`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/inspectionReportSubmitted`}>
                                     {state.inspectionReportSubmitted}
                                 </ReportLink>
                             }</Td>
                             <Td>{state.lessthan15days  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/lessthan15days`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/lessthan15days`}>
                                     {state.lessthan15days}
                                 </ReportLink>
                             }</Td>
                             <Td>{state.morethan15days  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/morethan15days`} target="_blank">
+                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/morethan15days`}>
                                     {state.morethan15days}
                                 </ReportLink>
                             }</Td>

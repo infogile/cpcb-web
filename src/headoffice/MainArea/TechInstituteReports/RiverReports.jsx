@@ -147,32 +147,32 @@ const params = useParams();
                         <Tr>
                             <Td>{insts.insts.toUpperCase()}</Td>
                             <Td>{insts.totalAlloted &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/totalAlloted`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/totalAlloted`}>
                                     {insts.totalAlloted}
                                 </ReportLink>
                             }</Td>
                             <Td>{insts.pending  &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/pending`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/pending`}>
                                     {insts.pending}
                                 </ReportLink>
                             }</Td>
                             <Td>{insts.fieldReportSubmitted  &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/fieldReportSubmitted`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/fieldReportSubmitted`}>
                                     {insts.fieldReportSubmitted}
                                 </ReportLink>
                             }</Td>
                             <Td>{insts.inspectionReportSubmitted  &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/inspectionReportSubmitted`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/inspectionReportSubmitted`}>
                                     {insts.inspectionReportSubmitted}
                                 </ReportLink>
                             }</Td>
                             <Td>{insts.lessthan15days  &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/lessthan15days`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/lessthan15days`}>
                                     {insts.lessthan15days}
                                 </ReportLink>
                             }</Td>
                             <Td>{insts.morethan15days  &&
-                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/morethan15days`} target="_blank">
+                                <ReportLink to={`/headoffice/tir/${params.river_name}/${insts.insts}/morethan15days`}>
                                     {insts.morethan15days}
                                 </ReportLink>
                             }</Td>
