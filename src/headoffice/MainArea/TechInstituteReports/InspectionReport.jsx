@@ -85,7 +85,7 @@ export const InspectionReport = () => {
                     <Th>{field.title}</Th>
                     {field.link && field.value && (
                       <Td>
-                        <a href={field.value} target="_blank">
+                        <a href={field.value}>
                           {field.title}
                         </a>
                       </Td>

@@ -145,7 +145,7 @@ export const FactoryLists = () => {
               <FieldReport>
               {status === 0 && "Pending"}
               {status > 0 && (
-                  <ReportLink target="_blank" to={`/headoffice/dashboard/${params.status}/${params.river}/field_report/${id}`} >
+                  <ReportLink to={`/headoffice/dashboard/${params.status}/${params.river}/field_report/${id}`} >
                     View Field Report
                   </ReportLink>
               )} 
@@ -153,7 +153,7 @@ export const FactoryLists = () => {
               <InspectionReport>
               {(status === 1 || status === 0) && "Pending"}
               {status >= 2 && (
-                <ReportLink to={`/headoffice/dashboard/${params.status}/${params.river}/inspection_report/${id}`} target="_blank">
+                <ReportLink to={`/headoffice/dashboard/${params.status}/${params.river}/inspection_report/${id}`} >
                     View Report
                 </ReportLink>
               )}
