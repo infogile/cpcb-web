@@ -22,7 +22,7 @@ export const TechInstituteReports = ({ expand })=>{
             <Route exact path="/headoffice/tir/:river_name/sectorwise">
                 <SectorWise title="Technical Institute Reports: Sector Wise"/>
             </Route>
-            <Route path="/headoffice/tir/:river_name/sectorwise/field_report/:id" target="_blank">
+            <Route path="/headoffice/tir/:river_name/sectorwise/field_report/:id">
                 <FieldReport />
             </Route>
             <Route path="/headoffice/tir/:river_name/sectorwise/inspection_report/:id">
