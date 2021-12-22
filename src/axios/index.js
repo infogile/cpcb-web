@@ -3,7 +3,7 @@ import axios from "axios";
 export default axios.create({
  // baseURL: window.location.protocol + "//localhost:80/api",
  // baseURL: window.location.protocol + "//localhost:9090/api",
- baseURL: "https://admin.gangagpis.in/webportal",
+ baseURL: true ? "https://admin.gangagpis.in/webportal" : "http://localhost:8000/webportal",
 
   headers: {
     authorization: sessionStorage.getItem("token")

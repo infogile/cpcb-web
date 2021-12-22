@@ -15,12 +15,18 @@ export function getActiveInspections() {
         const responseData = res.data;
         let data = [];
         if (responseData) {
-          console.log("hehe this is data");
-          data = responseData.map((inspection) => ({
-            id: inspection._id,
-            code: inspection.factory.unitcode,
-            name: inspection.factory.name,
-          }));
+          console.log("response data : ", responseData);
+          for (let x = 0; x < responseData.length; x++) {
+            console.log("inspection : ", responseData[x]);
+            if (responseData[x].status > 0) {
+              let temp_data = {
+                id: responseData[x]._id,
+                code: responseData[x].factory.unitcode,
+                name: responseData[x].factory.name,
+              }
+              data.push(temp_data)
+            }
+          }
         }
         console.log(data)
         dispatch({ ...activeInspectionSuccess(), data });
