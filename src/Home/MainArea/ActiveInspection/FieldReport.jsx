@@ -59,15 +59,26 @@ const Td = styled.td`
 export const FieldReport = () => {
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
   const params = useParams();
+
+  console.log(params)
+
+  // window.localStorage.setItem('localLoader', 'false');
+  
   useEffect(() => {
-    const id = params.id;
+    let id = params.id;
     store.dispatch(getFieldReport(id));
+    console.log("after store dispatch in field report");
   }, [params.id]);
+  
   if (isLoading) {
     return <Loading />;
   }
+  if (!data) {
+    return <Text as="h4">No Data Available for given Inspection</Text>
+  }
   return (
     <FieldReportStyled>
+      {console.log("this is the dataaaaaaaaaaaaaaa : ", data)}
       <Text as="h3" marginLeft="10px">
         Field Report
       </Text>
@@ -78,9 +89,9 @@ export const FieldReport = () => {
             {data.fields &&
               data.fields.map((field) => {
                 return (
-                  <tr key={field.title}>
+                  <tr key={field.id}>
                     <Th>{field.title}</Th>
-                    <Td>{field.value || "−"}</Td>
+                    <Td>{field.value || "-"}</Td>
                   </tr>
                 );
               })}

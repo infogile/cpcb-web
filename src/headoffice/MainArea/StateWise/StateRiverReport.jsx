@@ -40,7 +40,7 @@ text-align: center;
 margin-bottom: 40px;
 `;
 
-const Table= styled.table`
+const Table = styled.table`
 margin-left: 20px;
 font-family: Arial, Helvetica, sans-serif;
 border-collapse: collapse;
@@ -92,95 +92,96 @@ const ReportLink = styled(Link)`
   padding: 10px 0px;
 `;
 
-export const StateRiverReports =({ title })=>{
-const params = useParams();
-  const { isLoading, data } = useSelector((state) => state.stateWiseReducers);
+export const StateRiverReports = ({ title }) => {
+    const params = useParams();
+    const { isLoading, data } = useSelector((state) => state.stateWiseReducers);
     useEffect(() => {
         store.dispatch(getStateWise(params.river_name || ""));
     }, [params.river_name]);
-    
+
     if (isLoading) {
         return <Loading />;
     }
     return (
-    <>
-    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50" left="400px">
-        <header>
-            <Head>
-                <h3 style={{ position:"absolute", left:"30px" ,fontSize: "30px", fontFamily:"Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif"}}>
-                    <strong>{title}</strong>
-                </h3>
-            </Head>      
-        </header>
-        <div>
-            {data.map((state) => {
-                return (
-                    <Graph>
-                        <VictoryPie 
-                            colorScale={["tomato", "green", "gold"]}
-                            data={[
-                                { x: `Total Alloted:${state.totalAlloted}`, y: state.totalAlloted },
-                                state.inspectionReportSubmitted >= 1? ({ x: `Insp Report:${state.inspectionReportSubmitted}`, y: state.inspectionReportSubmitted } ) : (null ),
-                                state.fieldReportSubmitted >= 1?{ x: `Field Report:${state.fieldReportSubmitted}`, y: state.fieldReportSubmitted } : null,
-                            ]}
-                            style={{labels: {fontSize: 17, marginTop: "5px"}, }}/>
-                        <p style={{ marginTop :  "25px" }}>{state.state}</p> 
-                    </Graph>
-                );
-            })}         
-        </div>
-        <div class="container" style={{marginBottom:"100px", marginRight:"20px", marginTop: "100px"}}>
-            <Table>
-                <Tr>
-                    <Th></Th>
-                    <Th>Total Inspection</Th>
-                    <Th>Inspection Pending</Th>
-                    <Th>Field Report Submitted</Th>
-                    <Th>Inspection Report Submitted</Th>
-                    <Th>Report Submitted WiThin 15 Days</Th>
-                    <Th>Submitted More Than 15 Days</Th>
-                </Tr>
-                {data && data.map((state)=>{
-                    return (
+        <>
+            {console.log("StateWise : " ,data)}
+            <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50" left="400px">
+                <header>
+                    <Head>
+                        <h3 style={{ position: "absolute", left: "30px", fontSize: "30px", fontFamily: "Avantgarde, TeX Gyre Adventor, URW GoThic L, sans-serif" }}>
+                            <strong>{title}</strong>
+                        </h3>
+                    </Head>
+                </header>
+                <div>
+                    {data.map((state) => {
+                        return (
+                            <Graph>
+                                <VictoryPie
+                                    colorScale={["tomato", "green", "gold"]}
+                                    data={[
+                                        { x: `Total Alloted:${state.totalAlloted}`, y: state.totalAlloted },
+                                        state.inspectionReportSubmitted >= 1 ? ({ x: `Insp Report:${state.inspectionReportSubmitted}`, y: state.inspectionReportSubmitted }) : (null),
+                                        state.fieldReportSubmitted >= 1 ? { x: `Field Report:${state.fieldReportSubmitted}`, y: state.fieldReportSubmitted } : null,
+                                    ]}
+                                    style={{ labels: { fontSize: 17, marginTop: "5px" }, }} />
+                                <p style={{ marginTop: "25px" }}>{state.state}</p>
+                            </Graph>
+                        );
+                    })}
+                </div>
+                <div class="container" style={{ marginBottom: "100px", marginRight: "20px", marginTop: "100px" }}>
+                    <Table>
                         <Tr>
-                            <Td>{state.state}</Td>
-                            <Td>{state.totalAlloted &&
-                                <ReportLink to={`/headoffice/statewise/${state.title}/${state.state}/totalAlloted`}>
-                                    {state.totalAlloted}
-                                </ReportLink>
-                            }</Td>
-                            <Td>{state.pending  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/pending`}>
-                                    {state.pending}
-                                </ReportLink>
-                            }</Td>
-                            <Td>{state.fieldReportSubmitted  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/fieldReportSubmitted`}>
-                                    {state.fieldReportSubmitted}
-                                </ReportLink>
-                            }</Td>
-                            <Td>{state.inspectionReportSubmitted  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/inspectionReportSubmitted`}>
-                                    {state.inspectionReportSubmitted}
-                                </ReportLink>
-                            }</Td>
-                            <Td>{state.lessthan15days  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/lessthan15days`}>
-                                    {state.lessthan15days}
-                                </ReportLink>
-                            }</Td>
-                            <Td>{state.morethan15days  &&
-                                <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/morethan15days`}>
-                                    {state.morethan15days}
-                                </ReportLink>
-                            }</Td>
+                            <Th></Th>
+                            <Th>Total Inspection</Th>
+                            <Th>Inspection Pending</Th>
+                            <Th>Field Report Submitted</Th>
+                            <Th>Inspection Report Submitted</Th>
+                            <Th>Report Submitted WiThin 15 Days</Th>
+                            <Th>Submitted More Than 15 Days</Th>
                         </Tr>
-                    );
-                })}
-            </Table>
-        </div>
-    </body>
-    </>
+                        {data && data.map((state) => {
+                            return (
+                                <Tr>
+                                    <Td>{state.state}</Td>
+                                    <Td>{state.totalAlloted &&
+                                        <ReportLink to={`/headoffice/statewise/${state.title}/${state.state}/totalAlloted`}>
+                                            {state.totalAlloted}
+                                        </ReportLink>
+                                    }</Td>
+                                    <Td>{state.pending &&
+                                        <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/pending`}>
+                                            {state.pending}
+                                        </ReportLink>
+                                    }</Td>
+                                    <Td>{state.fieldReportSubmitted &&
+                                        <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/fieldReportSubmitted`}>
+                                            {state.fieldReportSubmitted}
+                                        </ReportLink>
+                                    }</Td>
+                                    <Td>{state.inspectionReportSubmitted &&
+                                        <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/inspectionReportSubmitted`}>
+                                            {state.inspectionReportSubmitted}
+                                        </ReportLink>
+                                    }</Td>
+                                    <Td>{state.lessthan15days &&
+                                        <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/lessthan15days`}>
+                                            {state.lessthan15days}
+                                        </ReportLink>
+                                    }</Td>
+                                    <Td>{state.morethan15days &&
+                                        <ReportLink to={`/headoffice/statewise/${params.river_name}/${state.state}/morethan15days`}>
+                                            {state.morethan15days}
+                                        </ReportLink>
+                                    }</Td>
+                                </Tr>
+                            );
+                        })}
+                    </Table>
+                </div>
+            </body>
+        </>
     );
 };
 

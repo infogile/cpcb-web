@@ -4,10 +4,12 @@ import axios from "../../axios"
 export function getComplianceStatus() {
     return (dispatch) => {
         dispatch(initcomplianceAction());
+        console.log("getComplianceStatus was just called : )")
         axios
             .get('/inspection/allinspection')
             .then((res) => {
                 const resdata = res.data;
+                console.log("Got some data : ", resdata);
                 let data = []
                 const rivers = ["ganga", "yamuna"];
                 if (resdata && resdata.length > 0) {
@@ -78,6 +80,7 @@ export function getComplianceStatus() {
             })
             .catch((err) => {
                 console.log(err)
+                console.log("there is an errorrrrrrrr")
                 dispatch(compliancestatusError());
             });
     };

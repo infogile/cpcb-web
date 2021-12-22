@@ -8,20 +8,27 @@ import axios from "../../axios";
 export function submitInspectionform(id, formdata) {
   return (dispatch) => {
     dispatch(initInspectionformAction());
+    let _id = window.location.pathname.split("/");
+    _id = _id[_id.length - 1];
     const form = {
+      inspectionId : _id,
       status: 2,
       teamNames: formdata.teamnames,
       finalRecommendation: formdata.finalrecommendation,
       complianceStatus: formdata.compliancestatus,
+
       wasteWaterGeneration: formdata.watergeneration,
       wasteWaterDischarge: formdata.waterdischarge,
+
       bod: formdata.BOD,
       bodLoad: formdata.BODload,
       cod: formdata.COD,
       codLoad: formdata.CODload,
+
       otherChars: formdata.othercharacterestics,
       nonInstallationofOCEMS: formdata.nonInstallationofOCEMS,
       temperedOCEMS: formdata.temperedOCEMS,
+      
       dissentBypassArrangement: formdata.dissentBypassArrangement,
       provision: formdata.provision,
       defunctETP: formdata.defunctETP,
@@ -34,12 +41,12 @@ export function submitInspectionform(id, formdata) {
       invalidCTO: formdata.invalidCTO,
       inspectionDate: formdata.inspectionDate,
       inspectionReportUploadDate: formdata.inspectionReportUploadDate,
-      report: {
-        files: Object.keys(formdata.files).map((file) => formdata.files[file]),
-      },
+      // report: {
+      //   files: Object.keys(formdata.files).map((file) => formdata.files[file]),
+      // },
     };
     return axios
-      .put(`/inspection/${id}`, form)
+      .put(`/inspection/finalreportupload`, form)
       .then((res) => {
         dispatch({ ...inspectionformActionSuccess() });
         return res;

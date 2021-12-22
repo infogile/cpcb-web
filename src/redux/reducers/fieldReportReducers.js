@@ -17,7 +17,7 @@ export function fieldReportReducers(
       };
     case "ERROR_FIELD_REPORT":
       return {
-        ...state,
+        state,
         isLoading: false,
       };
     default:

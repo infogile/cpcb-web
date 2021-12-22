@@ -12,7 +12,7 @@ export function getInspections() {
       .post(`/inspection/myallinspection`)
       .then((res) => {
         const data = res.data;
-        const rivers = ["ganga", "yamuna"];
+        const rivers = ["Ganga", "Yamuna"];
         const dashboard = {};
         if (data && data.length > 0) {
           data.forEach((inspection) => {
@@ -34,7 +34,7 @@ export function getInspections() {
                 } else if (inspection.status === 1) {
                   dashboard[river].fieldReportSubmitted =
                     dashboard[river].fieldReportSubmitted + 1;
-                } else if (inspection.status === 2 || 3) {
+                } else if (inspection.status === 2 || inspection.status === 3) {
                   dashboard[river].inspectionReportSubmitted =
                     dashboard[river].inspectionReportSubmitted + 1;
                 }
@@ -45,6 +45,7 @@ export function getInspections() {
         const dashboardArray = Object.keys(dashboard).map(
           (river) => dashboard[river]
         );
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaa dashboard : ", dashboardArray);
         dispatch({ ...dashboardSuccess(), data: dashboardArray });
       })
       .catch((err) => {

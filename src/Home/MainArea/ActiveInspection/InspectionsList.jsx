@@ -67,16 +67,17 @@ const List = styled.div`
 export const InspectionsList = ({ title }) => {
   const { data, isLoading } = useSelector(
     (state) => state.activeInspectionReducers
-  );
-  useEffect(() => {
-    store.dispatch(getActiveInspections());
-  }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-  return (
+    );
+    useEffect(() => {
+      store.dispatch(getActiveInspections());
+    }, []);
+    
+    if (isLoading) {
+      return <Loading />;
+    }
+    return (
     <>
+      {/* {window.location.reload} */}
       <Text as="h3" marginLeft="10px">
         Active Inspections
       </Text>
@@ -87,7 +88,7 @@ export const InspectionsList = ({ title }) => {
           <ListItemHeader>Field reports</ListItemHeader>
           <ListItemHeader>Inspection reports</ListItemHeader>
         </ListHeader>
-        {data.map(({ id, code, name }) => (
+        {data.map(({ id, code, name}) => (
           <ListItem key={id}>
             <UnitCode>{code}</UnitCode>
             <UnitName>{name}</UnitName>

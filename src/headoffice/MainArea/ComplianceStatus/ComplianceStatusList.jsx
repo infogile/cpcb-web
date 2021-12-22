@@ -68,13 +68,14 @@ export const ComplianceStatusList = () => {
   const params = useParams();
   const history = useHistory();
   const { isLoading, data } = useSelector((state) => state.complianceStatusReducers);
-    useEffect(() => {
-        store.dispatch(getComplianceStatus());
-    }, []);
-    if (isLoading) {
-        return <Loading />;
-    }
-    var i=0;
+  useEffect(() => {
+    store.dispatch(getComplianceStatus());
+  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
+  var i=0;
+  console.log("aaaaaaaa : ",data);
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
       <h2>Compliance status</h2>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useLocation } from "react";
 import { FileInput } from "./Input";
 import { CancelToken } from "axios";
 import axios from "../axios";
@@ -16,11 +16,16 @@ export const UploadReport = ({
   const [fileLink, setFileLink] = useState("");
   const [source, setSource] = useState(CancelToken.source());
   const fileRef = useRef(null);
+  // const location = useLocation();
+  let _id = window.location.pathname.split("/")
+  console.log("id : ", _id[_id.length - 1])
+  _id = _id[_id.length - 1]
   useEffect(() => {
     if (file) setProgress(101);
     setFileLink(file);
   }, [file]);
   const onClick = () => {
+    // console.log("Path Location : ", location.pathname);
     const file = fileRef.current.files[0];
     if (file) {
       const formData = new FormData();
@@ -28,6 +33,8 @@ export const UploadReport = ({
       const fileExtention =
         filename.length > 1 ? filename[filename.length - 1] : "";
       formData.append(name, file, `${name}.${fileExtention}`);
+      formData.append("inspectionId", _id)
+      console.log(`/inspection/${name}`)
       axios
         .post(`/inspection/${name}`, formData, {
           headers: {

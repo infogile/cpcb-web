@@ -9,8 +9,9 @@ import axios from "../../axios";
 export function getInspectionReport(id) {
   return (dispatch) => {
     dispatch(initInspectionReportAction());
+    let MEDIA_URL = "https://cloverbuddies.sgp1.digitaloceanspaces.com/cloverbuddies/media/"
     axios
-      .get(`/inspection/getinspectionreport/${id}`)
+      .get(`/inspection/getinspectionreport?id=${id}`)
       .then((res) => {
         const responseData = res.data;
         let data = {};
@@ -34,6 +35,7 @@ export function getInspectionReport(id) {
           2: "Temporarily Closed",
           3: "Permanent Closed",
         };
+        console.log("response data bae : ", responseData)
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
@@ -63,7 +65,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("consentcopy")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -75,7 +77,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("inspectionreport")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -87,7 +89,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("airconsent")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -99,7 +101,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("waterconsent")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -111,7 +113,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("cgwaNoc")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -123,7 +125,7 @@ export function getInspectionReport(id) {
                 responseData.report?.files &&
                 responseData.report.files.reduce((r, cr) => {
                   if (cr.includes("hazardousconsent")) {
-                    return cr;
+                    return MEDIA_URL + cr;
                   }
                   return r;
                 }, ""),
@@ -174,11 +176,7 @@ export function getInspectionReport(id) {
             },
             {
               title: "Contacted Person",
-              value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc
-                    .map((p) => p.name + ", " + p.number + ", " + p.email)
-                    .join(",")
-                : "",
+              value: responseData.fieldReport.poc.name + ", " + responseData.fieldReport.poc.number + ", " + responseData.fieldReport.poc.email
             },
             {
               title: "Date of Inspection",

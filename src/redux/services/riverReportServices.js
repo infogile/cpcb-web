@@ -12,6 +12,7 @@ export function getRiverReport(river){
         .get('/inspection/allinspection')
         .then((res) => {
             const data = res.data;
+            console.log("This is the total data there is to show : ", data);
             const inst = ["iitkgp", "iitbhu", "iitr", "iitd", "mnit", "nitp"]
             const institutes = [];
             if (data && data.length > 0) {

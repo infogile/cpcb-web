@@ -9,7 +9,7 @@ export function getFieldReport(id) {
   return (dispatch) => {
     dispatch(initFieldReportAction());
     axios
-      .get(`/inspection/getfieldreport/${id}`)
+      .get(`/inspection/getfieldreport?inspectionId=${id}`)
       .then((res) => {
         const responseData = res.data;
         let data = {};
@@ -28,6 +28,7 @@ export function getFieldReport(id) {
           dateOfInspection = `${da}-${mo}-${ye}`;
         }
         if (responseData) {
+          console.log(responseData)
           data.name = responseData.factory.name;
           data.status = responseData.status;
           data.updatedAt = responseData.updatedAt;
@@ -40,18 +41,16 @@ export function getFieldReport(id) {
             { title: "Unit Sector", value: responseData.factory.sector.name },
             {
               title: "Latitude",
-              value: responseData.attendance?.entrylocation?.coordinates[0],
+              value: responseData.attendance?.entrylocation?.lat,
             },
             {
               title: "Longitude",
-              value: responseData.attendance?.entrylocation?.coordinates[1],
+              value: responseData.attendance?.entrylocation?.long,
             },
             {
               title: "Contacted Person",
               value: responseData.fieldReport.poc
-                ? responseData.fieldReport.poc
-                    .map((p) => p.name + ", " + p.number + ", " + p.email)
-                    .join(",")
+                ? responseData.fieldReport.poc.name + ", " + responseData.fieldReport.poc.number + ", " + responseData.fieldReport.poc.email
                 : "",
             },
             {
@@ -192,10 +191,12 @@ export function getFieldReport(id) {
             },
           ];
         }
+        console.log("dipatch in fieldreportservice : ", data);
         dispatch({ ...fieldReportSuccess(), data });
       })
       .catch((err) => {
         console.log(err);
+        // window.location.reload();
         dispatch(fieldReportError());
       });
   };

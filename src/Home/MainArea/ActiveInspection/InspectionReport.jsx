@@ -62,6 +62,9 @@ export const InspectionReport = ({ title }) => {
   if (isLoading) {
     return <Loading />;
   }
+  if (!data) {
+    return <Text as="h4">No Field Report available for given Inspection</Text>  
+  }
   return (
     <InspectionReportStyled>
       <Text as="h3" marginLeft="10px">
