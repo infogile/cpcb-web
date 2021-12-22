@@ -60,14 +60,14 @@ export const FieldReport = () => {
   const { data, isLoading } = useSelector((state) => state.fieldReportReducers);
   const params = useParams();
 
-  console.log(params)
+  // console.log(params)
 
   // window.localStorage.setItem('localLoader', 'false');
   
   useEffect(() => {
     let id = params.id;
     store.dispatch(getFieldReport(id));
-    console.log("after store dispatch in field report");
+    // console.log("after store dispatch in field report");
   }, [params.id]);
   
   if (isLoading) {
@@ -78,7 +78,7 @@ export const FieldReport = () => {
   }
   return (
     <FieldReportStyled>
-      {console.log("this is the dataaaaaaaaaaaaaaa : ", data)}
+      {/* {console.log("this is the dataaaaaaaaaaaaaaa : ", data)} */}
       <Text as="h3" marginLeft="10px">
         Field Report
       </Text>

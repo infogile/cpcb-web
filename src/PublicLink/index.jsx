@@ -63,7 +63,7 @@ export const PublicLink = () => {
       .catch((err) => console.warn(err));
   }, []);
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div style={{ marginBottom: "100px", marginRight: "261px", marginLeft:"233px" }}>

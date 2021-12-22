@@ -112,7 +112,7 @@ export const FactoryLists = () => {
 
   const { isLoading, factorylist } = useSelector((state) => state.factoryReducers);
     useEffect(() => {
-      console.log("params : ", params)
+      // console.log("params : ", params)
       store.dispatch(getFactorylist(params.status, params.river, params.state, params.insts, params.states));
     }, []);
     if (isLoading) {

@@ -45,11 +45,11 @@ export function getInspections() {
         const dashboardArray = Object.keys(dashboard).map(
           (river) => dashboard[river]
         );
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaa dashboard : ", dashboardArray);
+        // console.log("aaaaaaaaaaaaaaaaaaaaaaaaa dashboard : ", dashboardArray);
         dispatch({ ...dashboardSuccess(), data: dashboardArray });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(dashboardError());
       });
   };

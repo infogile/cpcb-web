@@ -36,11 +36,11 @@ export function getSectorWise(river){
             const sectorWiseArray = Object.keys(sectors).map(
                 (sector) => sectors[sector]
               );
-              console.log(sectorWiseArray)
+            //   console.log(sectorWiseArray)
               dispatch({ ...SectorWiseSuccess(), data : sectorWiseArray });
           })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
             dispatch(SectorWiseError());
         });
     };

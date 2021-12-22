@@ -75,7 +75,7 @@ export const ComplianceStatusList = () => {
     return <Loading />;
   }
   var i=0;
-  console.log("aaaaaaaa : ",data);
+  // console.log("aaaaaaaa : ",data);
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
       <h2>Compliance status</h2>

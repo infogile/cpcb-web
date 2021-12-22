@@ -44,7 +44,7 @@ export function getHeadofficedashboard(){
             dispatch({ ...HeadofficeDashboardSuccess(), data: dashboardArray });
           })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
             dispatch(HeadofficeDashboardError());
         });
     };

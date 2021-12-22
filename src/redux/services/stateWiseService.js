@@ -13,7 +13,7 @@ export function getStateWise(river){
         .then((res) => {
             const data = res.data;
             const states = [];
-            console.log("getStateWise Data : ", data);
+            // console.log("getStateWise Data : ", data);
             if (data && data.length > 0) {
               data.forEach((inspection) => {
                   if (inspection.factory.basin.name.includes(river)) {
@@ -63,12 +63,12 @@ export function getStateWise(river){
             const riverReportArray = Object.keys(states).map(
                 (state) => states[state]
               );
-                console.log("RiverReportArray : ", riverReportArray)
+                // console.log("RiverReportArray : ", riverReportArray)
             
               dispatch({ ...StateWiseSuccess(), data : riverReportArray });
           })
         .catch((err) => {
-            console.log("riverreportarrayaaaaaaaaaaaa : ", err)
+            // console.log("riverreportarrayaaaaaaaaaaaa : ", err)
             dispatch(StateWiseError());
         });
     };

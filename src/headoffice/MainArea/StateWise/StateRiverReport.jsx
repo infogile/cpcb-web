@@ -104,7 +104,7 @@ export const StateRiverReports = ({ title }) => {
     }
     return (
         <>
-            {console.log("StateWise : " ,data)}
+            {/* {console.log("StateWise : " ,data)} */}
             <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50" left="400px">
                 <header>
                     <Head>

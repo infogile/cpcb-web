@@ -25,7 +25,7 @@ export function tryLogin(username, password) {
         });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(loginError());
       });
     // setTimeout(() => dispatch(loginSuccess()), 2000);

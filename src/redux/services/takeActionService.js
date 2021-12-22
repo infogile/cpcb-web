@@ -38,7 +38,7 @@ export function getCompletedInspection(river_name) {
         dispatch({ ...getCompletedInspectionSuccess(), data });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(getCompletedInspectionError());
       });
   };
@@ -62,7 +62,7 @@ export function submitActionTakenform(id, formdata, submit = false) {
         return res;
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(submitActionFormError());
       });
   };

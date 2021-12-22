@@ -68,7 +68,7 @@ export function getShowAction(id) {
         dispatch({ ...ShowActionSuccess(), data });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(ShowActionError());
       });
   };

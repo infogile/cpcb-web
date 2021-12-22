@@ -28,7 +28,7 @@ export function getFieldReport(id) {
           dateOfInspection = `${da}-${mo}-${ye}`;
         }
         if (responseData) {
-          console.log(responseData)
+          // console.log(responseData)
           data.name = responseData.factory.name;
           data.status = responseData.status;
           data.updatedAt = responseData.updatedAt;
@@ -191,11 +191,11 @@ export function getFieldReport(id) {
             },
           ];
         }
-        console.log("dipatch in fieldreportservice : ", data);
+        // console.log("dipatch in fieldreportservice : ", data);
         dispatch({ ...fieldReportSuccess(), data });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         // window.location.reload();
         dispatch(fieldReportError());
       });

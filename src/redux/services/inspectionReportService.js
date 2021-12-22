@@ -35,7 +35,7 @@ export function getInspectionReport(id) {
           2: "Temporarily Closed",
           3: "Permanent Closed",
         };
-        console.log("response data bae : ", responseData)
+        // console.log("response data bae : ", responseData)
         if (responseData) {
           data.name = responseData.factory.name;
           data.status = responseData.status;
@@ -187,7 +187,7 @@ export function getInspectionReport(id) {
         dispatch({ ...inspectionReportSuccess(), data });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(inspectionReportError());
       });
   };

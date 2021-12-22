@@ -18,7 +18,7 @@ export const UploadReport = ({
   const fileRef = useRef(null);
   // const location = useLocation();
   let _id = window.location.pathname.split("/")
-  console.log("id : ", _id[_id.length - 1])
+  // console.log("id : ", _id[_id.length - 1])
   _id = _id[_id.length - 1]
   useEffect(() => {
     if (file) setProgress(101);
@@ -34,7 +34,7 @@ export const UploadReport = ({
         filename.length > 1 ? filename[filename.length - 1] : "";
       formData.append(name, file, `${name}.${fileExtention}`);
       formData.append("inspectionId", _id)
-      console.log(`/inspection/${name}`)
+      // console.log(`/inspection/${name}`)
       axios
         .post(`/inspection/${name}`, formData, {
           headers: {
@@ -55,7 +55,7 @@ export const UploadReport = ({
         })
         .catch((e) => {
           setProgress(-1);
-          console.log(e);
+          // console.log(e);
         });
     }
   };

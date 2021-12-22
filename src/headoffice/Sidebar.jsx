@@ -67,7 +67,7 @@ function Sidebar({ show, showItem, ...otherProps }) {
   };
 
   const history = useHistory();
-  console.log(history);
+  // console.log(history);
   return (
     <StyledSidebar show={show}>
         <NavItem to="/headoffice">

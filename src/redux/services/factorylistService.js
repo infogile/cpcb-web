@@ -37,7 +37,7 @@ export function getFactorylist(status, river, state, insts, states){
 
                 data.forEach((inspection) => {
                     var days = 0;
-                    console.log(states);
+                    // console.log(states);
                     if(inspection.factory.basin.name.includes(river) && 
                     ( (insts && inspection.assignedTo.username.split(".")[0].includes(insts) && !states) || 
                     (!insts && inspection.factory.district.state.name.includes(states)))){
@@ -129,7 +129,7 @@ export function getFactorylist(status, river, state, insts, states){
             dispatch({ ...factorylistSuccess(),  factorylist});
           })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
             dispatch(factorylistError());
         });
     };
