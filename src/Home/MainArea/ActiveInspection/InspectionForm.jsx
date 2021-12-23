@@ -174,7 +174,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
         onUploadComplete={onUploadComplete}
         onRemoveFile={onRemoveFile}
         name="consentcopy"
-        label="*Upload Consent Copy"
+        label="*Upload Log Book and Other Documents"
       />
       <UploadReport
         onUploadComplete={onUploadComplete}
@@ -269,7 +269,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
       <Grid templateColumns="auto auto">
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "Waste water generation" }}
+          labelProps={{ label: "Waste water generation (in KLD)" }}
           inputProps={{
             name: "watergeneration",
             id: "watergeneration",
@@ -281,7 +281,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
         />
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "Waste water discharge" }}
+          labelProps={{ label: "Waste water discharge (in KLD)" }}
           inputProps={{
             name: "waterdischarge",
             id: "waterdischarge",
@@ -295,7 +295,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
       <Grid templateColumns="auto auto">
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "BOD" }}
+          labelProps={{ label: "BOD in (mg/L)" }}
           inputProps={{
             name: "BOD",
             id: "BOD",
@@ -307,7 +307,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
         />
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "BOD Load" }}
+          labelProps={{ label: "BOD Load in (kg/day)" }}
           inputProps={{
             name: "BODload",
             id: "BODload",
@@ -321,7 +321,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
       <Grid templateColumns="auto auto">
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "COD" }}
+          labelProps={{ label: "COD in (mg/L)" }}
           inputProps={{
             name: "COD",
             id: "COD",
@@ -333,7 +333,7 @@ const InspectionForm = ({ status, inspectionDate }) => {
         />
         <LabeledInput
           marginTop="30px"
-          labelProps={{ label: "COD Load" }}
+          labelProps={{ label: "COD Load in (kg/day)" }}
           inputProps={{
             name: "CODload",
             id: "CODload",
