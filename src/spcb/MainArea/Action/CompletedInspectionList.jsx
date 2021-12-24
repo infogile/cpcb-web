@@ -60,6 +60,10 @@ export const CompletedInspectionList = () => {
   if (isLoading) {
     return <Loading />;
   }
+  if (data.length === 0) {
+    return <h2>No data to be shown yet !</h2>
+  }
+  console.log("This is the spcb data : ", data);
   var num = 1;
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>

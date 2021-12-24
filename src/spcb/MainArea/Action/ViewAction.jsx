@@ -65,6 +65,7 @@ export const ViewAction = () => {
     const id = params.id;
     store.dispatch(getShowAction(id));
   }, [params.id]);
+  let MEDIA_URL = "https://cloverbuddies.sgp1.digitaloceanspaces.com/cloverbuddies/media/"
   if (isLoading) {
     return <Loading />;
   }
@@ -91,7 +92,7 @@ export const ViewAction = () => {
                             return (
                               report && (
                                 <Div marginTop="10px">
-                                  <a href={report} target="_blank">
+                                  <a href={MEDIA_URL + report} target="_blank">
                                     {`${field.title} ${i + 1}`}
                                   </a>
                                 </Div>

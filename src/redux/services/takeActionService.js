@@ -53,10 +53,12 @@ export function submitActionTakenform(id, formdata, submit = false) {
         formdata.showcausenoticestatus === "showcausenotice",
       date: formdata.date,
       finalRecommendation: formdata.finalrecommendation,
-      reports: formdata.actionreports,
+      // reports: formdata.actionreports,
+      inspectionId : id
     };
+    console.log(`/inspection/action${submit ? "/submit" : ""}${submit ? `?inspectionId=${id}` : ""}`)
     return axios
-      .put(`/inspection/action/${id}${submit ? "/submit" : ""}`, form)
+      .post(`/inspection/action${submit ? "/submit" : ""}`, form)
       .then((res) => {
         dispatch({ ...submitActionFormSuccess() });
         return res;
