@@ -9,7 +9,7 @@ export function getShowAction(id) {
   return (dispatch) => {
     dispatch(initShowActionAction());
     axios
-      .get(`/inspection/getinspectionreport/${id}`)
+      .get(`/inspection/getinspectionreport?id=${id}`)
       .then((res) => {
         const responseData = res.data;
         let data = {};
