@@ -15,6 +15,7 @@ export function getCompletedInspection(river_name) {
       .get(`inspection/mycompletedinspections`)
       .then((res) => {
         const responseData = res.data;
+        console.log("This is the backend data", responseData);
         let data = [];
         if (responseData && responseData.length > 0) {
           responseData.forEach((inspection) => {
@@ -31,6 +32,9 @@ export function getCompletedInspection(river_name) {
                 username:
                   inspection.assignedTo &&
                   inspection.assignedTo.username.split(".")[0].toUpperCase(),
+                STATE: inspection.factory.state.name,
+                STATE_shortName:inspection.factory.state.short_name,  
+                
               });
             }
           });

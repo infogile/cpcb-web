@@ -10,6 +10,8 @@ export function loginReducer(state, action) {
         ...state,
         username: action.username,
         role: action.role,
+        state: action.state,
+        state_shortName: action.state_shortName,
         loginValidated: true,
         isLoading: false,
       };

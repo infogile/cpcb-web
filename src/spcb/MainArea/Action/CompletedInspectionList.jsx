@@ -52,10 +52,22 @@ export const CompletedInspectionList = () => {
   const { data, isLoading } = useSelector(
     (state) => state.completedInspectionReducer
   );
+
   const params = useParams();
   useEffect(() => {
     store.dispatch(getCompletedInspection(params.river_name || ""));
   }, [params.river_name]);
+  
+  let { state , state_shortName } = useSelector((state) => state.loginReducer);
+  
+  if(state == undefined){
+    state = sessionStorage.getItem("state");
+  }
+  if(state_shortName == undefined){
+    state_shortName = sessionStorage.getItem("state_shortName");
+  }
+
+  console.log(state, state_shortName, "in completed inspection list");
 
   if (isLoading) {
     return <Loading />;
@@ -85,8 +97,8 @@ export const CompletedInspectionList = () => {
             <Th>Final report</Th>
             <Th>Take action</Th>
           </tr>
-          {data.map(({ id, status, code, name, sector, region, username, actioncount }) => {
-            if(status>=3){
+          {data.map(({ id, status, code, name, sector, region, username, actioncount ,STATE,STATE_shortName}) => {
+            if(status>=3 && (STATE == state || STATE_shortName == state_shortName )){
               return (
                 <Tr  Color = "green" key={id}>
                   <Td>{num++}</Td>
@@ -126,7 +138,7 @@ export const CompletedInspectionList = () => {
                   </Td>
                 </Tr>
               );
-            } else if(actioncount > 0 && status ===2){
+            } else if(actioncount > 0 && status ===2 && (STATE == state || STATE_shortName == state_shortName )){
               return (
                 <Tr  Color = "#cc7a00" key={id}>
                   <Td>{num++}</Td>
@@ -166,7 +178,7 @@ export const CompletedInspectionList = () => {
                   </Td>
                 </Tr>
               );
-            } else return(
+            } else if(STATE == state || STATE_shortName == state_shortName ) return(
               <Tr key={id}>
                   <Td >{num++}</Td>
                   <Td whiteSpace="nowrap">{code}</Td>
