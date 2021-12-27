@@ -23,7 +23,7 @@ export function tryLogin(username, password) {
             return Promise.reject(error);
           }
         );
-        console.log("login data:",  res.data);
+        // console.log("login data:",  res.data);
         if(res.data.role == 'spcb_user'){
           dispatch({
             ...loginSuccess(),

@@ -67,7 +67,7 @@ export const CompletedInspectionList = () => {
     state_shortName = sessionStorage.getItem("state_shortName");
   }
 
-  console.log(state, state_shortName, "in completed inspection list");
+  // console.log(state, state_shortName, "in completed inspection list");
 
   if (isLoading) {
     return <Loading />;
@@ -75,7 +75,7 @@ export const CompletedInspectionList = () => {
   if (data.length === 0) {
     return <h2>No data to be shown yet !</h2>
   }
-  console.log("This is the spcb data : ", data);
+  // console.log("This is the spcb data : ", data);
   var num = 1;
   return (
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>

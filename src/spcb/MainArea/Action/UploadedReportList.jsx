@@ -2,6 +2,8 @@ import React from "react";
 import { Div } from "../../../shared/Div";
 import { Text } from "../../../shared/Text";
 
+const MEDIA_URL = "https://cloverbuddies.sgp1.digitaloceanspaces.com/cloverbuddies/media/"
+
 export const UploadedReportList = ({ label, links, ...otherProps }) => {
   if (!links || links.length === 0) {
     return null;
@@ -17,7 +19,7 @@ export const UploadedReportList = ({ label, links, ...otherProps }) => {
           const name = linkSplit[linkSplit.length - 1];
           return (
             <Div marginTop="10px">
-              <a href={link} target="_blank">
+              <a href={MEDIA_URL+link} target="_blank">
                 {name}
               </a>
             </Div>

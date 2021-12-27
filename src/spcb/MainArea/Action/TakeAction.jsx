@@ -36,6 +36,7 @@ const TakeAction = () => {
     actionreport: "",
     uploadedActionReports: [],
   });
+  console.log(actionTakenform)
 
   useEffect(() => {
     const { actions } = data;

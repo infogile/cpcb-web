@@ -31,10 +31,10 @@ export function getInspections() {
                   dashboard[river].totalAlloted + 1;
                 if (inspection.status === 0) {
                   dashboard[river].pending = dashboard[river].pending + 1;
-                } else if (inspection.status === 1 || inspection.status === 2 || inspection.status === 3) {
+                } if (inspection.status === 1 || inspection.status === 2 || inspection.status === 3) {
                   dashboard[river].fieldReportSubmitted =
                     dashboard[river].fieldReportSubmitted + 1;
-                } else if (inspection.status === 2 || inspection.status === 3) {
+                } if (inspection.status === 2 || inspection.status === 3) {
                   dashboard[river].inspectionReportSubmitted =
                     dashboard[river].inspectionReportSubmitted + 1;
                 }
