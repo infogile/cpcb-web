@@ -88,8 +88,10 @@ export const InspectionsList = ({ title }) => {
           <ListItemHeader>Field reports</ListItemHeader>
           <ListItemHeader>Inspection reports</ListItemHeader>
         </ListHeader>
-        {data.map(({ id, code, name}) => (
-          <ListItem key={id}>
+        {data.map(({ id, code, name,status}) => {
+          if(status==1){
+            return (
+            <ListItem key={id}>
             <UnitCode>{code}</UnitCode>
             <UnitName>{name}</UnitName>
             <ReportLink to={`/home/active_inspections/field_report/${id}`}>
@@ -101,7 +103,23 @@ export const InspectionsList = ({ title }) => {
               Upload Report
             </ReportLink>
           </ListItem>
-        ))}
+          )}
+          else{
+            return(
+            <ListItem key={id} style={{backgroundColor: '#8cff98'}}>
+            <UnitCode>{code}</UnitCode>
+            <UnitName>{name}</UnitName>
+            <ReportLink to={`/home/active_inspections/field_report/${id}`}>
+              View Report
+            </ReportLink>
+            <ReportLink
+              to={`/home/active_inspections/upload_inspection_report/${id}`}
+            >
+              Report Submitted
+            </ReportLink>
+            </ListItem>
+            )}
+        })}   
       </List>
     </>
   );

@@ -23,6 +23,7 @@ export function getActiveInspections() {
                 id: responseData[x]._id,
                 code: responseData[x].factory.unitcode,
                 name: responseData[x].factory.name,
+                status: responseData[x].status,
               }
               data.push(temp_data)
             }
