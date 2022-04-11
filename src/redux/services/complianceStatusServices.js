@@ -38,27 +38,27 @@ export function getComplianceStatus() {
                                 }
                                 if (inspection.status >= 3 || inspection.actions.length > 0) {
                                     data[river][state].actioncompleted = data[river][state].actioncompleted + 1;
-                                    if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-1].complianceStatus === 1){
+                                    if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 1){
                                         data[river][state].complied = data[river][state].complied + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-1].complianceStatus === 2){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 2){
                                         data[river][state].tempclose = data[river][state].tempclose + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-1].complianceStatus === 3){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 3){
                                         data[river][state].permanentclose = data[river][state].permanentclose + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-1].complianceStatus === 0 && inspection.actions[inspection.actions.length-1].showcausenoticeStatus === true){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 0 && inspection?.actions[inspection?.actions?.length-1]?.showcausenoticeStatus === true){
                                         data[river][state].showcausenotice = data[river][state].showcausenotice + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-1].complianceStatus === 0 && inspection.actions[inspection.actions.length-1].showcausenoticeStatus === false){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 0 && inspection?.actions[inspection?.actions?.length-1]?.showcausenoticeStatus === false){
                                         data[river][state].closerdirection = data[river][state].closerdirection + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-2].complianceStatus === 0 && inspection.actions[inspection.actions.length-2].showcausenoticeStatus === true
-                                            && inspection.actions[inspection.actions.length-1].complianceStatus === 1){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-2]?.complianceStatus === 0 && inspection?.actions[inspection?.actions?.length-2]?.showcausenoticeStatus === true
+                                            && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 1){
                                         data[river][state].scnwithdrawn = data[river][state].scnwithdrawn + 1;
                                     } 
-                                    else if (inspection.actions[inspection.actions.length-1].hasOwnProperty("complianceStatus") && inspection.actions[inspection.actions.length-2].complianceStatus === 0 && inspection.actions[inspection.actions.length-2].showcausenoticeStatus === false
-                                        && inspection.actions[inspection.actions.length-1].complianceStatus === 1){
+                                    else if (inspection?.actions[inspection?.actions?.length-1]?.hasOwnProperty("complianceStatus") && inspection?.actions[inspection?.actions?.length-2]?.complianceStatus === 0 && inspection?.actions[inspection?.actions?.length-2]?.showcausenoticeStatus === false
+                                        && inspection?.actions[inspection?.actions?.length-1]?.complianceStatus === 1){
                                         data[river][state].closurerevoke = data[river][state].closurerevoke + 1;
                                     }
                                 }   
