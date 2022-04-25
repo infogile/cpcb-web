@@ -80,7 +80,7 @@ export const ComplianceStatusList = () => {
     <div style={{ marginBottom: "100px", marginRight: "20px" }}>
       <h2>Compliance status</h2>
       {data && data.map((river)=>{
-        const rivers = ["Yamuna", "Ganga"];
+        const rivers = ["Ganga","Yamuna"];
         var num = 1;
         return(
           <>
@@ -145,12 +145,12 @@ export const ComplianceStatusList = () => {
                         </ReportLink>
                       }</Td>
                     </Tr>
-                  );
-                })};
+                  )
+                })}
               </tbody>
             </Table>
           </>
-        );
+        )
       })}
     </div>
   );
